@@ -153,7 +153,7 @@ def command_add_exams(
         except ValueError:
             console.print(f"Invalid datetime. Use DD/MM/YYYY HH:MM")
             raise typer.Exit()
-        if date <= ExamDateTime.now():
+        if date < ExamDateTime.now():
             console.print(f"Cannot schedule an exam in the past!")
             raise typer.Exit()
 

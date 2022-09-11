@@ -71,9 +71,18 @@ class ExamDateTime:
     @staticmethod
     def now() -> 'ExamDateTime':
         res = datetime.datetime.now()
+        res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=res.hour, minute=res.minute)
+
         minutes_to_add = 15 - (res.minute % 15)
         if minutes_to_add != 15:
             res = res + datetime.timedelta(minutes=minutes_to_add)
+
+        if res.hour < 8:
+            res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=8, minute=0)
+        elif res.hour > 23:
+            res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=8, minute=0) + \
+                  datetime.timedelta(days=1)
+
         return ExamDateTime(res)
 
     def __str__(self) -> str:
