@@ -33,6 +33,7 @@ def new_esse3_wrapper(detached: bool = False, with_live_status: bool = True):
             password=app_options.password,
             debug=app_options.debug,
             detached=detached,
+            headless=not app_options.debug and not detached,
         )
     if with_live_status:
         with console.status("Login..."):

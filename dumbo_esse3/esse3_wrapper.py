@@ -32,10 +32,7 @@ class Esse3Wrapper:
     def __post_init__(self, key: object, username: Username, password: Password):
         validators.validate_dataclass(self)
         validators.validate('key', key, equals=self.__key, help_msg="Can only be instantiated using a factory method")
-        if self.debug:
-            self.maximize()
-        else:
-            self.minimize()
+        self.maximize()
         self.__login(username, password)
 
     def __del__(self):
@@ -49,8 +46,10 @@ class Esse3Wrapper:
                 pass
 
     @classmethod
-    def create(cls, username: str, password: str, debug: bool = False, detached: bool = False) -> 'Esse3Wrapper':
+    def create(cls, username: str, password: str, debug: bool = False, detached: bool = False,
+               headless: bool = True) -> 'Esse3Wrapper':
         options = webdriver.ChromeOptions()
+        options.headless = headless
         if debug or detached:
             options.add_experimental_option("detach", True)
         driver = webdriver.Chrome(options=options)
@@ -63,12 +62,6 @@ class Esse3Wrapper:
             driver=driver,
         )
 
-    # @staticmethod
-    # def headless():
-    #     options = webdriver.ChromeOptions()
-    #     options.headless = True
-    #     return Esse3Wrapper(driver=webdriver.Chrome(options=options))
-
     @property
     def is_headless(self) -> bool:
         return self.driver.execute_script("return navigator.webdriver")
@@ -77,7 +70,7 @@ class Esse3Wrapper:
         self.driver.get(LOGIN_URL)
         self.driver.find_element(By.ID, 'u').send_keys(username.value)
         self.driver.find_element(By.ID, 'p').send_keys(password.value)
-        self.driver.find_element(By.ID, 'btnLogin').click()
+        self.driver.find_element(By.ID, 'btnLogin').send_keys(Keys.RETURN)
 
     def __logout(self) -> None:
         self.driver.get(LOGOUT_URL)
@@ -99,7 +92,7 @@ class Esse3Wrapper:
 
     def fetch_exams(self, course: Course) -> List[Exam]:
         self.driver.get(COURSE_LIST_URL)
-        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").click()
+        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
         exams = self.driver.find_elements(By.XPATH, '//tr[@class="detail_table"]')
         return list(sorted([Exam.of(
             ExamDateTime.parse(exam.find_element(By.XPATH, "td[3]").text),
@@ -108,9 +101,9 @@ class Esse3Wrapper:
 
     def fetch_students(self, course: Course, exam: ExamDateTime) -> List[Student]:
         self.driver.get(COURSE_LIST_URL)
-        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").click()
+        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
-        self.driver.find_element(By.XPATH, f"//tr[normalize-space(td/text()) = '{exam}']//input[@src='images/defAppStudent.gif']").click()
+        self.driver.find_element(By.XPATH, f"//tr[normalize-space(td/text()) = '{exam}']//input[@src='images/defAppStudent.gif']").send_keys(Keys.RETURN)
 
         rows = self.driver.find_elements(By.XPATH, f"//table[@class='detail_table']//tr[position() > 1][td[1] >= 1]")
         return [
@@ -127,21 +120,21 @@ class Esse3Wrapper:
     def add_exam(self, course: Course, exam: ExamDateTime, exam_type: ExamType, description: ExamDescription,
                  notes: ExamNotes) -> None:
         self.driver.get(COURSE_LIST_URL)
-        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").click()
+        self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
-        self.driver.find_element(By.XPATH, '//input[@type = "submit"][@name = "new_pf"]').click()
+        self.driver.find_element(By.XPATH, '//input[@type = "submit"][@name = "new_pf"]').send_keys(Keys.RETURN)
 
         self.driver.find_element(By.ID, 'data_inizio_app').send_keys(exam.stringify_date() + Keys.ESCAPE)
         self.driver.find_element(By.NAME, 'hh_esa').send_keys(exam.stringify_hour())
         self.driver.find_element(By.NAME, 'mm_esa').send_keys(exam.stringify_minute())
 
-        self.driver.find_element(By.XPATH, f'//input[@type = "radio"][@value = "{exam_type.value}"]').click()
+        self.driver.find_element(By.XPATH, f'//input[@type = "radio"][@value = "{exam_type.value}"]').send_keys(Keys.RETURN)
 
         self.driver.find_element(By.XPATH, '//tr[starts-with(th, "*Descrizione:")]//input').send_keys(description.value)
         self.driver.find_element(By.XPATH, '//tr[starts-with(th, "Note:")]//textarea').send_keys(notes.value)
 
-        self.driver.find_element(By.NAME, 'sbmDef').click()
-        self.driver.find_element(By.XPATH, '//a[. = "Esci"]').click()
+        self.driver.find_element(By.NAME, 'sbmDef').send_keys(Keys.RETURN)
+        self.driver.find_element(By.XPATH, '//a[. = "Esci"]').send_keys(Keys.RETURN)
 
     def fetch_thesis_list(self) -> List[StudentThesisState]:
         self.driver.get(THESIS_LIST_URL)
@@ -178,13 +171,13 @@ class Esse3Wrapper:
 
     def __thesis_action(self, student: Student, action) -> None:
         self.driver.get(THESIS_LIST_URL)
-        self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a").click()
-        self.driver.find_element(By.ID, action).click()
+        self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a").send_keys(Keys.RETURN)
+        self.driver.find_element(By.ID, action).send_keys(Keys.RETURN)
 
     def show_thesis(self, student: Student) -> None:
         self.__thesis_action(student, "btnDownload")
 
     def sign_thesis(self, student: Student) -> None:
         self.__thesis_action(student, "btnApprova")
-        self.driver.find_element(By.ID, "selApprova1").click()
-        self.driver.find_element(By.ID, "btnApprova").click()
+        self.driver.find_element(By.ID, "selApprova1").send_keys(Keys.RETURN)
+        self.driver.find_element(By.ID, "btnApprova").send_keys(Keys.RETURN)
