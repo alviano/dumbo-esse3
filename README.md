@@ -20,7 +20,29 @@ On Debian-like OSes it can be installed with the following command:
 $ sudo apt install python3-poetry
 ```
 
-After that, you can proceed to clone the repository and install dependencies:
+After that, you can proceed either via PyPI, or by cloning the repository and install dependencies.
+If you opt for PyPI, run the following command:
+```bash
+$ pip install dumbo_esse3
+Defaulting to user installation because normal site-packages is not writeable
+Collecting dumbo_esse3
+  Downloading dumbo_esse3-0.1.5-py3-none-any.whl (14 kB)
+...
+Installing collected packages: dumbo_esse3
+Successfully installed dumbo_esse3-0.1.5
+```
+
+After that, **dumbo-esse3** can be run with
+```bash
+$ python -m dumbo_esse3
+Usage: python -m dumbo_esse3 [OPTIONS] COMMAND [ARGS]...
+Try 'python -m dumbo_esse3 --help' for help.
+╭─ Error ──────────────────────────────────────────────────────────────────────────────────────╮
+│ Missing command.                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+If you instead opt for poetry, run the following commands:
 ```bash
 $ git clone git@github.com:alviano/dumbo-esse3.git
 Cloning into 'dumbo-esse3'...
