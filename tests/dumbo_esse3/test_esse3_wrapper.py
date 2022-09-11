@@ -1,8 +1,7 @@
-import datetime
-
 import pytest
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
+from dumbo_esse3.primitives import ExamDateTime
 from tests.test_environment import USERNAME, PASSWORD
 
 
@@ -47,7 +46,7 @@ def test_is_exam_present(esse3_wrapper):
     if exams:
         assert esse3_wrapper.is_exam_present(courses[0], exams[0].date_and_time)
     else:
-        today = datetime.datetime.now()
+        today = ExamDateTime.now()
         assert not esse3_wrapper.is_exam_present(courses[0], today)
 
 

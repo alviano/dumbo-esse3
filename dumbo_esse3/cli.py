@@ -1,6 +1,5 @@
 import dataclasses
-import datetime
-from typing import Optional, List, Tuple
+from typing import Optional, List
 
 import typer
 from rich.progress import track
@@ -8,7 +7,7 @@ from rich.table import Table
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, ExamDateTime
-from utils.console import console
+from dumbo_esse3.utils.console import console
 
 
 @dataclasses.dataclass(frozen=True)
@@ -25,6 +24,15 @@ app = typer.Typer()
 def is_debug_on():
     return app_options.debug
 
+
+def run_app():
+    try:
+        app()
+    except Exception as e:
+        if is_debug_on():
+            raise e
+        else:
+            console.print(f"[red bold]Error:[/red bold] {e}")
 
 def new_esse3_wrapper(detached: bool = False, with_live_status: bool = True):
     def res():
@@ -115,7 +123,8 @@ def command_add_exams(
         exams: List[str] = typer.Argument(
             ...,
             metavar="exam",
-            help="One or more strings of the form 'CourseIndex DD/MM/YYYY HH:MM'",
+            help="One or more strings of the form 'CourseIndex DD/MM HH:MM' "
+                 "(separators can be omitted, and spaces can be replaced by dashes; year is inferred)",
         ),
         exam_type: str = typer.Option(..., prompt=True, envvar="DUMBO_ESSE3_EXAM_TYPE"),
         description: str = typer.Option(..., prompt=True, envvar="DUMBO_ESSE3_EXAM_DESCRIPTION"),
@@ -143,16 +152,16 @@ def command_add_exams(
         raise typer.Exit()
 
     def parse(exam):
-        exam = exam.split(' ', maxsplit=1)
+        exam = exam.replace('-', ' ').split(' ', maxsplit=1)
         course_index = int(exam[0])
         if course_index <= 0:
             console.print(f"Course index must be positive, not {course_index}")
             raise typer.Exit()
 
         try:
-            date = ExamDateTime.parse(exam[1])
+            date = ExamDateTime.smart_parse(exam[1])
         except ValueError:
-            console.print(f"Invalid datetime. Use DD/MM/YYYY HH:MM")
+            console.print(f"Invalid datetime. Use DD/MM HH:MM")
             raise typer.Exit()
         if date < ExamDateTime.now():
             console.print(f"Cannot schedule an exam in the past!")

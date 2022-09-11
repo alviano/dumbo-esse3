@@ -4,8 +4,8 @@ from typing import Optional
 
 import typeguard
 
-from utils import validators
-from utils.validators import validate, validate_dataclass
+from dumbo_esse3.utils import validators
+from dumbo_esse3.utils.validators import validate, validate_dataclass
 
 
 def _arithmetic(cls):

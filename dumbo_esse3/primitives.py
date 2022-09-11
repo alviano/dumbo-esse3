@@ -4,8 +4,10 @@ import enum
 
 import typeguard
 
-from utils.primitives import bounded_string, bounded_integer
-from utils.validators import validate_dataclass, validate
+from dumbo_esse3.utils.primitives import bounded_string, bounded_integer
+from dumbo_esse3.utils.validators import validate_dataclass, validate
+
+from dateutil.relativedelta import relativedelta
 
 
 @bounded_string(min_length=3, max_length=30, pattern=r'[A-Za-z0-9]*')
@@ -67,6 +69,17 @@ class ExamDateTime:
     @staticmethod
     def parse(s: str) -> 'ExamDateTime':
         return ExamDateTime(datetime.datetime.strptime(s, "%d/%m/%Y %H:%M"))
+
+    @staticmethod
+    def smart_parse(s: str) -> 'ExamDateTime':
+        s = s.replace('/', '').replace(':', '')
+        s = s.split(' ', maxsplit=1)
+        now = datetime.datetime.now()
+        year = now.year
+        res = datetime.datetime.strptime(f"{s[0]}{year} {s[1]}", "%d%m%Y %H%M")
+        if res <= now:
+            res = res + relativedelta(years=1)
+        return ExamDateTime(res)
 
     @staticmethod
     def now() -> 'ExamDateTime':

@@ -1,5 +1,4 @@
 import dataclasses
-import datetime
 from dataclasses import InitVar
 from typing import List
 
@@ -9,7 +8,7 @@ from selenium.common import WebDriverException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
-import utils.validators as validators
+from dumbo_esse3.utils import validators
 from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, ExamDescription, \
     ExamNotes, ExamType, ExamDateTime
 
