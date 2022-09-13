@@ -14,11 +14,6 @@ Please, download and install the most appropriate version from the following lin
 
 https://sites.google.com/chromium.org/driver/downloads?authuser=0
 
-You also need the [Poetry](https://python-poetry.org/) Python package manager.
-On Debian-like OSes it can be installed with the following command:
-```bash
-$ sudo apt install python3-poetry
-```
 
 After that, you can proceed either via PyPI, or by cloning the repository and install dependencies.
 If you opt for PyPI, run the following command:
@@ -42,7 +37,12 @@ Try 'python -m dumbo_esse3 --help' for help.
 ╰──────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-If you instead opt for poetry, run the following commands:
+If you instead opt for the repository, you also need the [Poetry](https://python-poetry.org/) Python package manager.
+On Debian-like OSes it can be installed with the following command:
+```bash
+$ sudo apt install python3-poetry
+```
+After that, run the following commands:
 ```bash
 $ git clone git@github.com:alviano/dumbo-esse3.git
 Cloning into 'dumbo-esse3'...
@@ -69,6 +69,15 @@ Installing the current project: dumbo-esse3 (0.1.1)
 ```
 
 Poetry may take some time to complete this step.
+After that, **dumbo-esse3** can be run with
+```bash
+$ poetry run ./dumbo_esse3_cli.py
+Usage: python -m dumbo_esse3 [OPTIONS] COMMAND [ARGS]...
+Try 'python -m dumbo_esse3 --help' for help.
+╭─ Error ──────────────────────────────────────────────────────────────────────────────────────╮
+│ Missing command.                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+```
 
 
 ## Configuration

@@ -242,7 +242,6 @@ def command_theses(
                 console.print(f"Open thesis of {student_thesis_state.student.name} (#{index})")
                 student_wrapper = new_esse3_wrapper(detached=True, with_live_status=False)
                 student_wrapper.show_thesis(student_thesis_state.student)
-                student_wrapper.maximize()
                 must_wait = True
     if must_wait:
         console.input("Press ENTER to continue")
