@@ -162,7 +162,7 @@ class Esse3Wrapper:
                 self.driver.get(student[2])
                 if self.driver.find_elements(By.ID, f"btnApprova"):
                     state = StudentThesisState.State.UNSIGNED
-                else:
+                elif self.driver.find_elements(By.XPATH, f"//td[text() = 'Approvato']"):
                     state = StudentThesisState.State.SIGNED
                 self.driver.back()
             res.append(StudentThesisState.of(student[0], student[1], state))
