@@ -4,18 +4,19 @@ from typing import List
 
 import typeguard
 from selenium import webdriver
-from selenium.common import WebDriverException
+from selenium.common import WebDriverException, NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
-from dumbo_esse3.utils import validators
 from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, ExamDescription, \
-    ExamNotes, ExamType, ExamDateTime
+    ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, ActivityTitle, ActivityType
+from dumbo_esse3.utils import validators
 
 LOGIN_URL = 'https://unical.esse3.cineca.it/auth/Logon.do?menu_opened_cod='
 LOGOUT_URL = 'https://unical.esse3.cineca.it/Logout.do?menu_opened_cod='
 COURSE_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica'
 THESIS_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo'
+REGISTER_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro'
 
 
 @typeguard.typechecked
@@ -94,11 +95,11 @@ class Esse3Wrapper:
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
         exams = self.driver.find_elements(By.XPATH, '//tr[@class="detail_table"]')
         return list(sorted([Exam.of(
-            ExamDateTime.parse(exam.find_element(By.XPATH, "td[3]").text),
+            DateTime.parse(exam.find_element(By.XPATH, "td[3]").text),
             int(exam.find_element(By.XPATH, "td[5]").text or 0),
         ) for exam in exams], key=lambda exam: exam.date_and_time))
 
-    def fetch_students(self, course: Course, exam: ExamDateTime) -> List[Student]:
+    def fetch_students(self, course: Course, exam: DateTime) -> List[Student]:
         self.driver.get(COURSE_LIST_URL)
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
@@ -112,11 +113,11 @@ class Esse3Wrapper:
             ) for row in rows
         ]
 
-    def is_exam_present(self, course: Course, date_and_time: ExamDateTime) -> bool:
+    def is_exam_present(self, course: Course, date_and_time: DateTime) -> bool:
         exams = self.fetch_exams(course)
         return any(exam for exam in exams if exam.date_and_time == date_and_time)
 
-    def add_exam(self, course: Course, exam: ExamDateTime, exam_type: ExamType, description: ExamDescription,
+    def add_exam(self, course: Course, exam: DateTime, exam_type: ExamType, description: ExamDescription,
                  notes: ExamNotes) -> None:
         self.driver.get(COURSE_LIST_URL)
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
@@ -180,3 +181,100 @@ class Esse3Wrapper:
         self.__thesis_action(student, "btnApprova")
         self.driver.find_element(By.ID, "selApprova1").send_keys(Keys.RETURN)
         self.driver.find_element(By.ID, "btnApprova").send_keys(Keys.RETURN)
+
+    def fetch_registers(self) -> List[Register]:
+        self.driver.get(REGISTER_LIST_URL)
+        rows = self.driver.find_elements(By.XPATH, "//tr[td/a/img[@src = 'images/open_registro.gif']]")
+        res = []
+        for idx, row in enumerate(rows):
+            course = Course.parse(row.find_element(By.XPATH, "td[2]").text)
+            hours = NumberOfHours.parse(row.find_element(By.XPATH, "td[4]").text)
+            semester = Semester.parse(row.find_element(By.XPATH, "td[5]").text)
+            state = Register.State(row.find_element(By.XPATH, "td[6]/img").get_attribute('alt'))
+            res.append(Register.of(course=course, hours=hours, semester=semester, state=state))
+        return res
+
+    def fetch_register_activities(self, register: Register, with_time: bool = False) -> List[RegisterActivity]:
+        self.driver.get(REGISTER_LIST_URL)
+        self.driver.find_element(
+            By.XPATH,
+            f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
+        ).send_keys(Keys.RETURN)
+
+        rows_xpath = "//tr[td/form/input/@src = 'images/open_registro.gif']"
+        rows = self.driver.find_elements(By.XPATH, rows_xpath)
+        number_of_rows = len(rows)
+        res = []
+        for index in range(number_of_rows):
+            row = rows[index]
+            date = DateTime.parse_date(row.find_element(By.XPATH, "td[2]").text)
+            hours = NumberOfHours.parse(row.find_element(By.XPATH, "td[3]").text)
+            title = ActivityTitle.parse(row.find_element(By.XPATH, "td[4]").text)
+            activity_type = ActivityType(row.find_element(By.XPATH, "td[5]").text)
+
+            if with_time:
+                row.find_element(By.XPATH, "td/form/input[@src = 'images/open_registro.gif']").send_keys(Keys.RETURN)
+                h = self.driver.find_element(By.ID, "hh_inizio").find_element(By.XPATH, "option[@selected]").text
+                m = self.driver.find_element(By.ID, "mm_inizio").find_element(By.XPATH, "option[@selected]").text
+                date = date.at_time(hour=int(h), minute=int(m))
+                self.driver.find_element(By.XPATH, "//a[. = 'Esci']").send_keys(Keys.RETURN)
+                rows = self.driver.find_elements(By.XPATH, rows_xpath)
+
+            res.append(RegisterActivity.of(date=date, hours=hours, activity_type=activity_type, title=title))
+
+        return res
+
+    def add_register_activity(self, register: Register, activity: RegisterActivity) -> bool:
+        self.driver.get(REGISTER_LIST_URL)
+        self.driver.find_element(
+            By.XPATH,
+            f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
+        ).send_keys(Keys.RETURN)
+        self.driver.find_element(
+            By.XPATH,
+            f"//a[normalize-space(text()) = 'Inserisci nuova attività']"
+        ).send_keys(Keys.RETURN)
+
+        self.driver.find_element(
+            By.XPATH,
+            "//tr[normalize-space(th/text()) = '*Data:']/td/input"
+        ).send_keys(activity.date.stringify_date() + Keys.ESCAPE)
+        self.driver.find_element(By.ID, "hh_inizio").send_keys(activity.date.stringify_hour())
+        self.driver.find_element(By.ID, "mm_inizio").send_keys(activity.date.stringify_minute())
+        self.driver.find_element(By.ID, "hh_fine").send_keys(activity.end_date_time.stringify_hour())
+        self.driver.find_element(By.ID, "mm_fine").send_keys(activity.end_date_time.stringify_minute())
+        self.driver.find_element(By.ID, "ore_accademiche").send_keys(str(activity.hours))
+        self.driver.find_element(
+            By.XPATH,
+            "//tr[normalize-space(th/text()) = 'Tipo attività:']/td/select"
+        ).send_keys(activity.type.value)
+        self.driver.find_element(
+            By.XPATH,
+            "//tr[normalize-space(th/text()) = '*Titolo:']/td/input"
+        ).send_keys(str(activity.title))
+        self.driver.find_element(
+            By.XPATH,
+            "//input[@value = 'Salva']"
+        ).send_keys(Keys.RETURN)
+
+        return len(self.driver.find_elements(
+            By.XPATH,
+            "//tr[starts-with(normalize-space(td/text()), 'ATTENZIONE')]"
+        )) == 0
+
+    def delete_register_activity(self, register: Register, activity_index: int) -> bool:
+        self.driver.get(REGISTER_LIST_URL)
+        self.driver.find_element(
+            By.XPATH,
+            f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
+        ).send_keys(Keys.RETURN)
+        try:
+            self.driver.find_element(
+                By.XPATH,
+                f"//tr[td/form/input/@src = 'images/open_registro.gif'][{activity_index}]/td/a[img/@src = 'images/del.gif']"
+            ).send_keys(Keys.RETURN)
+        except NoSuchElementException:
+            return False
+        self.driver.find_element(By.XPATH, "//input[@value = 'Conferma']").send_keys(Keys.RETURN)
+        return True
+

@@ -10,6 +10,24 @@ from dumbo_esse3.utils.validators import validate_dataclass, validate
 from dateutil.relativedelta import relativedelta
 
 
+class ExamType(enum.Enum):
+    WRITTEN = 'S'
+    ORAL = 'O'
+    WRITTEN_AND_ORAL = 'SO'
+
+
+class ActivityType(enum.Enum):
+    LECTURE = 'Lezione'
+    LAB = 'Laboratorio'
+    EXERCISE = 'Esercitazione'
+    SEMINAR = 'Seminario'
+
+
+@bounded_integer(min_value=1, max_value=120)
+class NumberOfHours:
+    pass
+
+
 @bounded_string(min_length=3, max_length=30, pattern=r'[A-Za-z0-9]*')
 class Username:
     pass
@@ -20,7 +38,7 @@ class Password:
     pass
 
 
-@bounded_string(min_length=3, max_length=255, pattern=r'[A-Z ]+ \[\d+\]')
+@bounded_string(min_length=3, max_length=255, pattern=r'[A-Z ]+ (- )?\[\d+\]')
 class Course:
     pass
 
@@ -40,12 +58,6 @@ class StudentName:
     pass
 
 
-class ExamType(enum.Enum):
-    WRITTEN = 'S'
-    ORAL = 'O'
-    WRITTEN_AND_ORAL = 'SO'
-
-
 @bounded_string(min_length=1, max_length=80, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]_-]*")
 class ExamDescription:
     pass
@@ -56,9 +68,19 @@ class ExamNotes:
     pass
 
 
+@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9 ]*")
+class Semester:
+    pass
+
+
+@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]\+*_-]*")
+class ActivityTitle:
+    pass
+
+
 @typeguard.typechecked
 @dataclasses.dataclass(frozen=True, order=True)
-class ExamDateTime:
+class DateTime:
     value: datetime.datetime
 
     def __post_init__(self):
@@ -67,11 +89,15 @@ class ExamDateTime:
         validate("value", self.value.minute, is_in=[0, 15, 30, 45], help_msg="Minutes must be aligned to 15")
 
     @staticmethod
-    def parse(s: str) -> 'ExamDateTime':
-        return ExamDateTime(datetime.datetime.strptime(s, "%d/%m/%Y %H:%M"))
+    def parse(s: str) -> 'DateTime':
+        return DateTime(datetime.datetime.strptime(s, "%d/%m/%Y %H:%M"))
 
     @staticmethod
-    def smart_parse(s: str) -> 'ExamDateTime':
+    def parse_date(s: str) -> 'DateTime':
+        return DateTime.parse(f"{s} 08:00")
+
+    @staticmethod
+    def smart_parse(s: str) -> 'DateTime':
         s = s.replace('/', '').replace(':', '')
         s = s.split(' ', maxsplit=1)
         now = datetime.datetime.now()
@@ -79,10 +105,10 @@ class ExamDateTime:
         res = datetime.datetime.strptime(f"{s[0]}{year} {s[1]}", "%d%m%Y %H%M")
         if res <= now:
             res = res + relativedelta(years=1)
-        return ExamDateTime(res)
+        return DateTime(res)
 
     @staticmethod
-    def now() -> 'ExamDateTime':
+    def now() -> 'DateTime':
         res = datetime.datetime.now()
         res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=res.hour, minute=res.minute)
 
@@ -96,16 +122,22 @@ class ExamDateTime:
             res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=8, minute=0) + \
                   datetime.timedelta(days=1)
 
-        return ExamDateTime(res)
+        return DateTime(res)
 
     def __str__(self) -> str:
         return self.value.strftime("%d/%m/%Y %H:%M")
 
-    def at_begin_of_day(self) -> 'ExamDateTime':
-        return ExamDateTime(datetime.datetime(self.value.year, self.value.month, self.value.day, hour=8, minute=0))
+    def at_time(self, hour, minute) -> 'DateTime':
+        return DateTime(datetime.datetime(self.value.year, self.value.month, self.value.day, hour=hour, minute=minute))
 
-    def add_days(self, days: int) -> 'ExamDateTime':
-        return ExamDateTime(self.value + datetime.timedelta(days=days))
+    def at_begin_of_day(self) -> 'DateTime':
+        return self.at_time(hour=8, minute=0)
+
+    def add_days(self, days: int) -> 'DateTime':
+        return DateTime(self.value + datetime.timedelta(days=days))
+
+    def add_hours(self, hours: int) -> 'DateTime':
+        return DateTime(self.value + datetime.timedelta(hours=hours))
 
     def stringify_date(self) -> str:
         return self.value.strftime("%d/%m/%Y")
@@ -130,19 +162,19 @@ class NumberOfStudents:
 @typeguard.typechecked
 @dataclasses.dataclass(frozen=True)
 class Exam:
-    date_and_time: ExamDateTime
+    date_and_time: DateTime
     number_of_students: NumberOfStudents
 
     def __post_init__(self):
         validate_dataclass(self)
 
     @staticmethod
-    def of(date_and_time: ExamDateTime, number_of_students: int) -> 'Exam':
+    def of(date_and_time: DateTime, number_of_students: int) -> 'Exam':
         return Exam(date_and_time, NumberOfStudents.of(number_of_students))
 
     @property
     def today_or_future(self) -> bool:
-        return self.date_and_time >= ExamDateTime.now().at_begin_of_day()
+        return self.date_and_time >= DateTime.now().at_begin_of_day()
 
 
 @typeguard.typechecked
@@ -174,3 +206,37 @@ class StudentThesisState:
     @staticmethod
     def of(student: Student, cdl: CdL, state: State) -> 'StudentThesisState':
         return StudentThesisState(student, cdl, state)
+
+
+@typeguard.typechecked
+@dataclasses.dataclass(frozen=True)
+class Register:
+    course: Course
+    hours: NumberOfHours
+    semester: Semester
+    state: 'State'
+
+    class State(enum.Enum):
+        DRAFT = "Bozza"
+        VERIFIED = "Verificato"
+
+    @staticmethod
+    def of(course: Course, hours: NumberOfHours, semester: Semester, state: State) -> 'Register':
+        return Register(course, hours, semester, state)
+
+
+@typeguard.typechecked
+@dataclasses.dataclass(frozen=True)
+class RegisterActivity:
+    date: DateTime
+    hours: NumberOfHours
+    type: ActivityType
+    title: ActivityTitle
+
+    @staticmethod
+    def of(date: DateTime, hours: NumberOfHours, activity_type: ActivityType, title: ActivityTitle) -> 'RegisterActivity':
+        return RegisterActivity(date, hours, activity_type, title)
+
+    @property
+    def end_date_time(self) -> DateTime:
+        return self.date.add_hours(self.hours.value)

@@ -6,7 +6,8 @@ from rich.progress import track
 from rich.table import Table
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
-from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, ExamDateTime
+from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, DateTime, Register, \
+    RegisterActivity, ActivityType, NumberOfHours, ActivityTitle
 from dumbo_esse3.utils.console import console
 
 
@@ -33,6 +34,7 @@ def run_app():
             raise e
         else:
             console.print(f"[red bold]Error:[/red bold] {e}")
+
 
 def new_esse3_wrapper(detached: bool = False, with_live_status: bool = True):
     def res():
@@ -159,11 +161,11 @@ def command_add_exams(
             raise typer.Exit()
 
         try:
-            date = ExamDateTime.smart_parse(exam[1])
+            date = DateTime.smart_parse(exam[1])
         except ValueError:
             console.print(f"Invalid datetime. Use DD/MM HH:MM")
             raise typer.Exit()
-        if date < ExamDateTime.now():
+        if date < DateTime.now():
             console.print(f"Cannot schedule an exam in the past!")
             raise typer.Exit()
 
@@ -256,3 +258,154 @@ def command_theses(
                 esse3_wrapper.sign_thesis(student_thesis_state.student)
             else:
                 console.log(f"Skip thesis of {student_thesis_state.student.name} (#{index})")
+
+
+@app.command(name="registers")
+def command_registers() -> None:
+    """
+    Prints the list of registers.
+    The number associated with each course is used an ID.
+    """
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching registers..."):
+        registers = esse3_wrapper.fetch_registers()
+
+    table = Table(title="Registers")
+    table.add_column("#")
+    table.add_column("Course")
+    table.add_column("Hours")
+    table.add_column("Semester")
+    table.add_column("State")
+    for index, register in enumerate(registers, start=1):
+        style = ""
+        if register.state == Register.State.VERIFIED:
+            style = "bold green"
+        table.add_row(
+            str(index),
+            register.course.value,
+            str(register.hours),
+            register.semester.value,
+            register.state.name,
+            style=style,
+        )
+    console.print(table)
+
+
+@app.command(name="register-activities")
+def command_register_activities(
+        of: List[int] = typer.Option([], help="Index of the register to fetch (omit to fetch all)"),
+        with_time: Optional[bool] = typer.Option(False, help="Also fetch starting time of each activity"),
+) -> None:
+    """
+    Prints register activities.
+    Filtering options are available.
+    """
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching registers..."):
+        registers = esse3_wrapper.fetch_registers()
+
+    for index, register in enumerate(track(registers, console=console, transient=True), start=1):
+        if of and index not in of:
+            continue
+        activities = esse3_wrapper.fetch_register_activities(register, with_time)
+
+        table = Table(title=f"{register.course}")
+        table.add_column("#")
+        table.add_column("Date and time" if with_time else "Date")
+        table.add_column("Hours", justify="right")
+        table.add_column("Title")
+        table.add_column("Type")
+        for activity_index, activity in enumerate(activities, start=1):
+            table.add_row(
+                str(activity_index),
+                str(activity.date) if with_time else activity.date.stringify_date(),
+                str(activity.hours),
+                str(activity.title),
+                activity.type.name,
+            )
+        console.print(table)
+
+
+@app.command(name="add-register-activity")
+def command_add_register_activity(
+        of: int = typer.Option(..., help="Index of the register of interest"),
+        date: Optional[str] = typer.Option(DateTime.now().stringify_date(),
+                                           help="Date of the activity in the format DD/MM/YYYY (today if omitted)"),
+        time: str = typer.Option(..., help="Starting time of the activity in the format HH:MM"),
+        hours: int = typer.Option(..., help="Number of hours of the activity"),
+        title: str = typer.Option(..., help="Title of the activity"),
+        activity_type: ActivityType = typer.Option(ActivityType.LECTURE.value, "--type", help="Type of activity"),
+) -> None:
+    """
+    Add one activity to the specified register.
+    """
+    try:
+        date_and_time = DateTime.parse(f"{date} {time}")
+    except ValueError:
+        console.print("Invalid date or time")
+        raise typer.Exit()
+
+    try:
+        number_of_hours = NumberOfHours.of(hours)
+    except ValueError:
+        console.print("Invalid number of hours")
+        raise typer.Exit()
+
+    try:
+        activity_title = ActivityTitle.parse(title)
+    except ValueError:
+        console.print("Invalid activity title")
+        raise typer.Exit()
+
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching registers..."):
+        registers = esse3_wrapper.fetch_registers()
+
+    if of <= 0 or of > len(registers):
+        console.print(f"Invalid register index. Must be between 1 and {len(registers)}")
+        raise typer.Exit()
+
+    register = registers[of - 1]
+    activity = RegisterActivity.of(
+        date=date_and_time,
+        hours=number_of_hours,
+        activity_type=activity_type,
+        title=activity_title,
+    )
+    with console.status(f"Adding activity to {register.course}..."):
+        added = esse3_wrapper.add_register_activity(register, activity)
+        if added:
+            console.log(f"Added activity to {register.course}")
+        else:
+            console.log(f"Cannot add activity to {register.course}. Check date and time, and try again!",
+                        style="bold red")
+
+
+@app.command(name="delete-register-activity")
+def command_delete_register_activity(
+        of: int = typer.Option(..., help="Index of the register of interest"),
+        index: int = typer.Argument(..., help="Index of the activity to delete"),
+) -> None:
+    """
+    Delete one activity of the specified register.
+    """
+    if index <= 0:
+        console.print("Invalid index. Must be greater than 1")
+        raise typer.Exit()
+
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching registers..."):
+        registers = esse3_wrapper.fetch_registers()
+
+    if of <= 0 or of > len(registers):
+        console.print(f"Invalid register index. Must be between 1 and {len(registers)}")
+        raise typer.Exit()
+
+    register = registers[of - 1]
+    with console.status(f"Deleting activity #{index} of register {register.course}..."):
+        deleted = esse3_wrapper.delete_register_activity(register, index)
+        if deleted:
+            console.log(f"Deleted activity #{index} of register {register.course}")
+        else:
+            console.log(f"Cannot delete activity #{index} of register {register.course}. Check the index, and try again!",
+                        style="bold red")
