@@ -73,7 +73,7 @@ class Semester:
     pass
 
 
-@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]\+*_-]*")
+@bounded_string(min_length=1, max_length=80, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]\+*_-]*")
 class ActivityTitle:
     pass
 
