@@ -285,7 +285,8 @@ def command_registers() -> None:
             register.course.value,
             str(register.hours),
             register.semester.value,
-            register.state.name,
+            register.state.name if register.state == Register.State.SIGNED else
+            f"[bold red]{register.state.name}[/bold red]",
             style=style,
         )
     console.print(table)
@@ -309,7 +310,9 @@ def command_register_activities(
             continue
         activities = esse3_wrapper.fetch_register_activities(register, with_time)
 
-        table = Table(title=f"{register.course}")
+        table = Table(title=f"{register.course}" + (
+            "" if register.state == Register.State.SIGNED else f" - [red]NOT SIGNED[/red]"
+        ))
         table.add_column("#")
         table.add_column("Date and time" if with_time else "Date")
         table.add_column("Hours", justify="right")

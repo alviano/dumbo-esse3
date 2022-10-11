@@ -219,6 +219,7 @@ class Register:
     class State(enum.Enum):
         DRAFT = "Bozza"
         VERIFIED = "Verificato"
+        SIGNED = "Stampato"
 
     @staticmethod
     def of(course: Course, hours: NumberOfHours, semester: Semester, state: State) -> 'Register':
