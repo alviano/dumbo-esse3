@@ -1,0 +1,611 @@
+
+<!DOCTYPE html><html id="top" lang="it">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Area Docente, Universit&agrave; di UNICAL</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="Servizi online dell'ateneo" name="description">
+<meta content="noindex, nofollow" name="robots">
+<base href="https://unical.esse3.cineca.it/">
+<link href="img/layout/favicons/apple-touch-icon.png" sizes="120x120" rel="apple-touch-icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-32x32.png" sizes="32x32" type="image/png" rel="icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-16x16.png" sizes="16x16" type="image/png" rel="icon" class="favicon">
+<link href="img/layout/favicons/manifest.json" rel="manifest" class="favicon">
+<link href="img/layout/favicons/safari-pinned-tab.svg" rel="mask-icon" class="favicon">
+<link href="JavaScript/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/layout/app.css?v=22.09.02" rel="stylesheet">
+<link href="css/templateCommon.css?v=19.08.00" type="text/css" rel="stylesheet">
+<link href="css/layout/print.css" type="text/css" rel="stylesheet">
+<link href="css/layout/legacy.css?v=20.10.04" type="text/css" rel="stylesheet">
+<link href="css/layout/theme-custom.css?v=22.08.02" type="text/css" rel="stylesheet">
+<link href="css/template.css" type="text/css" rel="stylesheet">
+<link href="css/unical.css" type="text/css" rel="stylesheet">
+<link href="css/jquery-ui.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/jquery.fileupload.css?v=20.12.00" media="all" type="text/css" rel="stylesheet">
+<link href="css/ui.jqgrid.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
+<script src="JavaScript/common.js"></script><script src="JavaScript/jquery/jquery-3.6.1.min.js"></script><script src="JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script><script src="JavaScript/jquery/jquery-ui/js/jquery-ui-1.13.2.min.js"></script><script src="JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script><script src="JavaScript/jquery/jqgrid/src/grid.tbltogrid.js?v=22.01.00"></script><script src="JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script><script src="JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script><script src="JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script><script src="JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script><script src="JavaScript/jquery/footable/js/footable.js"></script><script src="JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.iframe-transport.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.fileupload.js?v=22.01.00"></script><script src="JavaScript/widgetChunkFileUpload.js?v=22.01.00"></script><script src="JavaScript/sharedUtils.js?v=20.10.04"></script>
+</head>
+<body data-xsl="/xsl/unical/InserisciAggiornaAppelloCalEsa.xsl" class="secondaryMenuBottom ">
+<noscript>
+<div id="noscript-warning">E' necessario abilitare javascript per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript">qui</a>
+</div>
+</noscript>
+<div id="nocookies-warning" aria-hidden="true">E' necessario abilitare i cookies per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript" class="cookies_howto">qui</a>
+</div>
+<style>
+				#noscript-warning, #nocookies-warning {
+					width:100%;
+					z-index:10000;
+					text-align:center;
+					font-weight:bold;
+					color:#FFF;
+					background-color:#AE0000;
+					padding:10px 10px
+				}
+
+				#nocookies-warning {
+					display: none;
+				}
+
+				#noscript-warning a, #nocookies-warning a {
+					color:#FFF;
+					text-decoration: underline;
+				}
+			</style>
+<script>
+				$(
+					function() {
+						// try..catch because some in situations `document.cookie` is exposed but throws a
+					    // SecurityError if you try to access it; e.g. documents created from data URIs
+					    // or in sandboxed iframes (depending on flags/context)
+					    try {
+							// Create cookie
+							document.cookie = 'cookietest=1' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+							var ret = document.cookie.indexOf('cookietest=') != -1;
+							// Delete cookie
+							document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+
+							if (!ret) {
+								if (!!document.referrer) {
+									if (!document.referrer.toLowerCase().startsWith(document.location.protocol + '//' + document.location.host)) {
+										document.location.href = document.location.protocol + '//' + document.location.host + '';
+										return;
+									}
+								}
+							}
+
+							if (!ret) {
+								document.getElementById("nocookies-warning").style.display="block";
+								document.getElementById("nocookies-warning").setAttribute("aria-hidden", "false");
+
+								var anchors = document.getElementsByTagName("a");
+								for (var i = 0; anchors.length > i; i++) {
+									if (!(!(anchors[i].className != null) || !(anchors[i].className.indexOf("cookies_howto") == -1)) || (anchors[i].className == null)) {
+										anchors[i].removeAttribute("href");
+									}
+								}
+								var inputs = document.getElementsByTagName("input");
+								for (var i = 0; inputs.length > i; i++) {
+									inputs[i].disabled = true;
+								}
+								var textareas = document.getElementsByTagName("textarea");
+								for (var i = 0; textareas.length > i; i++) {
+									textareas[i].disabled = true;
+								}
+								var selects = document.getElementsByTagName("select");
+								for (var i = 0; selects.length > i; i++) {
+									selects[i].disabled = true;
+								}
+								var buttons = document.getElementsByTagName("button");
+								for (var i = 0; buttons.length > i; i++) {
+								    buttons[i].disabled = true;
+								}
+							}
+						}
+						catch (e) {
+							console.log("errore durante elaborazione 'cookies warning': " + e);
+						}
+					}
+				);
+			</script><script>
+								window.addEventListener('cookie-consent:initialized', _ => {
+									if (typeof changeCookieLang === 'function') {
+										changeCookieLang('it');
+									} else {
+									  console.error('Error changing language');
+									}
+								});
+								window.addEventListener('matomo-loaded:init', _ => {
+									if (typeof trackEvent === 'function') {
+									  trackEvent('trackPageView');
+									} else {
+									  console.error('Error tracking page view');
+									}
+
+									if (typeof trackLogin === 'function') {
+										trackLogin('12152');
+									} else {
+									  console.error('Error tracking login');
+									}
+
+								});
+
+								$(function() {
+									window.customCookieJsonConfigPath='CookieConfig.do';
+
+								    const cookieScript = document.createElement('script');
+								    cookieScript.src = 'https://static.dev.iu.cineca.it/v1/default.js';
+								    document.head.appendChild(cookieScript);
+							     });
+								</script>
+<nav class="accessibility-item">
+<h2 tabindex="1" id="shortcut">Link per accesso rapido</h2>
+<ul>
+<li>
+<a href="#maincontent">Contenuto principale della pagina</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menuprincipale">Menu principale</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#menuprincipale" aria-expanded="false" data-toggle="main-navigation" aria-controls="main-navigation" href="#main-navigation">Menu principale</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menusecondario">Link utili</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#focus-secondario" data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" href="#focus-secondario">Link utili</a>
+</li>
+</ul>
+</nav>
+<header class="masthead">
+<div class="l-container">
+<div class="masthead_top">
+<a class="masthead_logo" title="Home page" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_0"><img aria-hidden="true" alt="Logo ateneo" src="img/layout/logo.png?v=22.09.02" id="theme-logo"></a><a data-toggle="main-navigation" id="hamburger" aria-hidden="true" aria-controls="main-navigation" aria-expanded="false" aria-label="Menu principale" role="button" class="masthead_hamburger js-masthead-menubutton" href=""><i class="fa fa-2x fa-bars"></i></a>
+</div>
+<nav aria-labelledby="menuprincipale" id="main-navigation" class="masthead_menu" data-menu-opened-cod="menu_link-navbox_docenti_Didattica" data-menu-opened="">
+<h2 tabindex="2" id="menuprincipale" class="accessibility-item">Menu principale</h2>
+<div class="masthead_menu_container">
+<div class="masthead_menu_header">
+<a id="chiudi-menu-principale" data-focus="#shortcut" data-toggle="main-navigation" aria-hidden="true" role="button" class="masthead_menu_close js-masthead-menubutton" href="#shortcut"><i aria-hidden="true" class="fa fa-2x fa-times"></i></a>
+<ul class="masthead_menu_lang">
+<li>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02?cod_lingua=eng">eng</a>
+</li>
+<li>
+<a class="is-active">ita</a>
+</li>
+<li>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02?cod_lingua=spa">spa</a>
+</li>
+</ul>
+<div class="masthead_usermenu">
+<h2 class="accessibility-item">Menu utente</h2>
+<div class="masthead_usermenu_user">
+<div aria-label="Utente collegato" role="navigation" class="masthead_usermenu_user_name">MARIO ALVIANO</div>
+<img alt="Foto Utente" src="img/layout/ico-docente.gif" aria-hidden="true"></div>
+<div class="masthead_usermenu_menu">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_account_Area_Riservata" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="10-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Area Riservata​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="10-100" class="notOpened">
+<li id="log">
+<a id="menu_link-navbox_account_Logout" href="Logout.do?menu_opened_cod=">Logout​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_account_auth/CambioPasswordForm" href="auth/CambioPasswordForm.do?menu_opened_cod=">Cambia Password​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="masthead_menu_body">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Home" href="auth/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Home​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-100" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Messaggi" href="auth/Messaggi.do?menu_opened_cod=menu_link-navbox_docenti_Home">Messaggi​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-open  has-children ">
+<a id="menu_link-navbox_docenti_Didattica" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="true" aria-controls="500-200"><i aria-hidden="true" class="fa fa-chevron-left"></i>Didattica​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-200" class="is-open ">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaAttivitaCalEsa" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Calendario Esami​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/TemplateAppelli" href="auth/docente/CalendarioEsami/TemplateAppelli.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Modelli Appello​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/HomeDocElettronico" href="auth/HomeDocElettronico.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Firma Documenti Elettronici​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_FirmaDigitale/ConfirmaTest" href="FirmaDigitale/ConfirmaTest.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Test Firma Digitale​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaVerbaliAppello" href="auth/docente/CalendarioEsami/ListaVerbaliAppello.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Visualizza Verbali​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/ElencoPartizioniDocente" href="auth/docente/RegistroDocente/ElencoPartizioniDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Partizioni assegnate​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/DefinizioneOfferta/OffertaDidatticaDocente" href="auth/docente/DefinizioneOfferta/OffertaDidatticaDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Offerta Didattica​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/learningplanmgmt/LPMWizRicerca" href="auth/docente/learningplanmgmt/LPMWizRicerca.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Approvazione piani​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/questionari/ElencoQuestionariDoc" href="auth/docente/questionari/ElencoQuestionariDoc.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Questionari​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Conseguimento_Titolo" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-300"><i aria-hidden="true" class="fa fa-chevron-left"></i>Conseguimento Titolo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-300" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/SeduteLaurea" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Sedute di Laurea​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/LaureandiAssegnati" href="auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Laureandi assegnati​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Registro" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-400"><i aria-hidden="true" class="fa fa-chevron-left"></i>Registro​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-400" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/Home" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Lezioni​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/HomeDiario" href="auth/docente/RegistroDocente/HomeDiario.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Diario​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Commissioni" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-500"><i aria-hidden="true" class="fa fa-chevron-left"></i>Commissioni​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-500" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Admission/ElencoCommissioni" href="auth/Admission/ElencoCommissioni.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Concorsi​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/Graduation/ElencoSeduteLaurea" href="auth/docente/Graduation/ElencoSeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Conseguimento titolo​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Mobilita" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-550"><i aria-hidden="true" class="fa fa-chevron-left"></i>Mobilit&agrave;​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-550" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLA" href="auth/docente/dirittoAlloStudio/RicercaLA.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Learning Agreement​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLAInc" href="auth/docente/dirittoAlloStudio/RicercaLAInc.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Gest. Learning Agreement Incoming​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-GuideInfoAteneo" href="Redirect.do?parconfurl=GUOL_INFO_ATENEO&amp;menu_opened_cod=menu_link-GuideParent" aria-expanded="false" aria-controls="1900-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Informazioni Ateneo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="1900-100" class="notOpened">
+<li>
+<a id="menu_link-SedeAteneo" href="Redirect.do?parconfurl=GUOL_SEAT&amp;menu_opened_cod=menu_link-GuideInfoAteneo">Portale dell'Ateneo​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<div class="l-content-container">
+<div class="l-container">
+<div class="l-sidebar">
+<aside class="l-sidebar-left">
+<div aria-hidden="true" class="l-sidebar-left-placeholder"></div>
+</aside>
+<main aria-live="polite" id="main" class="l-sidebar-right">
+<h2 class="accessibility-item">Contenuto principale</h2>
+<div class="briciole">
+<h2 id="maincontent" class="accessibility-item">Tu sei qui</h2>
+<ul>
+<li>
+<a title="Homepage" href="auth/docente/AreaDocente.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02"><span class="accessibility-item" aria-hidden="true">Homepage</span><i aria-hidden="true" class="fa fa-home"></i></a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li>
+<a title="Calendario Esami" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02">Calendario Esami</a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li>
+<a title="Lista appelli d'esame" href="auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=17682">Lista appelli</a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li class="active" aria-current="page">Nuovo appello d'esame</li>
+</ul>
+</div>
+<div class="l-header">
+<div class="pagetitle">
+<h2 class="pagetitle_title"></h2>
+</div>
+</div>
+<div id="esse3old" class="layout-container-fluid container-fluid">
+<table width="100%" cellspacing="10" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="598" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="450" class="legenda3"><b>Appelli di: CYBER OFFENSE AND DEFENSE [27008777]</b></td><td align="right" class="legenda3"><a href="auth/docente/CalendarioEsami/InserisciAggiornaAppelloCalEsa.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02?CDS_ID=10711&amp;AD_ID=17682&amp;AA_ID=2022&amp;APP_ID=&amp;MIN_AA_CAL_ID=0&amp;VIS_DETT=101">visualizza dettagli &gt;&gt;</a></td>
+</tr>
+<tr>
+<td class="tplMessage">ARTIFICIAL INTELLIGENCE AND COMPUTER SCIENCE [0814] (LM)...</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="tplTitolo"><b>Dati appello</b></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/CalendarioEsami/InserisciAggiornaAppelloCalEsa.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody>
+<input value="10711" name="CDS_ID" type="hidden"><input value="17682" name="AD_ID" type="hidden"><input value="2022" name="AA_ID" type="hidden"><input value="0" name="MIN_AA_CAL_ID" type="hidden"><input value="0" name="CHECK_MODIFICA" type="hidden">
+<tr>
+<th class="tplForm" align="right">Carica modello:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><select class="tplForm" width="" cols="1" name="templ_prog_id" onchange="this.form.submit()"><option value="-" title=""></option><option value="1" title="Scritto, discussione ed eventuale orale">Scritto, discussione ed eventuale orale</option><option value="2" title="Orale con esercizi scritti">Orale con esercizi scritti</option></select><span style="width: 20%; margin-left:5px" id="span_N20030"><input height="20" alt="refresh" src="images/refresh.jpg" type="image"></span><script>
+																var elem = document.getElementById('span_N20030');
+																if(elem){elem.style.display = 'none';}
+														</script></td>
+</tr>
+</tbody>
+</table>
+<br>
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/CalendarioEsami/InserisciAggiornaAppelloCalEsaSubmit.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody>
+<input value="10711" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/cds_id" type="hidden"><input value="2022" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/aa_cal_id" type="hidden"><input value="" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/app_id" type="hidden"><input value="17682" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/ad_id" type="hidden"><input value="" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/iscritti" type="hidden"><input value="0" name="INS_TURNO" type="hidden"><input value="0" name="COUNT_TURNI" type="hidden"><input value="15" name="GG_INI_ISCR" type="hidden"><input value="2" name="GG_FINE_ISCR" type="hidden"><input value="0" name="MOD_SES" type="hidden"><input value="1" name="NOTIFICA_CAMBIO_DATA" type="hidden"><input value="1" name="NOTIFICA_CAMBIO_LUOGO" type="hidden"><input value="1" name="NOTIFICA_CAMBIO_DATA_LUOGO" type="hidden"><input value="10711" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row/cds_id" type="hidden"><input value="" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row/app_id" type="hidden"><input value="17682" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row/ad_id" type="hidden"><input value="PF" name="TIPO_PROVA" type="hidden"><input value="0" name="MIN_AA_CAL_ID" type="hidden"><input value="0" name="AULE_OBBL" type="hidden"><input value="1" name="VIEW_DETT_ESACOM" type="hidden"><input value="-100" name="VIS_DETT" type="hidden"><input value="0" name="ora_appello_disable" type="hidden"><input value="" name="app_log_id" type="hidden"><input value="" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row[@Num='1']/app_log_id" type="hidden"><input value="1" name="CHECK_MODIFICA" type="hidden"><input value="1" name="VIS_PERIODI_ISCR" type="hidden"><input value="1" name="NEW_APP" type="hidden">
+<tr>
+<th class="tplForm" style="height:5px; background-color : #DBDBDB;" align="left"></th><td class="tplForm" style="height:5px; background-color : #DBDBDB;" align="left" colspan="4"></td>
+</tr>
+<tr>
+<th class="tplForm" style="background-color : #DBDBDB;" align="left" width="160px">*Data appello:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" style="background-color : #DBDBDB;" align="left"><input id="data_inizio_app" class="tplForm input_date" value="" size="10" maxlength="10" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/data_inizio_app" type="text" onchange="setDiffDate(this.value,-15,'data_inizio_iscr');
+	                      setDiffDate(this.value,-2,'data_fine_iscr')" autocomplete="off"><script>
+							jQuery(".input_date").datepicker({
+								dateFormat: "dd/mm/yy",
+								changeMonth: true,
+								changeYear: true,
+								showButtonPanel: true,
+								yearRange: "-100:+10",
+								autoclose: true,
+								monthNamesShort: jQuery.datepicker.regional["it"].monthNames,
+								onSelect: function(d,i){
+							    	if(d !== i.lastVal){
+										try {
+											jQuery(this).trigger('change');
+										}
+										catch(err) {
+											console.log(err);
+										}
+									}
+								}
+							});
+						</script></input><span style="font-size: 10px;">&nbsp;(gg/mm/aaaa)</span></td><th class="tplForm" style="background-color : #DBDBDB;" align="left" width="50px">ora:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" style="background-color : #DBDBDB;" align="left"><select class="tplForm" width="" cols="1" name="hh_esa"><option value=""></option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+				&nbsp;:&nbsp;
+				<select class="tplForm" width="" cols="1" name="mm_esa"><option value=""></option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" style="background-color : #DBDBDB;" align="left">*Verbalizzazione:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" style="background-color : #DBDBDB;" align="left" colspan="3"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/tipo_gest_app_cod"><option value="FWS" title="Verbalizzazione senza pubblicazione esiti" selected>Verbalizzazione senza pubblicazione esiti</option><option value="FWP" title="Verbalizzazione con pubblicazione esiti">Verbalizzazione con pubblicazione esiti</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" style="background-color : #DBDBDB;" align="left">Tipo esame:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" style="background-color : #DBDBDB;" align="left" colspan="3"><input value="S" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/tipo_iscr_cod_prev" type="radio">Scritto<br>
+<input value="O" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/tipo_iscr_cod_prev" type="radio">Orale<br>
+<input value="SO" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/tipo_iscr_cod_prev" type="radio">Scritto e Orale&nbsp;&nbsp;<select name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/p10_app_tipo_esa_cod_prev" class="tplForm"><option value="">Congiunti</option></select>
+<br>
+</td>
+</tr>
+<tr>
+<th class="tplForm" align="left">*Iscrizioni (dal- al):
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><input id="data_inizio_iscr" class="tplForm input_date" value="" size="10" maxlength="10" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/data_inizio_iscr" type="text" onchange="" autocomplete="off"><script>
+							jQuery(".input_date").datepicker({
+								dateFormat: "dd/mm/yy",
+								changeMonth: true,
+								changeYear: true,
+								showButtonPanel: true,
+								yearRange: "-100:+10",
+								autoclose: true,
+								monthNamesShort: jQuery.datepicker.regional["it"].monthNames,
+								onSelect: function(d,i){
+							    	if(d !== i.lastVal){
+										try {
+											jQuery(this).trigger('change');
+										}
+										catch(err) {
+											console.log(err);
+										}
+									}
+								}
+							});
+						</script></input><span style="font-size: 10px;">&nbsp;(gg/mm/aaaa)</span></td><td class="tplForm" align="left" colspan="2"><input id="data_fine_iscr" class="tplForm input_date" value="" size="10" maxlength="10" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/data_fine_iscr" type="text" autocomplete="off"><script>
+							jQuery(".input_date").datepicker({
+								dateFormat: "dd/mm/yy",
+								changeMonth: true,
+								changeYear: true,
+								showButtonPanel: true,
+								yearRange: "-100:+10",
+								autoclose: true,
+								monthNamesShort: jQuery.datepicker.regional["it"].monthNames,
+								onSelect: function(d,i){
+							    	if(d !== i.lastVal){
+										try {
+											jQuery(this).trigger('change');
+										}
+										catch(err) {
+											console.log(err);
+										}
+									}
+								}
+							});
+						</script></input><span style="font-size: 10px;">&nbsp;(gg/mm/aaaa)</span></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">*Descrizione:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><input id="" class="tplForm" value="" size="40" maxlength="40" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/des" type="text"></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Prenotabile da:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/cond_id"><option value="" title="tutti">tutti</option><option value="80041" title="Controlo di prenotazione sul permesso di soggiorno">Controlo di prenotazione sul permesso di soggiorno</option><option value="80042" title="sessione di aprile: si possono iscrivere i soli studenti che hanno l'iscrizi...">sessione di aprile: si possono iscrivere i soli studenti che hanno l'iscrizi...</option><option value="80043" title="sessione di novembre: si possono iscrivere i soli studenti che hanno l'iscri...">sessione di novembre: si possono iscrivere i soli studenti che hanno l'iscri...</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Note:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><textarea class="tplForm" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/note" cols="74" rows="4"></textarea></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Appello riservato al docente:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><input class="tplForm" value="1" name="/WS/DataSet[@LocalEntityName='APP_CAL_ESA_WEB']/Row/riservato_flg" type="checkbox"></td>
+</tr>
+<tr>
+<th class="tplForm" style="height:15px;" align="left"></th><td class="tplForm" style="height:15px;" align="left" colspan="4"></td>
+</tr>
+<tr>
+<td class="tplForm" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #333333;" align="left" colspan="4"><b>dettagli organizzativi</b></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Edificio:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row[@Num='1']/edificio_id" onchange="loadElencoAule(this.value,'cmbAule1')"><option value="" title="-- selezionare --">-- selezionare --</option><option value="128" title="39 B (V PIANO)">39 B (V PIANO)</option><option value="184" title="39B1C (EXSTR3)">39B1C (EXSTR3)</option><option value="260" title="Ampliamento Polifunzionale">Ampliamento Polifunzionale</option><option value="156" title="AULA 5B3">AULA 5B3</option><option value="123" title="AULA CALDORA">AULA CALDORA</option><option value="62" title="AULA INFORMATICA 3 - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA">AULA INFORMATICA 3 - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA</option><option value="182" title="Aula Magna &quot;Beniamino Andreatta&quot;">Aula Magna "Beniamino Andreatta"</option><option value="77" title="Aula Magna Scienze della Terra">Aula Magna Scienze della Terra</option><option value="142" title="AULA P3">AULA P3</option><option value="7" title="AULE 5B1-5B2-5B3  - DiBEST + DESF">AULE 5B1-5B2-5B3  - DiBEST + DESF</option><option value="56" title="AULE EP - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA">AULE EP - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA</option><option value="63" title="AULE INFORMATICHE - DISCAG">AULE INFORMATICHE - DISCAG</option><option value="59" title="AULE OA/SG - DISCAG">AULE OA/SG - DISCAG</option><option value="280" title="CALDORA">CALDORA</option><option value="160" title="Casa Circondariale di Castrovillari">Casa Circondariale di Castrovillari</option><option value="158" title="Casa di Reclusione di Oristano">Casa di Reclusione di Oristano</option><option value="144" title="Casa di Reclusione di Rossano">Casa di Reclusione di Rossano</option><option value="279" title="CENTRO CONGRESSI">CENTRO CONGRESSI</option><option value="57" title="CONSOLIDATA 1 - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA">CONSOLIDATA 1 - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA</option><option value="32" title="CONSOLIDATA 29B1 - DIPARTIMENTO SCIENZE POLITICHE E SOCIALI">CONSOLIDATA 29B1 - DIPARTIMENTO SCIENZE POLITICHE E SOCIALI</option><option value="60" title="CONSOLIDATA 2 - DISCAG">CONSOLIDATA 2 - DISCAG</option><option value="61" title="CONSOLIDATA 3 - DISCAG">CONSOLIDATA 3 - DISCAG</option><option value="58" title="CONSOLIDATA 5 e ZENITH - DESF + DiScAG">CONSOLIDATA 5 e ZENITH - DESF + DiScAG</option><option value="208" title="Cubo 0B">Cubo 0B</option><option value="209" title="Cubo 0C">Cubo 0C</option><option value="266" title="Cubo 12B">Cubo 12B</option><option value="210" title="Cubo 12C">Cubo 12C</option><option value="80" title="CUBO 12C- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 12C- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="81" title="CUBO 12D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 12D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="211" title="Cubo 13C">Cubo 13C</option><option value="212" title="Cubo 14B">Cubo 14B</option><option value="82" title="CUBO 14C- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 14C- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="83" title="CUBO 14D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 14D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="285" title="Cubo 15A">Cubo 15A</option><option value="213" title="Cubo 15B">Cubo 15B</option><option value="214" title="Cubo 15C">Cubo 15C</option><option value="78" title="CUBO 15C - DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 15C - DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="84" title="CUBO 15D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 15D- DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="215" title="Cubo 16C">Cubo 16C</option><option value="216" title="Cubo 17B">Cubo 17B</option><option value="74" title="CUBO 17B - DICES">CUBO 17B - DICES</option><option value="217" title="Cubo 17C">Cubo 17C</option><option value="79" title="CUBO 17C - DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE">CUBO 17C - DIPARTIMENTO DI CHIMICA E TECNOLOGIE CHIMICHE</option><option value="153" title="CUBO 17 - DICES">CUBO 17 - DICES</option><option value="218" title="Cubo 18B">Cubo 18B</option><option value="71" title="CUBO 18B - DICES">CUBO 18B - DICES</option><option value="219" title="Cubo 18C">Cubo 18C</option><option value="220" title="Cubo 19B">Cubo 19B</option><option value="72" title="CUBO 19B - DICES">CUBO 19B - DICES</option><option value="221" title="Cubo 1A">Cubo 1A</option><option value="33" title="CUBO 1A - AULE SSP DIPARTIMENTO DI SCIENZE POLITICHE E SOCIALI">CUBO 1A - AULE SSP DIPARTIMENTO DI SCIENZE POLITICHE E SOCIALI</option><option value="222" title="Cubo 1C">Cubo 1C</option><option value="223" title="Cubo 1D">Cubo 1D</option><option value="286" title="Cubo 20A">Cubo 20A</option><option value="206" title="CUBO 20A - DICES">CUBO 20A - DICES</option><option value="224" title="Cubo 20B">Cubo 20B</option><option value="70" title="CUBO 20B - DICES">CUBO 20B - DICES</option><option value="225" title="Cubo 21B">Cubo 21B</option><option value="281" title="Cubo 23C">Cubo 23C</option><option value="284" title="Cubo 25C">Cubo 25C</option><option value="226" title="Cubo 27B">Cubo 27B</option><option value="227" title="Cubo 28B">Cubo 28B</option><option value="228" title="Cubo 28C">Cubo 28C</option><option value="277" title="Cubo 28D">Cubo 28D</option><option value="229" title="Cubo 29B">Cubo 29B</option><option value="73" title="CUBO 29B - LISE">CUBO 29B - LISE</option><option value="230" title="Cubo 29C">Cubo 29C</option><option value="231" title="Cubo 2B">Cubo 2B</option><option value="232" title="Cubo 2C">Cubo 2C</option><option value="233" title="Cubo 30A">Cubo 30A</option><option value="234" title="Cubo 30B">Cubo 30B</option><option value="235" title="Cubo 30C">Cubo 30C</option><option value="236" title="Cubo 31A">Cubo 31A</option><option value="237" title="Cubo 31B">Cubo 31B</option><option value="238" title="Cubo 31C">Cubo 31C</option><option value="239" title="Cubo 32B">Cubo 32B</option><option value="99" title="Cubo 32B">Cubo 32B</option><option value="240" title="Cubo 32C">Cubo 32C</option><option value="273" title="Cubo 33B">Cubo 33B</option><option value="274" title="Cubo 33C">Cubo 33C</option><option value="269" title="Cubo 37B">Cubo 37B</option><option value="270" title="Cubo 38B">Cubo 38B</option><option value="271" title="Cubo 38CDE">Cubo 38CDE</option><option value="241" title="Cubo 39B">Cubo 39B</option><option value="242" title="Cubo 39C">Cubo 39C</option><option value="98" title="CUBO 39C">CUBO 39C</option><option value="243" title="Cubo 3A">Cubo 3A</option><option value="244" title="Cubo 3B">Cubo 3B</option><option value="278" title="Cubo 3C">Cubo 3C</option><option value="245" title="Cubo 3D">Cubo 3D</option><option value="246" title="Cubo 40B">Cubo 40B</option><option value="69" title="CUBO 40B - Laboratorio Informatica ">CUBO 40B - Laboratorio Informatica </option><option value="247" title="Cubo 40C">Cubo 40C</option><option value="185" title="CUBO 40 C-DIAM">CUBO 40 C-DIAM</option><option value="50" title="CUBO 40C - DIMEG">CUBO 40C - DIMEG</option><option value="248" title="Cubo 41B">Cubo 41B</option><option value="51" title="CUBO 41B">CUBO 41B</option><option value="66" title="CUBO 41C - DIMEG">CUBO 41C - DIMEG</option><option value="268" title="Cubo 41Z">Cubo 41Z</option><option value="249" title="Cubo 42B">Cubo 42B</option><option value="196" title="CUBO 42B">CUBO 42B</option><option value="272" title="Cubo 42C">Cubo 42C</option><option value="250" title="Cubo 42D">Cubo 42D</option><option value="86" title="CUBO 42D">CUBO 42D</option><option value="251" title="Cubo 43B">Cubo 43B</option><option value="49" title="CUBO 43B">CUBO 43B</option><option value="252" title="Cubo 43C">Cubo 43C</option><option value="48" title="CUBO 43C - DIMEG">CUBO 43C - DIMEG</option><option value="253" title="Cubo 44B">Cubo 44B</option><option value="254" title="Cubo 44C">Cubo 44C</option><option value="129" title="CUBO 44C ">CUBO 44C </option><option value="46" title="CUBO 44C - DIMEG">CUBO 44C - DIMEG</option><option value="255" title="Cubo 45B ">Cubo 45B </option><option value="148" title="CUBO 45B AULA SEMINARI &quot;GIANNATTASIO&quot;">CUBO 45B AULA SEMINARI "GIANNATTASIO"</option><option value="67" title="CUBO 45C - DIMEG">CUBO 45C - DIMEG</option><option value="267" title="Cubo 46B">Cubo 46B</option><option value="68" title="CUBO 46C - DIMEG">CUBO 46C - DIMEG</option><option value="256" title="Cubo 4A">Cubo 4A</option><option value="125" title="CUBO 4B, 4C, 6B, 6C, 12B, 14B, 15B">CUBO 4B, 4C, 6B, 6C, 12B, 14B, 15B</option><option value="287" title="Cubo 4C">Cubo 4C</option><option value="257" title="Cubo 4D">Cubo 4D</option><option value="258" title="Cubo 5B">Cubo 5B</option><option value="259" title="Cubo 5C">Cubo 5C</option><option value="283" title="Cubo 6B">Cubo 6B</option><option value="282" title="Cubo 6C">Cubo 6C</option><option value="111" title="DINCI 39B 1A  (EX STR1) PRIMO PIANO">DINCI 39B 1A  (EX STR1) PRIMO PIANO</option><option value="113" title="DINCI 39B 1B	   (EX STR2) PRIMO PIANO">DINCI 39B 1B	   (EX STR2) PRIMO PIANO</option><option value="121" title="DINCI 39C 1	  (EX MOD1A) I PIANO">DINCI 39C 1	  (EX MOD1A) I PIANO</option><option value="119" title="DINCI 39C 2A   (EX 	MOD2D) II PIANO">DINCI 39C 2A   (EX 	MOD2D) II PIANO</option><option value="120" title="DINCI 39C 2B	   (EX MOD2E) II PIANO">DINCI 39C 2B	   (EX MOD2E) II PIANO</option><option value="102" title="DINCI 40B4 (EX	 40B) PONTE COPERTO">DINCI 40B4 (EX	 40B) PONTE COPERTO</option><option value="104" title="DINCI 41B 0 (EX DS3) Piano terra	">DINCI 41B 0 (EX DS3) Piano terra	</option><option value="116" title="DINCI 44B 2	    (EX DS11) PONTE COPERTO">DINCI 44B 2	    (EX DS11) PONTE COPERTO</option><option value="105" title="DINCI 45B 0A (EX 	PT1) Piano terra	">DINCI 45B 0A (EX 	PT1) Piano terra	</option><option value="107" title="DINCI 45B 0B  (EX 	PT2) PIANO TERRA">DINCI 45B 0B  (EX 	PT2) PIANO TERRA</option><option value="110" title="DINCI 45B 0C (EX PT3) PIANO TERRA">DINCI 45B 0C (EX PT3) PIANO TERRA</option><option value="141" title="DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA">DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA</option><option value="75" title="Dipartimento di FARMACIA e SSN">Dipartimento di FARMACIA e SSN</option><option value="127" title="Dipartimento Scienze Politiche e Sociali">Dipartimento Scienze Politiche e Sociali</option><option value="52" title="Edificio AMPLIAMENTO POLIFUNZIONALE - CISR">Edificio AMPLIAMENTO POLIFUNZIONALE - CISR</option><option value="146" title="Edificio Cubo 0 A - DIPARTIMENTO DI SCIENZE POLITICHE E SOCIALI">Edificio Cubo 0 A - DIPARTIMENTO DI SCIENZE POLITICHE E SOCIALI</option><option value="64" title="Edificio CUBO 0C - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA">Edificio CUBO 0C - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA</option><option value="11" title="Edificio CUBO 14B - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERR...">Edificio CUBO 14B - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERR...</option><option value="12" title="Edificio CUBO 15B - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERR...">Edificio CUBO 15B - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERR...</option><option value="27" title="Edificio CUBO 17A - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 17A - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="19" title="Edificio CUBO 17B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 17B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="18" title="Edificio CUBO 18C - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 18C - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="23" title="Edificio CUBO 19B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 19B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="143" title="Edificio CUBO 1C - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA">Edificio CUBO 1C - DIPARTIMENTO DI ECONOMIA, STATISTICA E FINANZA</option><option value="20" title="Edificio CUBO 21B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 21B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="16" title="Edificio CUBO 27B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 27B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="21" title="Edificio CUBO 28A - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 28A - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="13" title="Edificio  CUBO 28B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio  CUBO 28B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="17" title="Edificio CUBO 28C - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 28C - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="26" title="Edificio CUBO 28D - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 28D - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="24" title="Edificio CUBO 29B - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 29B - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="22" title="Edificio CUBO 29C - DIPARTIMENTO DI STUDI UMANISTICI">Edificio CUBO 29C - DIPARTIMENTO DI STUDI UMANISTICI</option><option value="85" title="Edificio CUBO 30A - DIPARTIMENTO DI MATEMATICA E INFORMATICA">Edificio CUBO 30A - DIPARTIMENTO DI MATEMATICA E INFORMATICA</option><option value="4" title="Edificio CUBO 30B - DIPARTIMENTO DI MATEMATICA E INFORMATICA">Edificio CUBO 30B - DIPARTIMENTO DI MATEMATICA E INFORMATICA</option><option value="2" title="Edificio CUBO 30C - DIPARTIMENTO DI FISICA">Edificio CUBO 30C - DIPARTIMENTO DI FISICA</option><option value="6" title="Edificio CUBO 31A - DIPARTIMENTO DI MATEMATICA E INFORMATICA">Edificio CUBO 31A - DIPARTIMENTO DI MATEMATICA E INFORMATICA</option><option value="5" title="Edificio CUBO 31B - DIPARTIMENTO DI MATEMATICA E INFORMATICA">Edificio CUBO 31B - DIPARTIMENTO DI MATEMATICA E INFORMATICA</option><option value="1" title="Edificio CUBO 31C - DIPARTIMENTO DI FISICA">Edificio CUBO 31C - DIPARTIMENTO DI FISICA</option><option value="3" title="Edificio CUBO 32C - DIPARTIMENTO DI FISICA">Edificio CUBO 32C - DIPARTIMENTO DI FISICA</option><option value="10" title="Edificio CUBO 4A - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA">Edificio CUBO 4A - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA</option><option value="9" title="Edificio CUBO 4D - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA">Edificio CUBO 4D - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA</option><option value="8" title="Edificio CUBO 5C - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA">Edificio CUBO 5C - DIPARTIMENTO DI BIOLOGIA, ECOLOGIA E SCIENZE DELLA TERRA</option><option value="155" title="Edificio Uffici - Ampliamento Polifunzionale - DISPeS">Edificio Uffici - Ampliamento Polifunzionale - DISPeS</option><option value="170" title="Esame a distanza DISPES">Esame a distanza DISPES</option><option value="150" title="Laboratorio Informatica">Laboratorio Informatica</option><option value="183" title="Laboratorio informatico Dipartimento Studi Umanistici">Laboratorio informatico Dipartimento Studi Umanistici</option><option value="115" title="MOD3A* III PIANO">MOD3A* III PIANO</option><option value="177" title="PIATTAFORMA ON LINE">PIATTAFORMA ON LINE</option><option value="172" title="PIATTAFORMA TEAMS">PIATTAFORMA TEAMS</option><option value="176" title="PIATTAFORMA TEAMS">PIATTAFORMA TEAMS</option><option value="261" title="Polifunzionale">Polifunzionale</option><option value="198" title="POLIFUNZIONALE - AULA 20">POLIFUNZIONALE - AULA 20</option><option value="43" title="POLIFUNZIONALE - AULA 44">POLIFUNZIONALE - AULA 44</option><option value="45" title="POLIFUNZIONALE - AULA B">POLIFUNZIONALE - AULA B</option><option value="262" title="Polifunzionale Capannone C">Polifunzionale Capannone C</option><option value="263" title="Polifunzionale Capannone D">Polifunzionale Capannone D</option><option value="276" title="Polifunzionale Capannone E">Polifunzionale Capannone E</option><option value="264" title="Polifunzionale Capannone F">Polifunzionale Capannone F</option><option value="41" title="POLIFUNZIONALE - CAPANNONE G">POLIFUNZIONALE - CAPANNONE G</option><option value="42" title="POLIFUNZIONALE - CAPANNONE H">POLIFUNZIONALE - CAPANNONE H</option><option value="40" title="POLIFUNZIONALE - CAPANNONE L">POLIFUNZIONALE - CAPANNONE L</option><option value="207" title="POLIFUNZIONALE ORTO BOTANICO">POLIFUNZIONALE ORTO BOTANICO</option><option value="205" title="SALA RIUNIONI AREA STRUTTURE P 1 DINCI">SALA RIUNIONI AREA STRUTTURE P 1 DINCI</option><option value="149" title="Scuola Superiore di Scienze delle Amministrazioni Pubbliche">Scuola Superiore di Scienze delle Amministrazioni Pubbliche</option><option value="265" title="Sottoviadotto Polifunzionale">Sottoviadotto Polifunzionale</option><option value="275" title="Stabulario">Stabulario</option><option value="181" title="TEAMS">TEAMS</option><option value="171" title="Telematico Fisica">Telematico Fisica</option><option value="76" title="University Club">University Club</option><option value="124" title="UNIVERSITY CLUB">UNIVERSITY CLUB</option></select><span style="width: 20%; margin-left:5px" id="span_N201A4"><input height="20" alt="refresh" src="images/refresh.jpg" type="image"></span><script>
+																var elem = document.getElementById('span_N201A4');
+																if(elem){elem.style.display = 'none';}
+														</script></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Aula:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row[@Num='1']/aula_id" id="cmbAule1"><option value="" title="-- selezionare --">-- selezionare --</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Partizionamento:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row[@Num='1']/dom_part_cod"><option value="GRUPPO A__A" title="GRUPPO A">GRUPPO A</option><option value="GRUPPO B__A" title="GRUPPO B">GRUPPO B</option><option value="A-L__A1" title="Cognomi A-L">Cognomi A-L</option><option value="M-Z__A1" title="Cognomi M-Z">Cognomi M-Z</option><option value="A-K__A10" title="Cognomi A-K">Cognomi A-K</option><option value="L-Z__A10" title="Cognomi L-Z">Cognomi L-Z</option><option value="A-F__A11" title="Cognomi A-F">Cognomi A-F</option><option value="G-P__A11" title="Cognomi G-P">Cognomi G-P</option><option value="Q-Z__A11" title="Cognomi Q-Z">Cognomi Q-Z</option><option value="A-D__A12" title="Cognomi A-D">Cognomi A-D</option><option value="E-O__A12" title="Cognomi E-O">Cognomi E-O</option><option value="P-Z__A12" title="Cognomi P-Z">Cognomi P-Z</option><option value="A-E__A2" title="Cognomi A-E">Cognomi A-E</option><option value="F-O__A2" title="Cognomi F-O">Cognomi F-O</option><option value="P-Z__A2" title="Cognomi P-Z">Cognomi P-Z</option><option value="A-E__A3" title="Cognomi A-E">Cognomi A-E</option><option value="F-N__A3" title="Cognomi F-N">Cognomi F-N</option><option value="O-Z__A3" title="Cognomi O-Z">Cognomi O-Z</option><option value="A-E__A4" title="Cognomi A-E">Cognomi A-E</option><option value="F-L__A4" title="Cognomi F-L">Cognomi F-L</option><option value="M-R__A4" title="Cognomi M-R">Cognomi M-R</option><option value="S-Z__A4" title="Cognomi S-Z">Cognomi S-Z</option><option value="A-M__A5" title="Cognomi A-M">Cognomi A-M</option><option value="N-Z__A5" title="Cognomi N-Z">Cognomi N-Z</option><option value="A-G__A6" title="Cognomi A-G">Cognomi A-G</option><option value="H-Z__A6" title="Cognomi H-Z">Cognomi H-Z</option><option value="A-O__A7" title="Cognomi A-O">Cognomi A-O</option><option value="P-Z__A7" title="Cognomi P-Z">Cognomi P-Z</option><option value="A-D__A8" title="Cognomi A-D">Cognomi A-D</option><option value="E-N__A8" title="Cognomi E-N">Cognomi E-N</option><option value="O-Z__A8" title="Cognomi O-Z">Cognomi O-Z</option><option value="A-C__A9" title="Cognomi A-C">Cognomi A-C</option><option value="D-L__A9" title="Cognomi D-L">Cognomi D-L</option><option value="M-P__A9" title="Cognomi M-P">Cognomi M-P</option><option value="Q-Z__A9" title="Cognomi Q-Z">Cognomi Q-Z</option><option value="A__CATTEDRE" title="Gruppo A">Gruppo A</option><option value="B__CATTEDRE" title="Gruppo B">Gruppo B</option><option value="C__CATTEDRE" title="Gruppo C">Gruppo C</option><option value="GRP-A__CATTEDRE" title="Gruppo GRP-A">Gruppo GRP-A</option><option value="GRP-B__CATTEDRE" title="Gruppo GRP-B">Gruppo GRP-B</option><option value="GRP-C__CATTEDRE" title="Gruppo GRP-C">Gruppo GRP-C</option><option value="GRP-D__CATTEDRE" title="Gruppo GRP-D">Gruppo GRP-D</option><option value="GRP-E__CATTEDRE" title="Gruppo GRP-E">Gruppo GRP-E</option><option value="GRP-A__GRP" title="Gruppo A">Gruppo A</option><option value="GRP-B__GRP" title="Gruppo B">Gruppo B</option><option value="GRP-C__GRP" title="Gruppo C">Gruppo C</option><option value="GRP-D__GRP" title="Gruppo D">Gruppo D</option><option value="GRP-E__GRP" title="Gruppo E">Gruppo E</option><option value="GRP-F__GRP" title="Gruppo F">Gruppo F</option><option value="GRP-G__GRP" title="Gruppo G">Gruppo G</option><option value="GRP-H__GRP" title="Gruppo H">Gruppo H</option><option value="GRP-I__GRP" title="Gruppo I">Gruppo I</option><option value="GRP-L__GRP" title="Gruppo L">Gruppo L</option><option value="GRPA__GRPAD" title="Gruppo GRPA">Gruppo GRPA</option><option value="GRPB__GRPAD" title="Gruppo GRPB">Gruppo GRPB</option><option value="GRPC__GRPAD" title="Gruppo GRPC">Gruppo GRPC</option><option value="GRPD__GRPAD" title="Gruppo GRPD">Gruppo GRPD</option><option value="A__GRUPPOAD" title="GRUPPO A">GRUPPO A</option><option value="B__GRUPPOAD" title="GRUPPO B">GRUPPO B</option><option value="C__GRUPPOAD" title="GRUPPO C">GRUPPO C</option><option value="GRUPPO A__GRUPPO AD" title="A">A</option><option value="GRUPPO B__GRUPPO AD" title="B">B</option><option value="GRUPPO C__GRUPPO AD" title="C">C</option><option value="GRUPPO D__GRUPPO AD" title="D">D</option><option value="N0__N0" title="Nessun partizionamento" selected>Nessun partizionamento</option><option value="A__SF" title="Componente Fittizio A">Componente Fittizio A</option><option value="B__SF" title="Componente Fittizio B">Componente Fittizio B</option><option value="C__SF" title="Componente Fittizio C">Componente Fittizio C</option><option value="D__SF" title="Componente Fittizio D">Componente Fittizio D</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Numero max posti:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left" colspan="3"><input id="" class="tplForm" value="" size="5" maxlength="4" name="/WS/DataSet[@LocalEntityName='APP_LOG_DATI_WEB']/Row[@Num='1']/numero_max" type="text"></td>
+</tr>
+<tr>
+<th class="tplForm" style="height:5px;" align="left"></th><td class="tplForm" style="height:5px;" align="left" colspan="4"></td>
+</tr>
+<tr>
+<th class="tplForm" style="height:35px;" align="left"></th><td class="tplForm" style="height:35px;" align="left" colspan="4"></td>
+</tr>
+</tbody>
+</table>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="1" border="0" align="center">
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="sbmDef" type="submit" value="Salva" onClick="return true;"></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="sbmNewApp" type="submit" value="Salva e aggiungi nuovo" onClick="return true;"></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="" type="reset" value="Annulla" onClick=""></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><a class="tplFormSubmit" title="" href="auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02?CDS_ID=10711&amp;AA_ID=2022&amp;AD_ID=17682&amp;MIN_AA_CAL_ID=0">Esci</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+</table>
+</div>
+</main>
+</div>
+</div>
+</div>
+<div id="secondary-menu" class="secondary-menu">
+<div class="l-container">
+<div class="secondary-menu_top">
+<button data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" id="focus-secondario" class="secondary-menu_button" data-scroll="#footer">Link utili<i data-toggle-icon-closed="true" aria-hidden="true" class="fa fa-chevron-right"></i><i data-toggle-icon-open="true" aria-hidden="true" class="fa fa-chevron-down"></i></button>
+</div>
+<nav id="secondary-menu-list" class="secondary-menu-list">
+<h2 id="menusecondario" class="accessibility-item">Link utili</h2>
+<ul>
+<li>
+<a title="Home" href="Home.do">Home</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<footer id="footer" class="footer">
+<div class="l-container">
+<div class="footer_content">
+<p>
+<a href="InformativaCookie.do">Informativa utilizzo cookie</a> | &copy; CINECA</p>
+</div>
+</div>
+</footer>
+<script src="JavaScript/enquire/enquire.min.js"></script><script src="JavaScript/layout/layout.js?v=20.12.00"></script><script>$(onReady);</script>
+</body>
+</html>

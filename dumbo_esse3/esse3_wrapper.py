@@ -141,7 +141,7 @@ class Esse3Wrapper:
         self.driver.find_element(By.NAME, 'hh_esa').send_keys(exam.stringify_hour())
         self.driver.find_element(By.NAME, 'mm_esa').send_keys(exam.stringify_minute())
 
-        self.driver.find_element(By.XPATH, f'//input[@type = "radio"][@value = "{exam_type.value}"]').send_keys(Keys.RETURN)
+        self.driver.find_element(By.XPATH, f'//input[@type = "radio"][@value = "{exam_type.value}"]').send_keys(Keys.SPACE)
 
         self.driver.find_element(By.XPATH, '//tr[starts-with(th, "*Descrizione:")]//input').send_keys(description.value)
         self.driver.find_element(By.XPATH, '//tr[starts-with(th, "Note:")]//textarea').send_keys(notes.value)
