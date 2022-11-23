@@ -194,14 +194,14 @@ class Student:
 @typeguard.typechecked
 @dataclasses.dataclass(frozen=True)
 class StudentThesisState:
-    student: Student
-    cdl: CdL
-    state: 'State'
-
     class State(enum.Enum):
         MISSING = 0
         UNSIGNED = 1
         SIGNED = 2
+
+    student: Student
+    cdl: CdL
+    state: State
 
     @staticmethod
     def of(student: Student, cdl: CdL, state: State) -> 'StudentThesisState':
@@ -211,15 +211,15 @@ class StudentThesisState:
 @typeguard.typechecked
 @dataclasses.dataclass(frozen=True)
 class Register:
-    course: Course
-    hours: NumberOfHours
-    semester: Semester
-    state: 'State'
-
     class State(enum.Enum):
         DRAFT = "Bozza"
         VERIFIED = "Verificato"
         SIGNED = "Stampato"
+
+    course: Course
+    hours: NumberOfHours
+    semester: Semester
+    state: State
 
     @staticmethod
     def of(course: Course, hours: NumberOfHours, semester: Semester, state: State) -> 'Register':
@@ -235,7 +235,8 @@ class RegisterActivity:
     title: ActivityTitle
 
     @staticmethod
-    def of(date: DateTime, hours: NumberOfHours, activity_type: ActivityType, title: ActivityTitle) -> 'RegisterActivity':
+    def of(date: DateTime, hours: NumberOfHours, activity_type: ActivityType,
+           title: ActivityTitle) -> 'RegisterActivity':
         return RegisterActivity(date, hours, activity_type, title)
 
     @property

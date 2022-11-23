@@ -12,11 +12,24 @@ from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, St
     ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, ActivityTitle, ActivityType
 from dumbo_esse3.utils import validators
 
-LOGIN_URL = 'https://unical.esse3.cineca.it/auth/Logon.do?menu_opened_cod='
-LOGOUT_URL = 'https://unical.esse3.cineca.it/Logout.do?menu_opened_cod='
-COURSE_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica'
-THESIS_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo'
-REGISTER_LIST_URL = 'https://unical.esse3.cineca.it/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro'
+ESSE3_SERVER = "https://unical.esse3.cineca.it"
+LOGIN_URL = f'{ESSE3_SERVER}/auth/Logon.do?menu_opened_cod='
+LOGOUT_URL = f'{ESSE3_SERVER}/Logout.do?menu_opened_cod='
+COURSE_LIST_URL = f'{ESSE3_SERVER}/auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica'
+THESIS_LIST_URL = f'{ESSE3_SERVER}/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo'
+REGISTER_LIST_URL = f'{ESSE3_SERVER}/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro'
+
+
+def change_esse3_server(url):
+    global ESSE3_SERVER, LOGIN_URL, LOGOUT_URL, COURSE_LIST_URL, THESIS_LIST_URL, REGISTER_LIST_URL
+
+    LOGIN_URL = LOGIN_URL.replace(ESSE3_SERVER, url, 1)
+    LOGOUT_URL = LOGOUT_URL.replace(ESSE3_SERVER, url, 1)
+    COURSE_LIST_URL = COURSE_LIST_URL.replace(ESSE3_SERVER, url, 1)
+    THESIS_LIST_URL = THESIS_LIST_URL.replace(ESSE3_SERVER, url, 1)
+    REGISTER_LIST_URL = REGISTER_LIST_URL.replace(ESSE3_SERVER, url, 1)
+
+    ESSE3_SERVER = url
 
 
 @typeguard.typechecked

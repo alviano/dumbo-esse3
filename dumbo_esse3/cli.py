@@ -1,4 +1,5 @@
 import dataclasses
+from collections import defaultdict
 from typing import Optional, List
 
 import typer
@@ -326,6 +327,20 @@ def command_register_activities(
                 str(activity.title),
                 activity.type.name,
             )
+        console.print(table)
+
+        hours = defaultdict(lambda: 0)
+        for activity in activities:
+            hours[activity.type] += activity.hours.value
+        table = Table()
+        table.add_column(justify="right")
+        table.add_column("Summary")
+        table.add_row("State", register.state.name)
+        table.add_row("Semester", str(register.semester))
+        table.add_row("Hours", str(register.hours))
+        table.add_row("Missing hours", str(register.hours.value - sum(activity.hours.value for activity in activities)))
+        for activity_type, hours in hours.items():
+            table.add_row(activity_type.name, str(hours))
         console.print(table)
 
 
