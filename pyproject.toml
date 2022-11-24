@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dumbo-esse3"
-version = "0.3.0"
+version = "0.3.1"
 description = "Esse3 command line utility, to save my future time!"
 authors = ["Mario Alviano <mario.alviano@gmail.com>"]
 
@@ -13,10 +13,10 @@ typeguard = "^2.13.3"
 valid8 = "^5.1.2"
 dataclass-type-validator = "^0.1.2"
 dateutils = "^0.6.12"
-pytest-splinter = "^3.3.2"
 
 [tool.poetry.dev-dependencies]
 coverage = "^6.5.0"
+freezegun = "^1.2.2"
 pytest = "^7.2.0"
 pytest-localserver = "^0.7.0"
 

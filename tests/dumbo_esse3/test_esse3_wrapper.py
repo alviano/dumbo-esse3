@@ -1,7 +1,8 @@
 import pytest
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
-from dumbo_esse3.primitives import DateTime, Course, ActivityTitle, ExamType, ExamDescription, ExamNotes
+from dumbo_esse3.primitives import DateTime, Course, ActivityTitle, ExamType, ExamDescription, ExamNotes, \
+    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 from tests.test_environment import USERNAME, PASSWORD
 
@@ -67,12 +68,6 @@ def test_add_exam(esse3_wrapper):
     assert len(new_exams) == len(old_exams) + 1
 
 
-def test_fetch_thesis_list(esse3_wrapper):
-    theses = esse3_wrapper.fetch_thesis_list()
-    assert len(theses) >= 0  # just to avoid a warning
-    assert False
-
-
 def test_fetch_registers(esse3_wrapper):
     registers = esse3_wrapper.fetch_registers()
     assert len(registers) == 3
@@ -81,7 +76,34 @@ def test_fetch_registers(esse3_wrapper):
 
 def test_fetch_register_activities(esse3_wrapper):
     registers = esse3_wrapper.fetch_registers()
-    assert len(registers) > 1
     activities = esse3_wrapper.fetch_register_activities(registers[1])
     assert len(activities) == 15
     assert activities[0].title == ActivityTitle("Introduction")
+
+
+def test_add_and_remove_register_activity(esse3_wrapper):
+    registers = esse3_wrapper.fetch_registers()
+    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    assert len(activities) == 0
+
+    assert esse3_wrapper.add_register_activity(registers[0], RegisterActivity.of(
+        DateTime.parse("24/11/2022 09:30"),
+        NumberOfHours(2),
+        ActivityType.LECTURE,
+        ActivityTitle("Example"),
+    ))
+    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    assert len(activities) == 1
+
+    assert activities[0].title == ActivityTitle("Example")
+    assert esse3_wrapper.delete_register_activity(registers[0], 1)
+    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    assert len(activities) == 0
+
+    assert not esse3_wrapper.delete_register_activity(registers[0], 1)
+
+
+def test_fetch_theses_list(esse3_wrapper):
+    theses = esse3_wrapper.fetch_thesis_list()
+    assert len(theses) == 2
+    assert theses[0].state == StudentThesisState.State.MISSING

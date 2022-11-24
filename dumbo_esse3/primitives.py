@@ -118,9 +118,6 @@ class DateTime:
 
         if res.hour < 8:
             res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=8, minute=0)
-        elif res.hour > 23:
-            res = datetime.datetime(year=res.year, month=res.month, day=res.day, hour=8, minute=0) + \
-                  datetime.timedelta(days=1)
 
         return DateTime(res)
 
@@ -233,6 +230,9 @@ class RegisterActivity:
     hours: NumberOfHours
     type: ActivityType
     title: ActivityTitle
+
+    def __post_init__(self):
+        validate("end_date_time", self.end_date_time, help_msg="The activity spans multiple days.")
 
     @staticmethod
     def of(date: DateTime, hours: NumberOfHours, activity_type: ActivityType,

@@ -1,0 +1,558 @@
+<!DOCTYPE html><html id="top" lang="it">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Registro Lezioni - Dettaglio riga registro, Universit&agrave; di UNICAL</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="Servizi online dell'ateneo" name="description">
+<meta content="noindex, nofollow" name="robots">
+<base href="https://unical.esse3.cineca.it/">
+<link href="img/layout/favicons/apple-touch-icon.png" sizes="120x120" rel="apple-touch-icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-32x32.png" sizes="32x32" type="image/png" rel="icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-16x16.png" sizes="16x16" type="image/png" rel="icon" class="favicon">
+<link href="img/layout/favicons/manifest.json" rel="manifest" class="favicon">
+<link href="img/layout/favicons/safari-pinned-tab.svg" rel="mask-icon" class="favicon">
+<link href="JavaScript/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/layout/app.css?v=22.09.02" rel="stylesheet">
+<link href="css/templateCommon.css?v=19.08.00" type="text/css" rel="stylesheet">
+<link href="css/layout/print.css" type="text/css" rel="stylesheet">
+<link href="css/layout/legacy.css?v=20.10.04" type="text/css" rel="stylesheet">
+<link href="css/layout/theme-custom.css?v=22.08.02" type="text/css" rel="stylesheet">
+<link href="css/template.css" type="text/css" rel="stylesheet">
+<link href="css/unical.css" type="text/css" rel="stylesheet">
+<link href="css/jquery-ui.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/jquery.fileupload.css?v=20.12.00" media="all" type="text/css" rel="stylesheet">
+<link href="css/ui.jqgrid.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
+<script src="JavaScript/common.js"></script><script src="JavaScript/jquery/jquery-3.6.1.min.js"></script><script src="JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script><script src="JavaScript/jquery/jquery-ui/js/jquery-ui-1.13.2.min.js"></script><script src="JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script><script src="JavaScript/jquery/jqgrid/src/grid.tbltogrid.js?v=22.01.00"></script><script src="JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script><script src="JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script><script src="JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script><script src="JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script><script src="JavaScript/jquery/footable/js/footable.js"></script><script src="JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.iframe-transport.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.fileupload.js?v=22.01.00"></script><script src="JavaScript/widgetChunkFileUpload.js?v=22.01.00"></script><script src="JavaScript/sharedUtils.js?v=20.10.04"></script>
+</head>
+<body data-xsl="/xsl/DettRigaReg.xsl" class="secondaryMenuBottom ">
+<noscript>
+<div id="noscript-warning">E' necessario abilitare javascript per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript">qui</a>
+</div>
+</noscript>
+<div id="nocookies-warning" aria-hidden="true">E' necessario abilitare i cookies per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript" class="cookies_howto">qui</a>
+</div>
+<style>
+				#noscript-warning, #nocookies-warning {
+					width:100%;
+					z-index:10000;
+					text-align:center;
+					font-weight:bold;
+					color:#FFF;
+					background-color:#AE0000;
+					padding:10px 10px
+				}
+
+				#nocookies-warning {
+					display: none;
+				}
+
+				#noscript-warning a, #nocookies-warning a {
+					color:#FFF;
+					text-decoration: underline;
+				}
+			</style>
+<script>
+				$(
+					function() {
+						// try..catch because some in situations `document.cookie` is exposed but throws a
+					    // SecurityError if you try to access it; e.g. documents created from data URIs
+					    // or in sandboxed iframes (depending on flags/context)
+					    try {
+							// Create cookie
+							document.cookie = 'cookietest=1' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+							var ret = document.cookie.indexOf('cookietest=') != -1;
+							// Delete cookie
+							document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+
+							if (!ret) {
+								if (!!document.referrer) {
+									if (!document.referrer.toLowerCase().startsWith(document.location.protocol + '//' + document.location.host)) {
+										document.location.href = document.location.protocol + '//' + document.location.host + '';
+										return;
+									}
+								}
+							}
+
+							if (!ret) {
+								document.getElementById("nocookies-warning").style.display="block";
+								document.getElementById("nocookies-warning").setAttribute("aria-hidden", "false");
+
+								var anchors = document.getElementsByTagName("a");
+								for (var i = 0; anchors.length > i; i++) {
+									if (!(!(anchors[i].className != null) || !(anchors[i].className.indexOf("cookies_howto") == -1)) || (anchors[i].className == null)) {
+										anchors[i].removeAttribute("href");
+									}
+								}
+								var inputs = document.getElementsByTagName("input");
+								for (var i = 0; inputs.length > i; i++) {
+									inputs[i].disabled = true;
+								}
+								var textareas = document.getElementsByTagName("textarea");
+								for (var i = 0; textareas.length > i; i++) {
+									textareas[i].disabled = true;
+								}
+								var selects = document.getElementsByTagName("select");
+								for (var i = 0; selects.length > i; i++) {
+									selects[i].disabled = true;
+								}
+								var buttons = document.getElementsByTagName("button");
+								for (var i = 0; buttons.length > i; i++) {
+								    buttons[i].disabled = true;
+								}
+							}
+						}
+						catch (e) {
+							console.log("errore durante elaborazione 'cookies warning': " + e);
+						}
+					}
+				);
+			</script><script>
+								window.addEventListener('cookie-consent:initialized', _ => {
+									if (typeof changeCookieLang === 'function') {
+										changeCookieLang('it');
+									} else {
+									  console.error('Error changing language');
+									}
+								});
+								window.addEventListener('matomo-loaded:init', _ => {
+									if (typeof trackEvent === 'function') {
+									  trackEvent('trackPageView');
+									} else {
+									  console.error('Error tracking page view');
+									}
+
+									if (typeof trackLogin === 'function') {
+										trackLogin('12152');
+									} else {
+									  console.error('Error tracking login');
+									}
+
+								});
+
+								$(function() {
+									window.customCookieJsonConfigPath='CookieConfig.do';
+
+								    const cookieScript = document.createElement('script');
+								    cookieScript.src = 'https://static.dev.iu.cineca.it/v1/default.js';
+								    document.head.appendChild(cookieScript);
+							     });
+								</script>
+<nav class="accessibility-item">
+<h2 tabindex="1" id="shortcut">Link per accesso rapido</h2>
+<ul>
+<li>
+<a href="#maincontent">Contenuto principale della pagina</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menuprincipale">Menu principale</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#menuprincipale" aria-expanded="false" data-toggle="main-navigation" aria-controls="main-navigation" href="#main-navigation">Menu principale</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menusecondario">Link utili</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#focus-secondario" data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" href="#focus-secondario">Link utili</a>
+</li>
+</ul>
+</nav>
+<header class="masthead">
+<div class="l-container">
+<div class="masthead_top">
+<a class="masthead_logo" title="Home page" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_0"><img aria-hidden="true" alt="Logo ateneo" src="img/layout/logo.png?v=22.09.02" id="theme-logo"></a><a data-toggle="main-navigation" id="hamburger" aria-hidden="true" aria-controls="main-navigation" aria-expanded="false" aria-label="Menu principale" role="button" class="masthead_hamburger js-masthead-menubutton" href=""><i class="fa fa-2x fa-bars"></i></a>
+</div>
+<nav aria-labelledby="menuprincipale" id="main-navigation" class="masthead_menu" data-menu-opened-cod="menu_link-navbox_docenti_Registro" data-menu-opened="">
+<h2 tabindex="2" id="menuprincipale" class="accessibility-item">Menu principale</h2>
+<div class="masthead_menu_container">
+<div class="masthead_menu_header">
+<a id="chiudi-menu-principale" data-focus="#shortcut" data-toggle="main-navigation" aria-hidden="true" role="button" class="masthead_menu_close js-masthead-menubutton" href="#shortcut"><i aria-hidden="true" class="fa fa-2x fa-times"></i></a>
+<ul class="masthead_menu_lang">
+<li>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=eng&amp;R_DOC_ID=6980&amp;CAN_CHANGE=1&amp;PROPR_FLG=1&amp;TIT_FLG=1&amp;VIS_DETT=0">eng</a>
+</li>
+<li>
+<a class="is-active">ita</a>
+</li>
+<li>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=spa&amp;R_DOC_ID=6980&amp;CAN_CHANGE=1&amp;PROPR_FLG=1&amp;TIT_FLG=1&amp;VIS_DETT=0">spa</a>
+</li>
+</ul>
+<div class="masthead_usermenu">
+<h2 class="accessibility-item">Menu utente</h2>
+<div class="masthead_usermenu_user">
+<div aria-label="Utente collegato" role="navigation" class="masthead_usermenu_user_name">MARIO ALVIANO</div>
+<img alt="Foto Utente" src="img/layout/ico-docente.gif" aria-hidden="true"></div>
+<div class="masthead_usermenu_menu">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_account_Area_Riservata" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="10-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Area Riservata​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="10-100" class="notOpened">
+<li id="log">
+<a id="menu_link-navbox_account_Logout" href="Logout.do?menu_opened_cod=">Logout​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_account_auth/CambioPasswordForm" href="auth/CambioPasswordForm.do?menu_opened_cod=">Cambia Password​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="masthead_menu_body">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Home" href="auth/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Home​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-100" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Messaggi" href="auth/Messaggi.do?menu_opened_cod=menu_link-navbox_docenti_Home">Messaggi​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Didattica" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-200"><i aria-hidden="true" class="fa fa-chevron-left"></i>Didattica​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-200" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaAttivitaCalEsa" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Calendario Esami​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/TemplateAppelli" href="auth/docente/CalendarioEsami/TemplateAppelli.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Modelli Appello​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/HomeDocElettronico" href="auth/HomeDocElettronico.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Firma Documenti Elettronici​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_FirmaDigitale/ConfirmaTest" href="FirmaDigitale/ConfirmaTest.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Test Firma Digitale​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaVerbaliAppello" href="auth/docente/CalendarioEsami/ListaVerbaliAppello.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Visualizza Verbali​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/ElencoPartizioniDocente" href="auth/docente/RegistroDocente/ElencoPartizioniDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Partizioni assegnate​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/DefinizioneOfferta/OffertaDidatticaDocente" href="auth/docente/DefinizioneOfferta/OffertaDidatticaDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Offerta Didattica​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/learningplanmgmt/LPMWizRicerca" href="auth/docente/learningplanmgmt/LPMWizRicerca.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Approvazione piani​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/questionari/ElencoQuestionariDoc" href="auth/docente/questionari/ElencoQuestionariDoc.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Questionari​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Conseguimento_Titolo" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-300"><i aria-hidden="true" class="fa fa-chevron-left"></i>Conseguimento Titolo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-300" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/SeduteLaurea" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Sedute di Laurea​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/LaureandiAssegnati" href="auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Laureandi assegnati​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-open  has-children ">
+<a id="menu_link-navbox_docenti_Registro" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="true" aria-controls="500-400"><i aria-hidden="true" class="fa fa-chevron-left"></i>Registro​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-400" class="is-open ">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/Home" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Lezioni​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/HomeDiario" href="auth/docente/RegistroDocente/HomeDiario.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Diario​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Commissioni" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-500"><i aria-hidden="true" class="fa fa-chevron-left"></i>Commissioni​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-500" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Admission/ElencoCommissioni" href="auth/Admission/ElencoCommissioni.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Concorsi​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/Graduation/ElencoSeduteLaurea" href="auth/docente/Graduation/ElencoSeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Conseguimento titolo​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Mobilita" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-550"><i aria-hidden="true" class="fa fa-chevron-left"></i>Mobilit&agrave;​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-550" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLA" href="auth/docente/dirittoAlloStudio/RicercaLA.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Learning Agreement​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLAInc" href="auth/docente/dirittoAlloStudio/RicercaLAInc.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Gest. Learning Agreement Incoming​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-GuideInfoAteneo" href="Redirect.do?parconfurl=GUOL_INFO_ATENEO&amp;menu_opened_cod=menu_link-GuideParent" aria-expanded="false" aria-controls="1900-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Informazioni Ateneo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="1900-100" class="notOpened">
+<li>
+<a id="menu_link-SedeAteneo" href="Redirect.do?parconfurl=GUOL_SEAT&amp;menu_opened_cod=menu_link-GuideInfoAteneo">Portale dell'Ateneo​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<div class="l-content-container">
+<div class="l-container">
+<div class="l-sidebar">
+<aside class="l-sidebar-left">
+<div aria-hidden="true" class="l-sidebar-left-placeholder"></div>
+</aside>
+<main aria-live="polite" id="main" class="l-sidebar-right">
+<h2 class="accessibility-item">Contenuto principale</h2>
+<div class="briciole">
+<h2 id="maincontent" class="accessibility-item">Tu sei qui</h2>
+<ul>
+<li>
+<a title="Homepage" href="auth/docente/AreaDocente.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02"><span class="accessibility-item" aria-hidden="true">Homepage</span><i aria-hidden="true" class="fa fa-home"></i></a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li>
+<a title="Elenco Registri" href="auth/docente/RegistroDocente/Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02">Elenco Registri</a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li class="active" aria-current="page">Dati Registro</li>
+</ul>
+</div>
+<div class="l-header">
+<div class="pagetitle">
+<h2 class="pagetitle_title">Registro Attivit&agrave; Didattiche</h2>
+</div>
+</div>
+<div id="esse3old" class="layout-container-fluid container-fluid">
+<table width="100%" cellspacing="10" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="598" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="450" class="legenda3"><b>Attivit&agrave;: ARCHITETTURA DEGLI ELABORATORI [27007790]</b></td><td align="right" class="legenda3"><a href="auth/docente/RegistroDocente/DettRigaReg.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?DETT_REG_ID=&amp;R_DOC_ID=6980&amp;CAN_CHANGE=1&amp;PROPR_FLG=1&amp;TIT_FLG=1&amp;VIS_DETT=1">visualizza dettagli &gt;&gt;</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="598" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Anno Accademico:</b></th><td valign="top" class="tplMaster">2022/2023 &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Docente:</b></th><td valign="top" class="tplMaster">MARIO&nbsp;ALVIANO &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Stato registro:</b></th><td valign="top" class="tplMaster">Bozza &nbsp;
+													</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td><img border="0" alt="" height="20" width="1" src="assets/images/clearpixel.gif"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/RegistroDocente/AggiornaRigaReg.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?R_DOC_ID=6980" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody></tbody>
+</table>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="tplTitolo"><b>DATI ATTIVITA' DI REGISTRO</b></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody>
+<input value="0" name="VIS_DETT" type="hidden"><input value="0" name="IS_UPDATE" type="hidden"><input value="1" name="CAN_CHANGE" type="hidden"><input value="1" name="PROPR_FLG" type="hidden"><input value="1" name="TIT_FLG" type="hidden"><input value="" name="DETT_REG_ID" type="hidden"><input value="" name="AD_LOG_ID" type="hidden"><input value="" name="DOCENTE_ID" type="hidden"><input value="" name="STATO_REG" type="hidden"><input value="6980" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_reg_id" type="hidden"><input value="27/02/2023" name="DATA_INI_PERIODO" type="hidden"><input value="27/05/2023" name="DATA_FINE_PERIODO" type="hidden"><input value="" name="VIS_WARN_DATA" type="hidden"><input value="" name="TIPO_ATT_COD_NON_VISIBILE" type="hidden"><input value="1" name="num_ud_tot" type="hidden"><input value="0" name="autoreg_flg" type="hidden">
+<tr>
+<th class="tplForm" align="left" width="128">*Data:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><input id="text_N30067" class="tplForm input_date" value="" size="10" maxlength="10" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_data" type="text" autocomplete="off"><script>
+							jQuery(".input_date").datepicker({
+								dateFormat: "dd/mm/yy",
+								changeMonth: true,
+								changeYear: true,
+								showButtonPanel: true,
+								yearRange: "-100:+10",
+								autoclose: true,
+								monthNamesShort: jQuery.datepicker.regional["it"].monthNames,
+								onSelect: function(d,i){
+							    	if(d !== i.lastVal){
+										try {
+											jQuery(this).trigger('change');
+										}
+										catch(err) {
+											console.log(err);
+										}
+									}
+								}
+							});
+						</script></input><span style="font-size: 10px;">&nbsp;(gg/mm/aaaa)</span></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Ora inizio:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><select class="tplForm" width="" cols="1" name="hh_inizio" id="hh_inizio"><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+				&nbsp;:&nbsp;
+				<select class="tplForm" width="" cols="1" name="mm_inizio" id="mm_inizio"><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Ora fine:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><select class="tplForm" width="" cols="1" name="hh_fine" id="hh_fine"><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+				&nbsp;:&nbsp;
+				<select class="tplForm" width="" cols="1" name="mm_fine" id="mm_fine"><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Ore accademiche:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><input id="ore_accademiche" class="tplForm" value="" size="4" maxlength="5" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_ore_accademiche" type="text"></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Tipo attivit&agrave;:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><select class="tplForm" width="" cols="1" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_tipo_att_cod"><option value="1_0001_" title="Lezione">Lezione</option><option value="1_0002_" title="Laboratorio">Laboratorio</option><option value="1_0003_" title="Esercitazione">Esercitazione</option><option value="1_0006_" title="Seminario">Seminario</option></select></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">*Titolo:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><input id="" class="tplForm" value="" size="74" maxlength="255" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_titolo" type="text"></td>
+</tr>
+<tr>
+<th class="tplForm" align="left">Descrizione:
+
+															<br>
+<span class="tplFormNote"></span></th><td class="tplForm" align="left"><textarea class="tplForm" name="/WS/DataSet[@LocalEntityName='RIGA_REG_WEB']/Row[@Num='1']/p09_reg_doc_dett_des" cols="55" rows="5"></textarea></td>
+</tr>
+<tr>
+<td class="tplForm" align="left" colspan="2">
+<br>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0" class="detail_table">
+<tr>
+<th valign="top" class="detail_table" colspan="2" id="" rowspan="" style="" width="">In compresenza con</th>
+</tr>
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="tpl_master"><input id="COMPRESENZE" name="COMPRESENZE" type="checkbox" value="2307">&nbsp;JESSICA&nbsp;ZANGARI&nbsp;
+	                  </td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tpl_master"><input id="COMPRESENZE" name="COMPRESENZE" type="checkbox" value="3970">&nbsp;LUIS ANGEL&nbsp;RODRIGUEZ REINERS&nbsp;
+	                  </td>
+</tr>
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="tpl_master"><input id="COMPRESENZE" name="COMPRESENZE" type="checkbox" value="3535">&nbsp;LUCA&nbsp;CINELLI&nbsp;
+	                  </td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tpl_master">&nbsp;
+	                  </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tplForm" align="left" colspan="2">
+<br>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td>
+<div class="detail_table"></div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th class="tplForm"></th><td class="tplForm" align="left">
+<cell></cell>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="1" border="0" align="center">
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="" type="submit" value="Salva" onClick="return true;"></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="submitSaveAndAdd" type="submit" value="Salva e aggiungi" onClick="return true;"></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><input class="tplFormSubmit" name="btnAnnulla" type="submit" value="Annulla" onClick="return true;"></td><td id="" width="" valign="" colspan="" style="" rowspan="" class="tplFormSubmit"><a class="tplFormSubmit" title="" href="auth/docente/RegistroDocente/ElencoRegistri.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?R_DOC_ID=6980&amp;VIS_DETT=0">Esci</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+</table>
+</div>
+</main>
+</div>
+</div>
+</div>
+<div id="secondary-menu" class="secondary-menu">
+<div class="l-container">
+<div class="secondary-menu_top">
+<button data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" id="focus-secondario" class="secondary-menu_button" data-scroll="#footer">Link utili<i data-toggle-icon-closed="true" aria-hidden="true" class="fa fa-chevron-right"></i><i data-toggle-icon-open="true" aria-hidden="true" class="fa fa-chevron-down"></i></button>
+</div>
+<nav id="secondary-menu-list" class="secondary-menu-list">
+<h2 id="menusecondario" class="accessibility-item">Link utili</h2>
+<ul>
+<li>
+<a title="Home" href="Home.do">Home</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<footer id="footer" class="footer">
+<div class="l-container">
+<div class="footer_content">
+<p>
+<a href="InformativaCookie.do">Informativa utilizzo cookie</a> | &copy; CINECA</p>
+</div>
+</div>
+</footer>
+<script src="JavaScript/enquire/enquire.min.js"></script><script src="JavaScript/layout/layout.js?v=20.12.00"></script><script>$(onReady);</script>
+</body>
+</html>

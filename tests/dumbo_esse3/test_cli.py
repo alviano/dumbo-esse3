@@ -30,4 +30,4 @@ def test_theses(runner):
     result = runner.invoke(app, ["theses"])
     assert result.exit_code == 0
     assert "Theses" in result.stdout
-    assert False
+    assert "ROSSI MARIO" in result.stdout
