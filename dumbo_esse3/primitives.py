@@ -206,7 +206,7 @@ class StudentThesisState:
 
 
 @typeguard.typechecked
-@dataclasses.dataclass(frozen=True)
+@dataclasses.dataclass(frozen=True, order=True)
 class Register:
     class State(enum.Enum):
         DRAFT = "Bozza"

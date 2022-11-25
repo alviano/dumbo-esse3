@@ -205,7 +205,7 @@ class Esse3Wrapper:
             semester = Semester.parse(row.find_element(By.XPATH, "td[5]").text)
             state = Register.State(row.find_element(By.XPATH, "td[6]/img").get_attribute('alt'))
             res.append(Register.of(course=course, hours=hours, semester=semester, state=state))
-        return res
+        return sorted(res)
 
     def fetch_register_activities(self, register: Register, with_time: bool = False) -> List[RegisterActivity]:
         self.driver.get(REGISTER_LIST_URL)
