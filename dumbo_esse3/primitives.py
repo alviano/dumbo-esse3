@@ -5,7 +5,7 @@ import enum
 import typeguard
 
 from dumbo_esse3.utils.primitives import bounded_string, bounded_integer
-from dumbo_esse3.utils.validators import validate_dataclass, validate
+from dumbo_esse3.utils.validators import validate
 
 from dateutil.relativedelta import relativedelta
 
@@ -84,7 +84,6 @@ class DateTime:
     value: datetime.datetime
 
     def __post_init__(self):
-        validate_dataclass(self)
         validate("value", self.value.hour, min_value=8, max_value=23, help_msg="Hour must be between 8 and 23")
         validate("value", self.value.minute, is_in=[0, 15, 30, 45], help_msg="Minutes must be aligned to 15")
 
@@ -162,9 +161,6 @@ class Exam:
     date_and_time: DateTime
     number_of_students: NumberOfStudents
 
-    def __post_init__(self):
-        validate_dataclass(self)
-
     @staticmethod
     def of(date_and_time: DateTime, number_of_students: int) -> 'Exam':
         return Exam(date_and_time, NumberOfStudents.of(number_of_students))
@@ -179,9 +175,6 @@ class Exam:
 class Student:
     id: StudentId
     name: StudentName
-
-    def __post_init__(self):
-        validate_dataclass(self)
 
     @staticmethod
     def of(student_id: str, student_name: str) -> 'Student':

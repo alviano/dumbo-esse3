@@ -8,8 +8,9 @@ from selenium.common import WebDriverException, NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
-from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, ExamDescription, \
-    ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, ActivityTitle, ActivityType
+from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, \
+    ExamDescription, ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, \
+    ActivityTitle, ActivityType
 from dumbo_esse3.utils import validators
 
 ESSE3_SERVER = "https://unical.esse3.cineca.it"
@@ -43,7 +44,6 @@ class Esse3Wrapper:
     __key = object()
 
     def __post_init__(self, key: object, username: Username, password: Password):
-        validators.validate_dataclass(self)
         validators.validate('key', key, equals=self.__key, help_msg="Can only be instantiated using a factory method")
         self.maximize()
         self.__login(username, password)

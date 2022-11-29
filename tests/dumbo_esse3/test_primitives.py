@@ -80,3 +80,8 @@ def test_register_activity_cannot_span_multiple_days():
             ActivityType.LECTURE,
             ActivityTitle("Night event"),
         )
+
+
+def test_student_types_are_validated():
+    with pytest.raises(TypeError):
+        Student("1234", "ROSSI MARIO")

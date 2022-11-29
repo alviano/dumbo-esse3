@@ -1,19 +1,11 @@
 from typing import Callable, List
 
-import dataclass_type_validator
 import re
 import typeguard
 import valid8
 
 
 validate = valid8.validate
-
-
-def validate_dataclass(data):
-    try:
-        dataclass_type_validator.dataclass_type_validator(data)
-    except dataclass_type_validator.TypeValidationError as e:
-        raise TypeError(e)
 
 
 @typeguard.typechecked

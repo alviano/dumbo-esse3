@@ -5,7 +5,7 @@ from typing import Optional
 import typeguard
 
 from dumbo_esse3.utils import validators
-from dumbo_esse3.utils.validators import validate, validate_dataclass
+from dumbo_esse3.utils.validators import validate
 
 
 def _arithmetic(cls):
@@ -49,7 +49,6 @@ def bounded_integer(min_value: int, max_value: int):
             setattr(cls, '_validate', lambda self: None)
 
         def post_init(self):
-            validate_dataclass(self)
             validate('value', self.value, min_value=self.min_value(), max_value=self.max_value())
             self._validate()
 
@@ -94,11 +93,9 @@ def bounded_string(min_length: int, max_length: int, pattern: str = r'.*', priva
 
         if pattern == r'.*':
             def __validate(self):
-                validate_dataclass(self)
                 validate('value', self.value, min_len=self.min_length(), max_len=self.max_length())
         else:
             def __validate(self):
-                validate_dataclass(self)
                 validate('value', self.value, min_len=self.min_length(), max_len=self.max_length(),
                          custom=validators.pattern(self.pattern()))
 
