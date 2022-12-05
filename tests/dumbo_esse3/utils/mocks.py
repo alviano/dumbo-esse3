@@ -1,12 +1,10 @@
 from pathlib import Path
-from typing import Final
 
 import pytest
 from pytest_localserver.http import WSGIServer
 
 from dumbo_esse3.esse3_wrapper import ESSE3_SERVER, LOGIN_URL, LOGOUT_URL, COURSE_LIST_URL, REGISTER_LIST_URL, \
     change_esse3_server
-
 
 TRACE = False
 
@@ -22,12 +20,13 @@ def read_html(filename):
 
 
 def endpoint(url):
-    return url.replace(ESSE3_SERVER, '', 1)
+    return url.replace(ESSE3_SERVER, '').replace("https://", "disable://").replace("http://", "disable://")
 
 
 MOCK_ESSE3_STATE = {
     "add exam cod completed": False,
     "register ae empty": True,
+    "theses signed": False,
 }
 
 
@@ -63,6 +62,13 @@ def mock_esse3_app(environ, start_response):
             html = read_html("register_ae_delete_activity.html")
         elif url == "/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo":
             html = read_html("theses.html")
+        elif url == "/auth/docente/Graduation/AllegatiTesi.do?tesi_id=1234&pers_id=134":
+            if MOCK_ESSE3_STATE["theses signed"]:
+                html = read_html("theses_signed.html")
+            else:
+                html = read_html("theses_present.html")
+        elif url == "/auth/docente/Graduation/ApprovaAllegatoTesi.do?tesi_id=1234&allegato_id=12344&stu_id=199451&pers_id=159952":
+            html = read_html("theses_sign.html")
     elif method == "POST":
         if url == "/auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=86CA8F3D3A6885013058837D593E0551.esse3-unical-prod-04":
             if MOCK_ESSE3_STATE["add exam cod completed"]:
@@ -80,6 +86,9 @@ def mock_esse3_app(environ, start_response):
         elif url == "/auth/docente/RegistroDocente/DelRigaReg.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02":
             MOCK_ESSE3_STATE["register ae empty"] = True
             html = read_html("register_ae_empty.html")
+        elif url == "/auth/docente/Graduation/ApprovaAllegatoTesiSubmit.do":
+            MOCK_ESSE3_STATE["theses signed"] = True
+            html = read_html("theses_signed.html")
     if TRACE and url.startswith("/auth/") and html is None:
         print('TRACE(mock_esse3_app)', 'missing page')
     return [html.replace(

@@ -71,39 +71,47 @@ def test_add_exam(esse3_wrapper):
 def test_fetch_registers(esse3_wrapper):
     registers = esse3_wrapper.fetch_registers()
     assert len(registers) == 3
-    assert registers[1].course == Course("CYBER OFFENSE AND DEFENSE - [27008777]")
+    assert registers[0].course == Course("CYBER OFFENSE AND DEFENSE - [27008777]")
 
 
 def test_fetch_register_activities(esse3_wrapper):
     registers = esse3_wrapper.fetch_registers()
-    activities = esse3_wrapper.fetch_register_activities(registers[1])
+    activities = esse3_wrapper.fetch_register_activities(registers[0])
     assert len(activities) == 15
     assert activities[0].title == ActivityTitle("Introduction")
 
 
 def test_add_and_remove_register_activity(esse3_wrapper):
-    registers = esse3_wrapper.fetch_registers()
-    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    register = esse3_wrapper.fetch_registers()[2]
+    activities = esse3_wrapper.fetch_register_activities(register)
     assert len(activities) == 0
 
-    assert esse3_wrapper.add_register_activity(registers[0], RegisterActivity.of(
+    assert esse3_wrapper.add_register_activity(register, RegisterActivity.of(
         DateTime.parse("24/11/2022 09:30"),
         NumberOfHours(2),
         ActivityType.LECTURE,
         ActivityTitle("Example"),
     ))
-    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    activities = esse3_wrapper.fetch_register_activities(register)
     assert len(activities) == 1
 
     assert activities[0].title == ActivityTitle("Example")
-    assert esse3_wrapper.delete_register_activity(registers[0], 1)
-    activities = esse3_wrapper.fetch_register_activities(registers[0])
+    assert esse3_wrapper.delete_register_activity(register, 1)
+    activities = esse3_wrapper.fetch_register_activities(register)
     assert len(activities) == 0
 
-    assert not esse3_wrapper.delete_register_activity(registers[0], 1)
+    assert not esse3_wrapper.delete_register_activity(register, 1)
 
 
 def test_fetch_theses_list(esse3_wrapper):
     theses = esse3_wrapper.fetch_thesis_list()
     assert len(theses) == 2
-    assert theses[0].state == StudentThesisState.State.MISSING
+    assert theses[0].state == StudentThesisState.State.UNSIGNED
+    assert theses[1].state == StudentThesisState.State.MISSING
+
+
+def test_fetch_theses_sign(esse3_wrapper):
+    theses = esse3_wrapper.fetch_thesis_list()
+    esse3_wrapper.sign_thesis(theses[0].student)
+    theses = esse3_wrapper.fetch_thesis_list()
+    assert theses[0].state == StudentThesisState.State.SIGNED

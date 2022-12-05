@@ -165,18 +165,17 @@ class Esse3Wrapper:
                         student.find_element(By.XPATH, f"td[2]").text,
                     ),
                     CdL.parse(cdl),
-                    student.find_element(By.XPATH, f"td[5]//a").get_attribute("href")
-                    if student.find_elements(By.XPATH, f"td[5]//a") else None,
+                    student.find_element(By.XPATH, f"td[5]//a[@id = 'btnAllegatiTesi']").get_attribute("href")
+                    if student.find_elements(By.XPATH, f"td[5]//a[@id = 'btnAllegatiTesi']") else None,
                 ))
 
         res = []
         for student in all_students:
             state = StudentThesisState.State.MISSING
             if student[2]:
+                state = StudentThesisState.State.UNSIGNED
                 self.driver.get(student[2])
-                if self.driver.find_elements(By.ID, f"btnApprova"):
-                    state = StudentThesisState.State.UNSIGNED
-                elif self.driver.find_elements(By.XPATH, f"//td[text() = 'Approvato']"):
+                if self.driver.find_elements(By.XPATH, f"//td[text() = 'Approvato']"):
                     state = StudentThesisState.State.SIGNED
                 self.driver.back()
             res.append(StudentThesisState.of(student[0], student[1], state))
@@ -184,7 +183,7 @@ class Esse3Wrapper:
 
     def __thesis_action(self, student: Student, action) -> None:
         self.driver.get(THESIS_LIST_URL)
-        self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a").send_keys(Keys.RETURN)
+        self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a[@id = 'btnAllegatiTesi']").send_keys(Keys.RETURN)
         self.driver.find_element(By.ID, action).send_keys(Keys.RETURN)
 
     def show_thesis(self, student: Student) -> None:
@@ -192,7 +191,7 @@ class Esse3Wrapper:
 
     def sign_thesis(self, student: Student) -> None:
         self.__thesis_action(student, "btnApprova")
-        self.driver.find_element(By.ID, "selApprova1").send_keys(Keys.RETURN)
+        self.driver.find_element(By.ID, "selApprova1").send_keys(Keys.SPACE)
         self.driver.find_element(By.ID, "btnApprova").send_keys(Keys.RETURN)
 
     def fetch_registers(self) -> List[Register]:
@@ -205,7 +204,7 @@ class Esse3Wrapper:
             semester = Semester.parse(row.find_element(By.XPATH, "td[5]").text)
             state = Register.State(row.find_element(By.XPATH, "td[6]/img").get_attribute('alt'))
             res.append(Register.of(course=course, hours=hours, semester=semester, state=state))
-        return sorted(res)
+        return sorted(res, key=lambda register: (register.semester, register.course))
 
     def fetch_register_activities(self, register: Register, with_time: bool = False) -> List[RegisterActivity]:
         self.driver.get(REGISTER_LIST_URL)

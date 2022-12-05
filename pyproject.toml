@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dumbo-esse3"
-version = "0.3.2"
+version = "0.3.3"
 description = "Esse3 command line utility, to save my future time!"
 authors = ["Mario Alviano <mario.alviano@gmail.com>"]
 

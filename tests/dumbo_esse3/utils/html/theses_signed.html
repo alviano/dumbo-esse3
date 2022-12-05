@@ -2,7 +2,7 @@
 <!DOCTYPE html><html id="top" lang="it">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Laureandi assegnati, Universit&agrave; di UNICAL</title>
+<title>Allegati tesi, Universit&agrave; di UNICAL</title>
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="Servizi online dell'ateneo" name="description">
@@ -28,7 +28,7 @@
 <link href="css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
 <script src="JavaScript/utils.js?v=22.01.00"></script><script src="JavaScript/jquery/jquery-3.6.1.min.js"></script><script src="JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script><script src="JavaScript/jquery/jquery-ui/js/jquery-ui-1.13.2.min.js"></script><script src="JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script><script src="JavaScript/jquery/jqgrid/src/grid.tbltogrid.js?v=22.01.00"></script><script src="JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script><script src="JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script><script src="JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script><script src="JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script><script src="JavaScript/jquery/footable/js/footable.js"></script><script src="JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.iframe-transport.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.fileupload.js?v=22.01.00"></script><script src="JavaScript/widgetChunkFileUpload.js?v=22.01.00"></script><script src="JavaScript/sharedUtils.js?v=20.10.04"></script>
 </head>
-<body data-xsl="/xsl/graduation/GradLaureandiAssegnati.xsl" class="secondaryMenuBottom ">
+<body data-xsl="/xsl/graduation/GradAllegatiTesiDocente.xsl" class="secondaryMenuBottom ">
 <noscript>
 <div id="noscript-warning">E' necessario abilitare javascript per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript">qui</a>
 </div>
@@ -108,7 +108,7 @@
 						catch (e) {
 							console.log("errore durante elaborazione 'cookies warning': " + e);
 						}
-					}
+					}						
 				);
 			</script><script>
 								window.addEventListener('cookie-consent:initialized', _ => {
@@ -124,20 +124,20 @@
 									} else {
 									  console.error('Error tracking page view');
 									}
-
+									
 									if (typeof trackLogin === 'function') {
 										trackLogin('12152');
 									} else {
 									  console.error('Error tracking login');
 									}
-
+									
 								});
 
 								$(function() {
 									window.customCookieJsonConfigPath='CookieConfig.do';
 
 								    const cookieScript = document.createElement('script');
-								    cookieScript.src = 'https://static.dev.iu.cineca.it/v1/default.js';
+								    cookieScript.src = 'https://static.iu.cineca.it/v1/default.js';
 								    document.head.appendChild(cookieScript);
 							     });
 								</script>
@@ -173,13 +173,10 @@
 <a id="chiudi-menu-principale" data-focus="#shortcut" data-toggle="main-navigation" aria-hidden="true" role="button" class="masthead_menu_close js-masthead-menubutton" href="#shortcut"><i aria-hidden="true" class="fa fa-2x fa-times"></i></a>
 <ul class="masthead_menu_lang">
 <li>
-<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=eng&amp;menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">eng</a>
-</li>
-<li>
 <a class="is-active">ita</a>
 </li>
 <li>
-<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=spa&amp;menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">spa</a>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=9D02883709B20D2CBCD4FB9EF8FC4630.esse3-unical-prod-02?cod_lingua=eng&amp;tesi_id=12344&amp;pers_id=159952">eng</a>
 </li>
 </ul>
 <div class="masthead_usermenu">
@@ -319,47 +316,36 @@
 <div class="l-header"></div>
 <div id="esse3" class="layout-container-fluid container-fluid"><div id="columnContainer" class="row"><div class="col-xs-12 " id="column1of1">
 <div id="header" class=" header-hx header-h1">
-<h1>Laureandi assegnati</h1>
-<p>Elenco dei laureandi assegnati.</p>
+<h1>Allegati tesi</h1>
+<p>Elenco degli allegati della tesi dello studente.</p>
 </div>
 <div class="" id="containerPrincipale">
-<form action="auth/docente/Graduation/LaureandiAssegnati.do" id="formPrincipale" class="form-horizontal " method="post" onSubmit="return checkFormSingleSubmit(this);">
-<div class="form-loading" id="formPrincipale_loading"></div>
-<div>
-<input value="formPrincipale" name="form_id_formPrincipale" type="hidden">
+<div class="container-1" id="grad-dettLau-currentFotoContainer">
+<div id="grad-dettLau-fotoHeader" class=" header-hx header-h3">
+<h3>Nessuna foto &egrave; attualmente in archivio</h3>
 </div>
-</form>
-<script>
-				jQuery(function() {
-					let el = document.getElementById("null");
-					if (el) { el.focus(); }
-   				});
-			</script>
-<table id="tableLaureandiAssegnati0733" class="table breaks3 table-1">
-<caption>INFORMATICA [0733] - Corso di Laurea</caption><thead><tr>
-<th id="tableLaureandiAssegnati0733th1" class="">Matricola</th><th id="tableLaureandiAssegnati0733th2" class="">Nominativo</th><th id="tableLaureandiAssegnati0733th3" class="">Ruolo docente</th><th id="tableLaureandiAssegnati0733th4" class="">Sessione</th><th id="tableLaureandiAssegnati0733th5" class="">Azioni</th>
+<div class="" id="grad-dettLau-fotoImageContainer">
+<div id="grad-dettLau-fotoImagePicture" class="ab-CurrentImage">
+<img id="grad-dettLau-fotoImagePicture-img" alt="Foto personale" aria-label="Foto personale" src="img/ab/sagoma.jpg"></div>
+</div>
+</div>
+<table id="tableAllegati" class="table breaks3 table-1">
+<caption>Elenco degli allegati dello studente: MARIO ROSSI</caption><thead><tr>
+<th id="tableAllegatith1" class="">Titolo</th><th id="tableAllegatith2" class="">Descrizione</th><th id="tableAllegatith3" class="">Stato allegato</th><th id="tableAllegatith4" class="">Azioni</th>
 </tr></thead><tbody class="table-1-body"><tr>
-<td title="" class="">1234</td><td title="" class="">ROSSI MARIO</td><td title="" class="">Primo relatore<br>
-</td><td title="" class="">Seduta di laurea del 21 dicembre 2022 A.A. 2021/2022</td><td title="" class="">
+<td title="" class=""><a id="tableAllegati-cell11-link1" href="auth/docente/Graduation/ApriAllegatoTesi.do?tesi_id=12344&amp;allegato_id=12344">Crowding Tracker</a></td><td title="" class=""></td><td title="" class="">Approvato</td><td title="" class="">
 <div id="toolbarAzioni" class="tool-bar toolbar-align-left">
-<a id="btnModificaDatiTesi" href="auth/docente/Graduation/ModificaDatiTesi.do?tesi_id=1234&amp;pers_id=134" title="Modifica dati tesi" aria-label="Modifica dati tesi" class="toolbar-s-image" style="background-image:url(img/graduation/book.png)">​</a><a id="btnAllegatiTesi" href="auth/docente/Graduation/AllegatiTesi.do?tesi_id=1234&amp;pers_id=134" title="Allegati" aria-label="Allegati" class="toolbar-s-image" style="background-image:url(img/graduation/attachment.png)">​</a>
+<a id="btnDownload" href="auth/docente/Graduation/ApriAllegatoTesi.do?tesi_id=12344&amp;allegato_id=12344" title="Apri allegato" aria-label="Apri allegato" class="toolbar-s-image" style="background-image:url(images/defAppOpen.jpg)">​</a><a id="btnStatoAppr" href="auth/docente/Graduation/StatoApprovazioneAllTesi.do?tesi_id=12344&amp;allegato_id=12344&amp;stu_id=199451&amp;pers_id=159952" title="Stato approvazione allegato" aria-label="Stato approvazione allegato" class="toolbar-s-image" style="background-image:url(img/graduation/detail.jpg)">​</a>
 </div>
 </td>
-</tr>
-<tr>
-<td title="" class="">1235</td><td title="" class="">WIENER PETER</td><td title="" class="">Primo relatore<br>
-</td><td title="" class="">Seduta di laurea del 21 dicembre 2022 A.A. 2021/2022</td><td title="" class="">
-<div id="toolbarAzioni" class="tool-bar toolbar-align-left">
-<a id="btnModificaDatiTesi" href="auth/docente/Graduation/ModificaDatiTesi.do?tesi_id=1235&amp;pers_id=135" title="Modifica dati tesi" aria-label="Modifica dati tesi" class="toolbar-s-image" style="background-image:url(img/graduation/book.png)">​</a>
+</tr></tbody></table>
 </div>
-</td>
-</tr>
-</tbody></table>
+<div id="toolbarPrincipale" class="tool-bar breaks3 toolbar-align-left">
+<a id="btnBack" href="auth/docente/Graduation/LaureandiAssegnati.do" class="toolbar-button-blu">Torna a lista laureandi assegnati​</a>
 </div>
 </div></div><script>
 								hideShowElementsById();
-								actionbarMultipleSubmit='Richiesta gi\u00E0 inviata';
-</script>
+								</script>
 </div>
 </main>
 </div>

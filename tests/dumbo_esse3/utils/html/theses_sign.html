@@ -2,7 +2,7 @@
 <!DOCTYPE html><html id="top" lang="it">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Laureandi assegnati, Universit&agrave; di UNICAL</title>
+<title>Approvazione allegato tesi, Universit&agrave; di UNICAL</title>
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="Servizi online dell'ateneo" name="description">
@@ -28,7 +28,7 @@
 <link href="css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
 <script src="JavaScript/utils.js?v=22.01.00"></script><script src="JavaScript/jquery/jquery-3.6.1.min.js"></script><script src="JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script><script src="JavaScript/jquery/jquery-ui/js/jquery-ui-1.13.2.min.js"></script><script src="JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script><script src="JavaScript/jquery/jqgrid/src/grid.tbltogrid.js?v=22.01.00"></script><script src="JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script><script src="JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script><script src="JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script><script src="JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script><script src="JavaScript/jquery/footable/js/footable.js"></script><script src="JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.iframe-transport.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.fileupload.js?v=22.01.00"></script><script src="JavaScript/widgetChunkFileUpload.js?v=22.01.00"></script><script src="JavaScript/sharedUtils.js?v=20.10.04"></script>
 </head>
-<body data-xsl="/xsl/graduation/GradLaureandiAssegnati.xsl" class="secondaryMenuBottom ">
+<body data-xsl="/xsl/graduation/GradApprovaAllegatoTesi.xsl" class="secondaryMenuBottom ">
 <noscript>
 <div id="noscript-warning">E' necessario abilitare javascript per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript">qui</a>
 </div>
@@ -108,7 +108,7 @@
 						catch (e) {
 							console.log("errore durante elaborazione 'cookies warning': " + e);
 						}
-					}
+					}						
 				);
 			</script><script>
 								window.addEventListener('cookie-consent:initialized', _ => {
@@ -124,20 +124,20 @@
 									} else {
 									  console.error('Error tracking page view');
 									}
-
+									
 									if (typeof trackLogin === 'function') {
 										trackLogin('12152');
 									} else {
 									  console.error('Error tracking login');
 									}
-
+									
 								});
 
 								$(function() {
 									window.customCookieJsonConfigPath='CookieConfig.do';
 
 								    const cookieScript = document.createElement('script');
-								    cookieScript.src = 'https://static.dev.iu.cineca.it/v1/default.js';
+								    cookieScript.src = 'https://static.iu.cineca.it/v1/default.js';
 								    document.head.appendChild(cookieScript);
 							     });
 								</script>
@@ -173,13 +173,10 @@
 <a id="chiudi-menu-principale" data-focus="#shortcut" data-toggle="main-navigation" aria-hidden="true" role="button" class="masthead_menu_close js-masthead-menubutton" href="#shortcut"><i aria-hidden="true" class="fa fa-2x fa-times"></i></a>
 <ul class="masthead_menu_lang">
 <li>
-<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=eng&amp;menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">eng</a>
-</li>
-<li>
 <a class="is-active">ita</a>
 </li>
 <li>
-<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?cod_lingua=spa&amp;menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">spa</a>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=9D02883709B20D2CBCD4FB9EF8FC4630.esse3-unical-prod-02?cod_lingua=eng&amp;tesi_id=12344&amp;allegato_id=364673&amp;stu_id=199451&amp;pers_id=12344">eng</a>
 </li>
 </ul>
 <div class="masthead_usermenu">
@@ -319,43 +316,99 @@
 <div class="l-header"></div>
 <div id="esse3" class="layout-container-fluid container-fluid"><div id="columnContainer" class="row"><div class="col-xs-12 " id="column1of1">
 <div id="header" class=" header-hx header-h1">
-<h1>Laureandi assegnati</h1>
-<p>Elenco dei laureandi assegnati.</p>
+<h1>Approvazione allegato tesi</h1>
+<p>Approvazione dell'allegato della tesi.</p>
 </div>
-<div class="" id="containerPrincipale">
-<form action="auth/docente/Graduation/LaureandiAssegnati.do" id="formPrincipale" class="form-horizontal " method="post" onSubmit="return checkFormSingleSubmit(this);">
+<form action="auth/docente/Graduation/ApprovaAllegatoTesiSubmit.do" id="formPrincipale" class="form-horizontal " method="post" onSubmit="return checkFormSingleSubmit(this);">
 <div class="form-loading" id="formPrincipale_loading"></div>
-<div>
-<input value="formPrincipale" name="form_id_formPrincipale" type="hidden">
+<div class="" id="containerPrincipale">
+<div class="container-1" id="grad-dettLau-currentFotoContainer">
+<div id="grad-dettLau-fotoHeader" class=" header-hx header-h3">
+<h3>Nessuna foto &egrave; attualmente in archivio</h3>
 </div>
+<div class="" id="grad-dettLau-fotoImageContainer">
+<div id="grad-dettLau-fotoImagePicture" class="ab-CurrentImage">
+<img id="grad-dettLau-fotoImagePicture-img" alt="Foto personale" aria-label="Foto personale" src="img/ab/sagoma.jpg"></div>
+</div>
+</div>
+<div id="boxInfoStu" class="breaks3 record">
+<h2 class="record-h2">Studente</h2>
+<dl class="record-riga">
+<dt class="">Nome</dt>
+<dd class="">MARIO&nbsp;​<br>
+</dd>
+<dt class="">Cognome</dt>
+<dd class="">ROSSI&nbsp;​<br>
+</dd>
+<dt class="">Matricola</dt>
+<dd class="">123&nbsp;​<br>
+</dd>
+</dl>
+<br>
+</div>
+<br class="pulisci">
+<div id="boxDatiTesi" class="breaks3 record">
+<h2 class="record-h2">Dati tesi</h2>
+<dl class="record-riga">
+<dt class="">Tipo</dt>
+<dd class="">Sperimentale&nbsp;​<br>
+</dd>
+<dt class="">Titolo</dt>
+<dd class="">La mia tesi&nbsp;​<br>
+</dd>
+</dl>
+<br>
+</div>
+<br class="pulisci">
+<div id="boxAllegato" class="breaks3 record">
+<h2 class="record-h2">Allegato</h2>
+<dl class="record-riga">
+<dt class="">Titolo</dt>
+<dd class="">Crowding Tracker&nbsp;​<br>
+</dd>
+</dl>
+<br>
+</div>
+<br class="pulisci">
+<table id="tableStatoAppr" class="table breaks3 table-1">
+<caption>Stato approvazione allegato</caption><thead><tr>
+<th id="tableStatoApprth1" class="">Cognome</th><th id="tableStatoApprth2" class="">Nome</th><th id="tableStatoApprth3" class="">Tipo relatore</th><th id="tableStatoApprth4" class="">Stato allegato</th><th id="tableStatoApprth5" class="">Motivazione</th>
+</tr></thead><tbody class="table-1-body"></tbody></table>
+<fieldset class="breaks3 form-fieldset" id="fieldsetPrincipale">
+<legend>Conferma approvazione allegato</legend>
+<div id="txtMotivazione-div" class="form-group">
+<label for="txtMotivazione" class=" control-label col-sm-2">Motivazione</label>
+<div class="col-sm-10">
+<textarea id="txtMotivazione" class="form-control" name="/WS/DataSet[@LocalEntityName='ALLEGATI_DOC_TESI_WEB']/Row[@Num='1']/p17_tesi_all_motivazione" rows="4" cols="60"></textarea>
+</div>
+</div>
+<br class="pulisci">
+<div id="selApprova-div" class="form-group">
+<div class="">
+<label class=" control-label col-sm-2">L'approvazione di questo documento sostituisce la firma autografa del documento cartaceo<span class="field-required" aria-hidden="true"></span></label>
+</div>
+<div class="col-sm-10">
+<div class="breaks3 selection-list-noborder">
+<fieldset>
+<legend class="hidden">L'approvazione di questo documento sostituisce la firma autografa del documento cartaceo</legend><div class="checkbox"><label for="selApprova1" class=""><input type="checkbox" id="selApprova1" name="approva_flg" data-required="true" aria-required="true" value="1">Approva​
+									</label></div><input type="hidden" id="selApprova1_hidden" name="approva_flg" value="0">
+</fieldset>
+</div>
+</div>
+</div>
+</fieldset>
+</div>
+<div>
+<input type="hidden" id="" name="tesi_id" value="123"><input type="hidden" id="" name="stu_id" value="123"><input type="hidden" id="" name="allegato_id" value="1234"><input type="hidden" id="" name="pers_id" value="12344"><input value="formPrincipale" name="form_id_formPrincipale" type="hidden">
+</div>
+<div id="formPrincipale_action_bar" class="form-group ">&nbsp;​<a id="btnBack" href="auth/docente/Graduation/AllegatiTesi.do?tesi_id=12344&amp;pers_id=12344" title="Indietro" style="cursor:pointer;" class="btn btn-default"><span>Indietro</span></a>&nbsp;​<input id="btnApprova" name="btnApprova" type="submit" title="Approva allegato" value="Approva allegato" class="btn btn-primary" style="cursor:pointer;">&nbsp;​</div>
 </form>
 <script>
 				jQuery(function() {
 					let el = document.getElementById("null");
 					if (el) { el.focus(); }
-   				});
+   				}); 
 			</script>
-<table id="tableLaureandiAssegnati0733" class="table breaks3 table-1">
-<caption>INFORMATICA [0733] - Corso di Laurea</caption><thead><tr>
-<th id="tableLaureandiAssegnati0733th1" class="">Matricola</th><th id="tableLaureandiAssegnati0733th2" class="">Nominativo</th><th id="tableLaureandiAssegnati0733th3" class="">Ruolo docente</th><th id="tableLaureandiAssegnati0733th4" class="">Sessione</th><th id="tableLaureandiAssegnati0733th5" class="">Azioni</th>
-</tr></thead><tbody class="table-1-body"><tr>
-<td title="" class="">1234</td><td title="" class="">ROSSI MARIO</td><td title="" class="">Primo relatore<br>
-</td><td title="" class="">Seduta di laurea del 21 dicembre 2022 A.A. 2021/2022</td><td title="" class="">
-<div id="toolbarAzioni" class="tool-bar toolbar-align-left">
-<a id="btnModificaDatiTesi" href="auth/docente/Graduation/ModificaDatiTesi.do?tesi_id=1234&amp;pers_id=134" title="Modifica dati tesi" aria-label="Modifica dati tesi" class="toolbar-s-image" style="background-image:url(img/graduation/book.png)">​</a><a id="btnAllegatiTesi" href="auth/docente/Graduation/AllegatiTesi.do?tesi_id=1234&amp;pers_id=134" title="Allegati" aria-label="Allegati" class="toolbar-s-image" style="background-image:url(img/graduation/attachment.png)">​</a>
-</div>
-</td>
-</tr>
-<tr>
-<td title="" class="">1235</td><td title="" class="">WIENER PETER</td><td title="" class="">Primo relatore<br>
-</td><td title="" class="">Seduta di laurea del 21 dicembre 2022 A.A. 2021/2022</td><td title="" class="">
-<div id="toolbarAzioni" class="tool-bar toolbar-align-left">
-<a id="btnModificaDatiTesi" href="auth/docente/Graduation/ModificaDatiTesi.do?tesi_id=1235&amp;pers_id=135" title="Modifica dati tesi" aria-label="Modifica dati tesi" class="toolbar-s-image" style="background-image:url(img/graduation/book.png)">​</a>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
 </div></div><script>
 								hideShowElementsById();
 								actionbarMultipleSubmit='Richiesta gi\u00E0 inviata';
