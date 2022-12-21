@@ -427,3 +427,24 @@ def command_delete_register_activity(
         else:
             console.log(f"Cannot delete activity #{index} of register {register.course}. Check the index, and try again!",
                         style="bold red")
+
+
+@app.command(name="graduation-days")
+def command_graduation_days() -> None:
+    """
+    Print the list of graduation days.
+    The number associated with each graduation day is used an ID.
+    """
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching graduation days..."):
+        days = esse3_wrapper.fetch_graduation_days()
+
+    table = Table(title="Graduation days")
+    table.add_column("#")
+    table.add_column("Graduation day")
+    for index, day in enumerate(days, start=1):
+        table.add_row(
+            str(index),
+            day.value,
+        )
+    console.print(table)

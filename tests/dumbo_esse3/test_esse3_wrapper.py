@@ -2,7 +2,7 @@ import pytest
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import DateTime, Course, ActivityTitle, ExamType, ExamDescription, ExamNotes, \
-    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState
+    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState, GraduationDay
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 from tests.test_environment import USERNAME, PASSWORD
 
@@ -115,3 +115,9 @@ def test_fetch_theses_sign(esse3_wrapper):
     esse3_wrapper.sign_thesis(theses[0].student)
     theses = esse3_wrapper.fetch_thesis_list()
     assert theses[0].state == StudentThesisState.State.SIGNED
+
+
+def test_fetch_graduation_days(esse3_wrapper):
+    days = esse3_wrapper.fetch_graduation_days()
+    assert len(days) == 2
+    assert days[0] == GraduationDay("Commissione Master del 19 dicembre 2022")

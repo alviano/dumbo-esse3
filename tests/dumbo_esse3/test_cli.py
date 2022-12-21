@@ -31,3 +31,9 @@ def test_theses(runner):
     assert result.exit_code == 0
     assert "Theses" in result.stdout
     assert "ROSSI MARIO" in result.stdout
+
+
+def test_graduation_days(runner):
+    result = runner.invoke(app, ["graduation-days"])
+    assert result.exit_code == 0
+    assert "Commissione Master del 19 dicembre 2022" in result.stdout

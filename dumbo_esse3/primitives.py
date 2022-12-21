@@ -235,3 +235,8 @@ class RegisterActivity:
     @property
     def end_date_time(self) -> DateTime:
         return self.date.add_hours(self.hours.value)
+
+
+@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 _-]*")
+class GraduationDay:
+    pass

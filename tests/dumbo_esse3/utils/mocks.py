@@ -3,10 +3,11 @@ from pathlib import Path
 import pytest
 from pytest_localserver.http import WSGIServer
 
-from dumbo_esse3.esse3_wrapper import ESSE3_SERVER, LOGIN_URL, LOGOUT_URL, COURSE_LIST_URL, REGISTER_LIST_URL, \
-    change_esse3_server
+from dumbo_esse3.esse3_wrapper import URLs, change_esse3_server
 
-TRACE = False
+TRACE = True
+
+LOCAL_SERVER = None
 
 
 def read_html(filename):
@@ -17,10 +18,6 @@ def read_html(filename):
         else:
             print("TRACE(read_html)", f"serving file {file}")
     return open(file).read()
-
-
-def endpoint(url):
-    return url.replace(ESSE3_SERVER, '').replace("https://", "disable://").replace("http://", "disable://")
 
 
 MOCK_ESSE3_STATE = {
@@ -41,13 +38,13 @@ def mock_esse3_app(environ, start_response):
     start_response(status, response_headers)
     html = None
     if method == "GET":
-        if url == endpoint(LOGIN_URL):
+        if url == URLs["login"].replace(LOCAL_SERVER, ''):
             html = read_html("login.html")
-        elif url == endpoint(LOGOUT_URL):
+        elif url == URLs["logout"].replace(LOCAL_SERVER, ''):
             html = read_html("logout.html")
-        elif url == endpoint(COURSE_LIST_URL):
+        elif url == URLs["course_list"].replace(LOCAL_SERVER, ''):
             html = read_html("course_list.html")
-        elif url == endpoint(REGISTER_LIST_URL):
+        elif url == URLs["register_list"].replace(LOCAL_SERVER, ''):
             html = read_html("registers.html")
         elif url == "/auth/docente/RegistroDocente/EnterRegistro.do;jsessionid=3D6CE80D6DED107AFC9D39538FB4AAEF.esse3-unical-prod-02?AA_OFF_ID=2022&FAT_PART_COD=N0&DOM_PART_COD=N0&AD_LOG_ID=65422&PART_COD=S1":
             html = read_html("register_cod.html")
@@ -69,6 +66,8 @@ def mock_esse3_app(environ, start_response):
                 html = read_html("theses_present.html")
         elif url == "/auth/docente/Graduation/ApprovaAllegatoTesi.do?tesi_id=1234&allegato_id=12344&stu_id=199451&pers_id=159952":
             html = read_html("theses_sign.html")
+        elif url == URLs["graduation_day_list"].replace(LOCAL_SERVER, ''):
+            html = read_html("graduation_day_list.html")
     elif method == "POST":
         if url == "/auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=86CA8F3D3A6885013058837D593E0551.esse3-unical-prod-04":
             if MOCK_ESSE3_STATE["add exam cod completed"]:
@@ -90,7 +89,7 @@ def mock_esse3_app(environ, start_response):
             MOCK_ESSE3_STATE["theses signed"] = True
             html = read_html("theses_signed.html")
     if TRACE and url.startswith("/auth/") and html is None:
-        print('TRACE(mock_esse3_app)', 'missing page')
+        print('TRACE(mock_esse3_app)', f'missing page {url}')
     return [html.replace(
         '<base href="https://unical.esse3.cineca.it/">',
         f'<base href="{server}">',
@@ -99,8 +98,11 @@ def mock_esse3_app(environ, start_response):
 
 @pytest.fixture
 def test_server(request):
+    global LOCAL_SERVER
+
     server = WSGIServer(application=mock_esse3_app)
     server.start()
     request.addfinalizer(server.stop)
-    change_esse3_server(server.url)
+    LOCAL_SERVER = server.url
+    change_esse3_server(LOCAL_SERVER)
     return server

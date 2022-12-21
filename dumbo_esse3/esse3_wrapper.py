@@ -1,6 +1,6 @@
 import dataclasses
 from dataclasses import InitVar
-from typing import List
+from typing import List, Final
 
 import typeguard
 from selenium import webdriver
@@ -10,25 +10,25 @@ from selenium.webdriver.common.by import By
 
 from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, \
     ExamDescription, ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, \
-    ActivityTitle, ActivityType
+    ActivityTitle, ActivityType, GraduationDay
 from dumbo_esse3.utils import validators
 
 ESSE3_SERVER = "https://unical.esse3.cineca.it"
-LOGIN_URL = f'{ESSE3_SERVER}/auth/Logon.do?menu_opened_cod='
-LOGOUT_URL = f'{ESSE3_SERVER}/Logout.do?menu_opened_cod='
-COURSE_LIST_URL = f'{ESSE3_SERVER}/auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica'
-THESIS_LIST_URL = f'{ESSE3_SERVER}/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo'
-REGISTER_LIST_URL = f'{ESSE3_SERVER}/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro'
+URLs: Final = {
+    "login": f'{ESSE3_SERVER}/auth/Logon.do?menu_opened_cod=',
+    "logout": f'{ESSE3_SERVER}/Logout.do?menu_opened_cod=',
+    "course_list": f'{ESSE3_SERVER}/auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica',
+    "thesis_list": f'{ESSE3_SERVER}/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo',
+    "register_list": f'{ESSE3_SERVER}/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro',
+    "graduation_day_list": f'{ESSE3_SERVER}/auth/docente/Graduation/ElencoSeduteLaurea.do',
+}
 
 
 def change_esse3_server(url):
-    global ESSE3_SERVER, LOGIN_URL, LOGOUT_URL, COURSE_LIST_URL, THESIS_LIST_URL, REGISTER_LIST_URL
+    global ESSE3_SERVER, URLs
 
-    LOGIN_URL = LOGIN_URL.replace(ESSE3_SERVER, url, 1)
-    LOGOUT_URL = LOGOUT_URL.replace(ESSE3_SERVER, url, 1)
-    COURSE_LIST_URL = COURSE_LIST_URL.replace(ESSE3_SERVER, url, 1)
-    THESIS_LIST_URL = THESIS_LIST_URL.replace(ESSE3_SERVER, url, 1)
-    REGISTER_LIST_URL = REGISTER_LIST_URL.replace(ESSE3_SERVER, url, 1)
+    for key in URLs.keys():
+        URLs[key] = URLs[key].replace(ESSE3_SERVER, url, 1)
 
     ESSE3_SERVER = url
 
@@ -80,13 +80,13 @@ class Esse3Wrapper:
         return self.driver.execute_script("return navigator.webdriver")
 
     def __login(self, username: Username, password: Password) -> None:
-        self.driver.get(LOGIN_URL)
+        self.driver.get(URLs["login"])
         self.driver.find_element(By.ID, 'u').send_keys(username.value)
         self.driver.find_element(By.ID, 'p').send_keys(password.value)
         self.driver.find_element(By.ID, 'btnLogin').send_keys(Keys.RETURN)
 
     def __logout(self) -> None:
-        self.driver.get(LOGOUT_URL)
+        self.driver.get(URLs["logout"])
 
     def minimize(self) -> None:
         self.driver.minimize_window()
@@ -95,7 +95,7 @@ class Esse3Wrapper:
         self.driver.maximize_window()
 
     def fetch_courses(self) -> List[Course]:
-        self.driver.get(COURSE_LIST_URL)
+        self.driver.get(URLs["course_list"])
         rows = self.driver.find_elements(By.XPATH, "//tr[@class='detail_table'][td//input[@src = 'images/sostenuta.gif']]")
         res = []
         for idx, row in enumerate(rows):
@@ -104,7 +104,7 @@ class Esse3Wrapper:
         return res
 
     def fetch_exams(self, course: Course) -> List[Exam]:
-        self.driver.get(COURSE_LIST_URL)
+        self.driver.get(URLs["course_list"])
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
         exams = self.driver.find_elements(By.XPATH, '//tr[@class="detail_table"]')
         return list(sorted([Exam.of(
@@ -113,7 +113,7 @@ class Esse3Wrapper:
         ) for exam in exams], key=lambda exam: exam.date_and_time))
 
     def fetch_students(self, course: Course, exam: DateTime) -> List[Student]:
-        self.driver.get(COURSE_LIST_URL)
+        self.driver.get(URLs["course_list"])
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
         self.driver.find_element(By.XPATH, f"//tr[normalize-space(td/text()) = '{exam}']//input[@src='images/defAppStudent.gif']").send_keys(Keys.RETURN)
@@ -132,7 +132,7 @@ class Esse3Wrapper:
 
     def add_exam(self, course: Course, exam: DateTime, exam_type: ExamType, description: ExamDescription,
                  notes: ExamNotes) -> None:
-        self.driver.get(COURSE_LIST_URL)
+        self.driver.get(URLs["course_list"])
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
         self.driver.find_element(By.XPATH, '//input[@type = "submit"][@name = "new_pf"]').send_keys(Keys.RETURN)
@@ -150,7 +150,7 @@ class Esse3Wrapper:
         self.driver.find_element(By.XPATH, '//a[. = "Esci"]').send_keys(Keys.RETURN)
 
     def fetch_thesis_list(self) -> List[StudentThesisState]:
-        self.driver.get(THESIS_LIST_URL)
+        self.driver.get(URLs["thesis_list"])
 
         all_students = []
 
@@ -182,7 +182,7 @@ class Esse3Wrapper:
         return res
 
     def __thesis_action(self, student: Student, action) -> None:
-        self.driver.get(THESIS_LIST_URL)
+        self.driver.get(URLs["thesis_list"])
         self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a[@id = 'btnAllegatiTesi']").send_keys(Keys.RETURN)
         self.driver.find_element(By.ID, action).send_keys(Keys.RETURN)
 
@@ -195,7 +195,7 @@ class Esse3Wrapper:
         self.driver.find_element(By.ID, "btnApprova").send_keys(Keys.RETURN)
 
     def fetch_registers(self) -> List[Register]:
-        self.driver.get(REGISTER_LIST_URL)
+        self.driver.get(URLs["register_list"])
         rows = self.driver.find_elements(By.XPATH, "//tr[td/a/img[@src = 'images/open_registro.gif']]")
         res = []
         for idx, row in enumerate(rows):
@@ -207,7 +207,7 @@ class Esse3Wrapper:
         return sorted(res, key=lambda register: (register.semester, register.course))
 
     def fetch_register_activities(self, register: Register, with_time: bool = False) -> List[RegisterActivity]:
-        self.driver.get(REGISTER_LIST_URL)
+        self.driver.get(URLs["register_list"])
         self.driver.find_element(
             By.XPATH,
             f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
@@ -237,7 +237,7 @@ class Esse3Wrapper:
         return res
 
     def add_register_activity(self, register: Register, activity: RegisterActivity) -> bool:
-        self.driver.get(REGISTER_LIST_URL)
+        self.driver.get(URLs["register_list"])
         self.driver.find_element(
             By.XPATH,
             f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
@@ -275,7 +275,7 @@ class Esse3Wrapper:
         )) == 0
 
     def delete_register_activity(self, register: Register, activity_index: int) -> bool:
-        self.driver.get(REGISTER_LIST_URL)
+        self.driver.get(URLs["register_list"])
         self.driver.find_element(
             By.XPATH,
             f"//tr[normalize-space(td/text()) = '{register.course}']/td//a[img/@src = 'images/open_registro.gif']"
@@ -290,3 +290,7 @@ class Esse3Wrapper:
         self.driver.find_element(By.XPATH, "//input[@value = 'Conferma']").send_keys(Keys.RETURN)
         return True
 
+    def fetch_graduation_days(self) -> List[GraduationDay]:
+        self.driver.get(URLs["graduation_day_list"])
+        rows = self.driver.find_elements(By.XPATH, "//table[@id = 'seduteAperte']/tbody/tr/td[1]")
+        return [GraduationDay(row.text) for row in rows]
