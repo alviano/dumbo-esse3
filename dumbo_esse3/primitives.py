@@ -240,3 +240,60 @@ class RegisterActivity:
 @bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 _-]*")
 class GraduationDay:
     pass
+
+
+@bounded_integer(min_value=66, max_value=121)
+class FinalScore:
+    pass
+
+
+@bounded_string(min_length=0, max_length=4000, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]\n_-]*")
+class GraduationNote:
+    @staticmethod
+    def empty() -> 'GraduationNote':
+        return GraduationNote('')
+
+
+@typeguard.typechecked
+@dataclasses.dataclass(frozen=True)
+class StudentGraduation:
+    student: Student
+    final_score: FinalScore
+    laude: bool = dataclasses.field(default=False)
+    special_mention: bool = dataclasses.field(default=False)
+    notes: GraduationNote = dataclasses.field(default=GraduationNote.empty())
+
+    def __post_init__(self):
+        validate("laude needs 110", not self.laude or self.final_score >= FinalScore(110), equals=True)
+        validate("special_mention needs laude", not self.special_mention or self.laude, equals=True)
+
+    @staticmethod
+    def of(student_id: str, student_name: str, final_score: int) -> 'StudentGraduation':
+        return StudentGraduation(Student.of(student_id, student_name), FinalScore(final_score))
+
+    def with_laude(self) -> 'StudentGraduation':
+        return StudentGraduation(
+            student=self.student,
+            final_score=self.final_score,
+            laude=True,
+            special_mention=self.special_mention,
+            notes=self.notes,
+        )
+
+    def with_special_mention(self) -> 'StudentGraduation':
+        return StudentGraduation(
+            student=self.student,
+            final_score=self.final_score,
+            laude=self.laude,
+            special_mention=True,
+            notes=self.notes,
+        )
+
+    def with_notes(self, value: GraduationNote) -> 'StudentGraduation':
+        return StudentGraduation(
+            student=self.student,
+            final_score=self.final_score,
+            laude=self.laude,
+            special_mention=self.special_mention,
+            notes=value,
+        )

@@ -1,7 +1,7 @@
 import pytest
 from freezegun import freeze_time
 from dumbo_esse3.primitives import DateTime, NumberOfStudents, Student, StudentId, StudentName, StudentThesisState, CdL, \
-    RegisterActivity, NumberOfHours, ActivityType, ActivityTitle
+    RegisterActivity, NumberOfHours, ActivityType, ActivityTitle, StudentGraduation, FinalScore
 
 
 def test_exam_date_time_order():
@@ -85,3 +85,21 @@ def test_register_activity_cannot_span_multiple_days():
 def test_student_types_are_validated():
     with pytest.raises(TypeError):
         Student("1234", "ROSSI MARIO")
+
+
+def test_student_graduation_with_laude_needs_110():
+    with pytest.raises(ValueError):
+        StudentGraduation.of("123", "ROSSI MARIO", 100).with_laude()
+    with pytest.raises(ValueError):
+        StudentGraduation(Student.of("123", "ROSSI MARIO"), FinalScore(100), laude=True)
+    assert StudentGraduation.of("123", "ROSSI MARIO", 110).with_laude().laude
+    assert StudentGraduation.of("123", "ROSSI MARIO", 113).with_laude().laude
+
+
+def test_student_graduation_with_special_mention_needs_with_laude():
+    with pytest.raises(ValueError):
+        StudentGraduation.of("123", "ROSSI MARIO", 110).with_special_mention()
+    with pytest.raises(ValueError):
+        StudentGraduation(Student.of("123", "ROSSI MARIO"), FinalScore(110), special_mention=True)
+    assert StudentGraduation.of("123", "ROSSI MARIO", 110).with_laude().with_special_mention().special_mention
+    assert StudentGraduation.of("123", "ROSSI MARIO", 113).with_laude().with_special_mention().special_mention

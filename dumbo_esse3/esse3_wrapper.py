@@ -10,8 +10,9 @@ from selenium.webdriver.common.by import By
 
 from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, \
     ExamDescription, ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, \
-    ActivityTitle, ActivityType, GraduationDay
+    ActivityTitle, ActivityType, GraduationDay, StudentGraduation
 from dumbo_esse3.utils import validators
+from dumbo_esse3.utils.validators import validate
 
 ESSE3_SERVER = "https://unical.esse3.cineca.it"
 URLs: Final = {
@@ -294,3 +295,80 @@ class Esse3Wrapper:
         self.driver.get(URLs["graduation_day_list"])
         rows = self.driver.find_elements(By.XPATH, "//table[@id = 'seduteAperte']/tbody/tr/td[1]")
         return [GraduationDay(row.text) for row in rows]
+
+    def upload_graduation_day(self, graduation_day: GraduationDay,
+                              student_graduation_list: List[StudentGraduation]) -> None:
+        validate("at least one student", student_graduation_list, min_len=1, help_msg="No student was provided")
+        self.driver.get(URLs["graduation_day_list"])
+        self.driver.find_element(
+            By.XPATH,
+            f"//table[@id = 'seduteAperte']/tbody/tr/td[text() = '{graduation_day}']/../td/a"
+        ).send_keys(Keys.RETURN)
+        rows = self.driver.find_elements(By.XPATH, '//table[@id="elencoLaureandi"]/tbody/tr')
+        student_to_url = {
+            Student.of(
+                student_id=row.find_element(By.XPATH, "td[2]").text,
+                student_name=row.find_element(By.XPATH, "td[1]").text,
+            ): row.find_element(By.XPATH, "td/a").get_attribute("href")
+            for row in rows
+        }
+        student_to_graduation = {graduation.student: graduation for graduation in student_graduation_list}
+        validate("student_graduation_list", student_to_graduation.keys(), equals=student_to_url.keys(),
+                 help_msg="Students don't match")
+
+        self.driver.get(student_to_url[student_graduation_list[0].student])
+        graduation_date = self.driver.find_element(By.ID, 'grad-dettLau-dataCt').text
+        committee = [
+            checkbox.is_selected()
+            for checkbox in self.driver.find_elements(
+                By.XPATH,
+                '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
+            )
+        ]
+        if not graduation_date:
+            graduation_date = DateTime.now().stringify_date()
+        if all(not x for x in committee):
+            committee = [not x for x in committee]
+
+        for graduation in student_graduation_list:
+            url = student_to_url[graduation.student]
+            self.driver.get(url)
+
+            starting_score = int(self.driver.find_element(
+                By.XPATH,
+                '//*[@id="grad-dettLau-boxVerbalizzazione"]/dl/dt[text() = "Voto di partenza"]/../dd'
+            ).text)
+            thesis_score = graduation.final_score.value - starting_score
+            validate("thesis_score", thesis_score, min_value=1, max_value=15, help_msg="Wrong thesis score")
+
+            self.__replace_content(
+                self.driver.find_element(By.ID, 'grad-dettLau-annotazioni'),
+                graduation.notes.value
+            )
+            self.__replace_content(
+                self.driver.find_element(By.ID, 'grad-dettLau-puntiTesi'),
+                str(thesis_score)
+            )
+            self.__replace_content(
+                self.driver.find_element(By.ID, 'grad-dettLau-dataCt'),
+                graduation_date
+            )
+            if graduation.laude:
+                self.driver.find_element(By.ID, 'grad-dettLau-lode1').send_keys(Keys.SPACE)
+            if graduation.special_mention:
+                self.driver.find_element(By.ID, 'grad-dettLau-menzione1').send_keys(Keys.SPACE)
+
+            checkboxes = self.driver.find_elements(
+                By.XPATH,
+                '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
+            )
+            for index, member in enumerate(committee):
+                if member != checkboxes[index].is_selected():
+                    checkboxes[index].send_keys(Keys.SPACE)
+
+            self.driver.find_element(By.ID, 'grad-dettLau-btnSubmit').send_keys(Keys.RETURN)
+
+    @staticmethod
+    def __replace_content(element, content):
+        element.clear()
+        element.send_keys(content + Keys.ESCAPE)
