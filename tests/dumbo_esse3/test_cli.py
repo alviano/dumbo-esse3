@@ -1,7 +1,11 @@
+from pathlib import Path
+from unittest.mock import patch, mock_open
+
 import pytest
 from typer.testing import CliRunner
 
-from dumbo_esse3.cli import app
+from dumbo_esse3.cli import app, read_graduation_day_list
+from dumbo_esse3.primitives import StudentId
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 
 
@@ -37,3 +41,15 @@ def test_graduation_days(runner):
     result = runner.invoke(app, ["graduation-days"])
     assert result.exit_code == 0
     assert "Commissione Master del 19 dicembre 2022" in result.stdout
+
+
+def test_read_graduation_day_list():
+    with patch("builtins.open", mock_open(read_data="""
+MATRICOLA,STUDENTE,VOTO FINALE,LODE,MENZIONE,NOTE
+12344,AIEIE BRAZORF,105,,,una bella nota
+12345,MARIANO VANO,114,sì,,una nota ancora più bella
+    """.strip())):
+        graduations = read_graduation_day_list(Path("scores.csv"))
+        assert len(graduations) == 2
+        assert graduations[0].student.id == StudentId("12344")
+

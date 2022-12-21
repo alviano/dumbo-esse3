@@ -1,5 +1,7 @@
+import csv
 import dataclasses
 from collections import defaultdict
+from pathlib import Path
 from typing import Optional, List
 
 import typer
@@ -8,8 +10,9 @@ from rich.table import Table
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, DateTime, Register, \
-    RegisterActivity, ActivityType, NumberOfHours, ActivityTitle
+    RegisterActivity, ActivityType, NumberOfHours, ActivityTitle, StudentGraduation, Student, FinalScore, GraduationNote
 from dumbo_esse3.utils.console import console
+from dumbo_esse3.utils.validators import validate
 
 
 @dataclasses.dataclass(frozen=True)
@@ -448,3 +451,47 @@ def command_graduation_days() -> None:
             day.value,
         )
     console.print(table)
+
+
+def read_graduation_day_list(csv_file: Path) -> List[StudentGraduation]:
+    validate("csv-file", csv_file.exists(), help_msg="The provided file doesn't exist")
+    with open(csv_file) as f:
+        reader = csv.reader(f)
+        rows = [row for row in reader]
+        student_id_index = rows[0].index("MATRICOLA")
+        student_name_index = rows[0].index("STUDENTE")
+        final_score_index = rows[0].index("VOTO FINALE")
+        laude_index = rows[0].index("LODE")
+        special_mention_index = rows[0].index("MENZIONE")
+        notes_index = rows[0].index("NOTE")
+        return [
+            StudentGraduation(
+                student=Student.of(row[student_id_index], row[student_name_index]),
+                final_score=FinalScore.parse(row[final_score_index]),
+                laude=bool(row[laude_index]),
+                special_mention=bool(row[special_mention_index]),
+                notes=GraduationNote(row[notes_index]),
+            )
+            for row in rows[1:]
+        ]
+
+@app.command(name="upload-graduation-day")
+def command_upload_graduation_day(
+        of: int = typer.Option(..., help="Index of the graduation day to upload"),
+        csv_file: Path = typer.Option(..., help="Path to the CSV file containing the scores to upload"),
+) -> None:
+    """
+    Upload scores for a graduation day.
+    The ID of the graduation day can be obtained with the command graduation-days.
+    Scores are provided via a CSV file.
+    """
+    student_graduation_list = read_graduation_day_list(csv_file)
+
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching graduation days..."):
+        days = esse3_wrapper.fetch_graduation_days()
+    validate("", of, min_value=1, max_value=len(days))
+
+    with console.status("Fetching graduation days..."):
+        esse3_wrapper.upload_graduation_day(days[of - 1], student_graduation_list)
+    console.print("All done!")

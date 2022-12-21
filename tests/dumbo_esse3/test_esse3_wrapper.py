@@ -2,12 +2,11 @@ import pytest
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import DateTime, Course, ActivityTitle, ExamType, ExamDescription, ExamNotes, \
-    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState, GraduationDay, StudentGraduation, Student
+    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState, GraduationDay, StudentGraduation
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 from tests.test_environment import USERNAME, PASSWORD
 
-
-SHOW_BROWSER = True
+SHOW_BROWSER = False
 
 
 @pytest.fixture
@@ -134,6 +133,17 @@ def test_fetch_graduation_days(esse3_wrapper):
     assert days[0] == GraduationDay("Commissione Master del 19 dicembre 2022")
 
 
+def test_upload_graduation_day_with_correct_data(esse3_wrapper):
+    pass
+    days = esse3_wrapper.fetch_graduation_days()
+    scores = [
+        StudentGraduation.of("12344", "AIEIE BRAZORF", 105),
+        StudentGraduation.of("12345", "MARIANO VANO", 114),
+    ]
+    esse3_wrapper.upload_graduation_day(days[-1], scores)
+    assert len(esse3_wrapper.fetch_graduation_days()) == 2
+
+
 def test_upload_graduation_day_fail_if_missing_data(esse3_wrapper):
     days = esse3_wrapper.fetch_graduation_days()
     scores = [StudentGraduation.of("12344", "AIEIE BRAZORF", 100)]
@@ -142,12 +152,3 @@ def test_upload_graduation_day_fail_if_missing_data(esse3_wrapper):
     scores += [StudentGraduation.of("12346", "MARIANO VANO", 114)]
     with pytest.raises(ValueError):
         esse3_wrapper.upload_graduation_day(days[-1], scores)
-
-
-def test_upload_graduation_day(esse3_wrapper):
-    days = esse3_wrapper.fetch_graduation_days()
-    scores = [
-        StudentGraduation.of("12344", "AIEIE BRAZORF", 105),
-        StudentGraduation.of("12345", "MARIANO VANO", 114),
-    ]
-    esse3_wrapper.upload_graduation_day(days[-1], scores)
