@@ -494,15 +494,22 @@ def command_upload_graduation_day(
             None,
             help="Date of the graduation day DD/MM/YYYY (today or from ESSE3 if omitted)"
         ),
-        no_committee: bool = typer.Option(False, "--no-committee", help="Don't change selected committee"),
+        exclude_from_committee: Optional[List[int]] = typer.Option(
+            None,
+            "--exclude-from-committee",
+            help="Index of the committee member to exclude (start with 1)"
+        ),
         dry_run: bool = typer.Option(False, "--dry-run", help="Don't save data"),
 ) -> None:
     """
-    Upload scores for a graduation day.
+    Upload scores for a graduation day. Requires the role CHAIR OF COMMITTEE.
     The ID of the graduation day can be obtained with the command graduation-days.
     Scores are provided via a CSV file.
     """
     student_graduation_list = read_graduation_day_list(csv_file)
+    if exclude_from_committee:
+        for x in exclude_from_committee:
+            validate("committee index in 1..99", x, min_value=1, max_value=99)
 
     esse3_wrapper = new_esse3_wrapper()
     with console.status("Fetching graduation days..."):
@@ -514,7 +521,7 @@ def command_upload_graduation_day(
             graduation_day=days[of - 1],
             student_graduation_list=student_graduation_list,
             date=None if date is None else DateTime.parse_date(date),
-            no_committee=no_committee,
+            exclude_from_committee=exclude_from_committee,
             dry_run=dry_run,
         )
     console.print("All done!")

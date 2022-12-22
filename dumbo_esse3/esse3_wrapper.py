@@ -302,7 +302,7 @@ class Esse3Wrapper:
             graduation_day: GraduationDay,
             student_graduation_list: List[StudentGraduation],
             date: Optional[DateTime] = None,
-            no_committee: bool = False,
+            exclude_from_committee: Optional[List[int]] = None,
             dry_run: bool = False,
     ) -> None:
         validate("at least one student", student_graduation_list, min_len=1, help_msg="No student was provided")
@@ -329,18 +329,17 @@ class Esse3Wrapper:
         graduation_date = self.driver.find_element(By.ID, 'grad-dettLau-dataCt').text
         if not graduation_date:
             graduation_date = DateTime.now().stringify_date() if date is None else date.stringify_date()
-        if no_committee:
-            committee = []
-        else:
-            committee = [
-                checkbox.is_selected()
-                for checkbox in self.driver.find_elements(
-                    By.XPATH,
-                    '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
-                )
-            ]
-            if all(not x for x in committee):
-                committee = [not x for x in committee]
+        committee = [
+            checkbox.is_selected()
+            for checkbox in self.driver.find_elements(
+                By.XPATH,
+                '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
+            )
+        ]
+        if all(not x for x in committee):
+            committee = [not x for x in committee]
+        if exclude_from_committee:
+            committee = [x and index not in exclude_from_committee for index, x in enumerate(committee, start=1)]
 
         for graduation in student_graduation_list:
             url = student_to_url[graduation.student]
