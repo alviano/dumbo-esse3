@@ -52,4 +52,3 @@ MATRICOLA,STUDENTE,VOTO FINALE,LODE,MENZIONE,NOTE
         graduations = read_graduation_day_list(Path("scores.csv"))
         assert len(graduations) == 2
         assert graduations[0].student.id == StudentId("12344")
-
