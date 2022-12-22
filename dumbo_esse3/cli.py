@@ -1,5 +1,6 @@
 import csv
 import dataclasses
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Optional, List
@@ -55,11 +56,21 @@ def new_esse3_wrapper(detached: bool = False, with_live_status: bool = True):
     return res()
 
 
+def version_callback(value: bool):
+    if value:
+        import importlib.metadata
+        __version__ = importlib.metadata.version("dumbo-esse3")
+        console.print("dumbo-esse3", __version__)
+        raise typer.Exit()
+
+
 @app.callback()
 def main(
         username: str = typer.Option(..., prompt=True, envvar="DUMBO_ESSE3_USERNAME"),
         password: str = typer.Option(..., prompt=True, hide_input=True, envvar="DUMBO_ESSE3_PASSWORD"),
         debug: bool = typer.Option(False, "--debug", help="Don't minimize browser"),
+        version: bool = typer.Option(False, "--version", callback=version_callback, is_eager=True,
+                                     help="Print version and exit"),
 ):
     """
     Esse3 command line utility, to save my future time!
