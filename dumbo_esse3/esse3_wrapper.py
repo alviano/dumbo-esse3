@@ -302,6 +302,7 @@ class Esse3Wrapper:
             student_graduation_list: List[StudentGraduation],
             date: Optional[DateTime] = None,
             no_committee: bool = False,
+            dry_run: bool = False,
     ) -> None:
         validate("at least one student", student_graduation_list, min_len=1, help_msg="No student was provided")
         self.driver.get(URLs["graduation_day_list"])
@@ -375,7 +376,8 @@ class Esse3Wrapper:
                     if member != checkboxes[index].is_selected():
                         checkboxes[index].send_keys(Keys.SPACE)
 
-            self.driver.find_element(By.ID, 'grad-dettLau-btnSubmit').send_keys(Keys.RETURN)
+            if not dry_run:
+                self.driver.find_element(By.ID, 'grad-dettLau-btnSubmit').send_keys(Keys.RETURN)
 
     @staticmethod
     def __replace_content(element, content):

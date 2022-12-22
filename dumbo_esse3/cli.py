@@ -495,6 +495,7 @@ def command_upload_graduation_day(
             help="Date of the graduation day DD/MM/YYYY (today or from ESSE3 if omitted)"
         ),
         no_committee: bool = typer.Option(False, "--no-committee", help="Don't change selected committee"),
+        dry_run: bool = typer.Option(False, "--dry-run", help="Don't save data"),
 ) -> None:
     """
     Upload scores for a graduation day.
@@ -514,5 +515,6 @@ def command_upload_graduation_day(
             student_graduation_list=student_graduation_list,
             date=None if date is None else DateTime.parse_date(date),
             no_committee=no_committee,
+            dry_run=dry_run,
         )
     console.print("All done!")
