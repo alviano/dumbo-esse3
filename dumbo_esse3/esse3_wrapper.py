@@ -1,6 +1,6 @@
 import dataclasses
 from dataclasses import InitVar
-from typing import List, Final
+from typing import List, Final, Optional
 
 import typeguard
 from selenium import webdriver
@@ -296,8 +296,13 @@ class Esse3Wrapper:
         rows = self.driver.find_elements(By.XPATH, "//table[@id = 'seduteAperte']/tbody/tr/td[1]")
         return [GraduationDay(row.text) for row in rows]
 
-    def upload_graduation_day(self, graduation_day: GraduationDay,
-                              student_graduation_list: List[StudentGraduation]) -> None:
+    def upload_graduation_day(
+            self,
+            graduation_day: GraduationDay,
+            student_graduation_list: List[StudentGraduation],
+            date: Optional[DateTime] = None,
+            no_committee: bool = False,
+    ) -> None:
         validate("at least one student", student_graduation_list, min_len=1, help_msg="No student was provided")
         self.driver.get(URLs["graduation_day_list"])
         self.driver.find_element(
@@ -318,17 +323,20 @@ class Esse3Wrapper:
 
         self.driver.get(student_to_url[student_graduation_list[0].student])
         graduation_date = self.driver.find_element(By.ID, 'grad-dettLau-dataCt').text
-        committee = [
-            checkbox.is_selected()
-            for checkbox in self.driver.find_elements(
-                By.XPATH,
-                '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
-            )
-        ]
         if not graduation_date:
-            graduation_date = DateTime.now().stringify_date()
-        if all(not x for x in committee):
-            committee = [not x for x in committee]
+            graduation_date = DateTime.now().stringify_date() if date is None else date.stringify_date()
+        if no_committee:
+            committee = []
+        else:
+            committee = [
+                checkbox.is_selected()
+                for checkbox in self.driver.find_elements(
+                    By.XPATH,
+                    '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
+                )
+            ]
+            if all(not x for x in committee):
+                committee = [not x for x in committee]
 
         for graduation in student_graduation_list:
             url = student_to_url[graduation.student]
@@ -358,13 +366,14 @@ class Esse3Wrapper:
             if graduation.special_mention:
                 self.driver.find_element(By.ID, 'grad-dettLau-menzione1').send_keys(Keys.SPACE)
 
-            checkboxes = self.driver.find_elements(
-                By.XPATH,
-                '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
-            )
-            for index, member in enumerate(committee):
-                if member != checkboxes[index].is_selected():
-                    checkboxes[index].send_keys(Keys.SPACE)
+            if committee:
+                checkboxes = self.driver.find_elements(
+                    By.XPATH,
+                    '//table[starts-with(@id, "gradDettLauCommissione")]//input[@type = "checkbox"]'
+                )
+                for index, member in enumerate(committee):
+                    if member != checkboxes[index].is_selected():
+                        checkboxes[index].send_keys(Keys.SPACE)
 
             self.driver.find_element(By.ID, 'grad-dettLau-btnSubmit').send_keys(Keys.RETURN)
 

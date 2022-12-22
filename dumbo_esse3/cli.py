@@ -490,6 +490,11 @@ def read_graduation_day_list(csv_file: Path) -> List[StudentGraduation]:
 def command_upload_graduation_day(
         of: int = typer.Option(..., help="Index of the graduation day to upload"),
         csv_file: Path = typer.Option(..., help="Path to the CSV file containing the scores to upload"),
+        date: Optional[str] = typer.Option(
+            None,
+            help="Date of the graduation day DD/MM/YYYY (today or from ESSE3 if omitted)"
+        ),
+        no_committee: bool = typer.Option(False, "--no-committee", help="Don't change selected committee"),
 ) -> None:
     """
     Upload scores for a graduation day.
@@ -504,5 +509,10 @@ def command_upload_graduation_day(
     validate("", of, min_value=1, max_value=len(days))
 
     with console.status("Fetching graduation days..."):
-        esse3_wrapper.upload_graduation_day(days[of - 1], student_graduation_list)
+        esse3_wrapper.upload_graduation_day(
+            graduation_day=days[of - 1],
+            student_graduation_list=student_graduation_list,
+            date=None if date is None else DateTime.parse_date(date),
+            no_committee=no_committee,
+        )
     console.print("All done!")
