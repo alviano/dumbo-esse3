@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dumbo-esse3"
-version = "0.3.13"
+version = "0.3.14"
 description = "Esse3 command line utility, to save my future time!"
 authors = ["Mario Alviano <mario.alviano@gmail.com>"]
 
@@ -12,6 +12,7 @@ selenium = "^4.4.3"
 typeguard = "^2.13.3"
 valid8 = "^5.1.2"
 dateutils = "^0.6.12"
+lxml = "^4.9.2"
 
 [tool.poetry.dev-dependencies]
 coverage = "^7.0.0"

@@ -1,6 +1,7 @@
 import dataclasses
 from dataclasses import InitVar
 from typing import List, Final, Optional
+from lxml import html
 
 import typeguard
 from selenium import webdriver
@@ -310,12 +311,14 @@ class Esse3Wrapper:
             By.XPATH,
             f"//table[@id = 'seduteAperte']/tbody/tr/td[text() = '{graduation_day}']/../td/a"
         ).send_keys(Keys.RETURN)
-        rows = self.driver.find_elements(By.XPATH, '//table[@id="elencoLaureandi"]/tbody/tr')
+
+        html_document = html.fromstring(self.driver.page_source)
+        rows = html_document.xpath('//table[@id="elencoLaureandi"]/tbody/tr')
         student_to_url = {
             Student.of(
-                student_id=row.find_element(By.XPATH, "td[2]").text,
-                student_name=row.find_element(By.XPATH, "td[1]").text,
-            ): row.find_element(By.XPATH, "td/a").get_attribute("href")
+                student_id=row.xpath("td[2]")[0].text,
+                student_name=row.xpath("td[1]")[0].text,
+            ): ESSE3_SERVER + '/' + row.xpath("td/a/@href")[0]
             for row in rows
         }
         student_to_graduation = {graduation.student: graduation for graduation in student_graduation_list}
