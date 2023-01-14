@@ -46,6 +46,7 @@ def test_fetch_students(esse3_wrapper):
     exams = esse3_wrapper.fetch_exams(courses[0])
     assert exams
     students = esse3_wrapper.fetch_students(courses[0], exams[0].date_and_time)
+    print(students)
     assert len(students) == exams[0].number_of_students.value
 
 

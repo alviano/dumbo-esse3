@@ -1,0 +1,655 @@
+
+<!DOCTYPE html><html id="top" lang="it">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Area Docente, Universit&agrave; di UNICAL</title>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="Servizi online dell'ateneo" name="description">
+<meta content="noindex, nofollow" name="robots">
+<base href="https://unical.esse3.cineca.it/">
+<link href="img/layout/favicons/apple-touch-icon.png" sizes="120x120" rel="apple-touch-icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-32x32.png" sizes="32x32" type="image/png" rel="icon" class="favicon">
+<link href="https://unical.esse3.cineca.it/img/layout/favicons/favicon-16x16.png" sizes="16x16" type="image/png" rel="icon" class="favicon">
+<link href="img/layout/favicons/manifest.json" rel="manifest" class="favicon">
+<link href="img/layout/favicons/safari-pinned-tab.svg" rel="mask-icon" class="favicon">
+<link href="JavaScript/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/layout/app.css?v=22.09.02" rel="stylesheet">
+<link href="css/templateCommon.css?v=19.08.00" type="text/css" rel="stylesheet">
+<link href="css/layout/print.css" type="text/css" rel="stylesheet">
+<link href="css/layout/legacy.css?v=20.10.04" type="text/css" rel="stylesheet">
+<link href="css/layout/theme-custom.css?v=22.08.02" type="text/css" rel="stylesheet">
+<link href="css/template.css" type="text/css" rel="stylesheet">
+<link href="css/unical.css" type="text/css" rel="stylesheet">
+<link href="css/jquery-ui.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/jquery.fileupload.css?v=20.12.00" media="all" type="text/css" rel="stylesheet">
+<link href="css/ui.jqgrid.css" media="all" type="text/css" rel="stylesheet">
+<link href="css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
+<script src="JavaScript/common.js"></script><script src="JavaScript/jquery/jquery-3.6.1.min.js"></script><script src="JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script><script src="JavaScript/jquery/jquery-ui/js/jquery-ui-1.13.2.min.js"></script><script src="JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script><script src="JavaScript/jquery/jqgrid/src/grid.tbltogrid.js?v=22.01.00"></script><script src="JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script><script src="JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script><script src="JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script><script src="JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script><script src="JavaScript/jquery/footable/js/footable.js"></script><script src="JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.iframe-transport.js"></script><script src="JavaScript/jquery/fileupload/js/jquery.fileupload.js?v=22.01.00"></script><script src="JavaScript/widgetChunkFileUpload.js?v=22.01.00"></script><script src="JavaScript/sharedUtils.js?v=20.10.04"></script>
+</head>
+<body data-xsl="/xsl/unical/ListaStudentiEsame.xsl" class="secondaryMenuBottom ">
+<noscript>
+<div id="noscript-warning">E' necessario abilitare javascript per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript">qui</a>
+</div>
+</noscript>
+<div id="nocookies-warning" aria-hidden="true">E' necessario abilitare i cookies per utilizzare questo sito. Istruzioni disponibili <a target="_blank" href="https://www.wikihow.com/Enable-Cookies-and-JavaScript" class="cookies_howto">qui</a>
+</div>
+<style>
+				#noscript-warning, #nocookies-warning {
+					width:100%;
+					z-index:10000;
+					text-align:center;
+					font-weight:bold;
+					color:#FFF;
+					background-color:#AE0000;
+					padding:10px 10px
+				}
+
+				#nocookies-warning {
+					display: none;
+				}
+
+				#noscript-warning a, #nocookies-warning a {
+					color:#FFF;
+					text-decoration: underline;
+				}
+			</style>
+<script>
+				$(
+					function() {
+						// try..catch because some in situations `document.cookie` is exposed but throws a
+					    // SecurityError if you try to access it; e.g. documents created from data URIs
+					    // or in sandboxed iframes (depending on flags/context)
+					    try {
+							// Create cookie
+							document.cookie = 'cookietest=1' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+							var ret = document.cookie.indexOf('cookietest=') != -1;
+							// Delete cookie
+							document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+
+							if (!ret) {
+								if (!!document.referrer) {
+									if (!document.referrer.toLowerCase().startsWith(document.location.protocol + '//' + document.location.host)) {
+										document.location.href = document.location.protocol + '//' + document.location.host + '';
+										return;
+									}
+								}
+							}
+
+							if (!ret) {
+								document.getElementById("nocookies-warning").style.display="block";
+								document.getElementById("nocookies-warning").setAttribute("aria-hidden", "false");
+
+								var anchors = document.getElementsByTagName("a");
+								for (var i = 0; anchors.length > i; i++) {
+									if (!(!(anchors[i].className != null) || !(anchors[i].className.indexOf("cookies_howto") == -1)) || (anchors[i].className == null)) {
+										anchors[i].removeAttribute("href");
+									}
+								}
+								var inputs = document.getElementsByTagName("input");
+								for (var i = 0; inputs.length > i; i++) {
+									inputs[i].disabled = true;
+								}
+								var textareas = document.getElementsByTagName("textarea");
+								for (var i = 0; textareas.length > i; i++) {
+									textareas[i].disabled = true;
+								}
+								var selects = document.getElementsByTagName("select");
+								for (var i = 0; selects.length > i; i++) {
+									selects[i].disabled = true;
+								}
+								var buttons = document.getElementsByTagName("button");
+								for (var i = 0; buttons.length > i; i++) {
+								    buttons[i].disabled = true;
+								}
+							}
+						}
+						catch (e) {
+							console.log("errore durante elaborazione 'cookies warning': " + e);
+						}
+					}
+				);
+			</script><script>
+								window.addEventListener('cookie-consent:initialized', _ => {
+									if (typeof changeCookieLang === 'function') {
+										changeCookieLang('it');
+									} else {
+									  console.error('Error changing language');
+									}
+								});
+								window.addEventListener('matomo-loaded:init', _ => {
+									if (typeof trackEvent === 'function') {
+									  trackEvent('trackPageView');
+									} else {
+									  console.error('Error tracking page view');
+									}
+
+									if (typeof trackLogin === 'function') {
+										trackLogin('12152');
+									} else {
+									  console.error('Error tracking login');
+									}
+
+								});
+
+								$(function() {
+									window.customCookieJsonConfigPath='CookieConfig.do';
+
+								    const cookieScript = document.createElement('script');
+								    cookieScript.src = 'https://static.iu.cineca.it/v1/default.js';
+								    document.head.appendChild(cookieScript);
+							     });
+								</script>
+<nav class="accessibility-item">
+<h2 tabindex="1" id="shortcut">Link per accesso rapido</h2>
+<ul>
+<li>
+<a href="#maincontent">Contenuto principale della pagina</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menuprincipale">Menu principale</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#menuprincipale" aria-expanded="false" data-toggle="main-navigation" aria-controls="main-navigation" href="#main-navigation">Menu principale</a>
+</li>
+<li class="salta-menu-desktop">
+<a href="#menusecondario">Link utili</a>
+</li>
+<li class="salta-menu-mobile">
+<a data-focus="#focus-secondario" data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" href="#focus-secondario">Link utili</a>
+</li>
+</ul>
+</nav>
+<header class="masthead">
+<div class="l-container">
+<div class="masthead_top">
+<a class="masthead_logo" title="Home page" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_0"><img aria-hidden="true" alt="Logo ateneo" src="img/layout/logo.png?v=22.09.02" id="theme-logo"></a><a data-toggle="main-navigation" id="hamburger" aria-hidden="true" aria-controls="main-navigation" aria-expanded="false" aria-label="Menu principale" role="button" class="masthead_hamburger js-masthead-menubutton" href=""><i class="fa fa-2x fa-bars"></i></a>
+</div>
+<nav aria-labelledby="menuprincipale" id="main-navigation" class="masthead_menu" data-menu-opened-cod="menu_link-navbox_docenti_Didattica" data-menu-opened="">
+<h2 tabindex="2" id="menuprincipale" class="accessibility-item">Menu principale</h2>
+<div class="masthead_menu_container">
+<div class="masthead_menu_header">
+<a id="chiudi-menu-principale" data-focus="#shortcut" data-toggle="main-navigation" aria-hidden="true" role="button" class="masthead_menu_close js-masthead-menubutton" href="#shortcut"><i aria-hidden="true" class="fa fa-2x fa-times"></i></a>
+<ul class="masthead_menu_lang">
+<li>
+<a class="is-active">ita</a>
+</li>
+<li>
+<a onclick="if(!confirm('Attenzione! Cambiando lingua, la navigazione torner&agrave; alla home page. Continuare?')) return false" href="Home.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02?cod_lingua=eng&amp;AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;MIN_AA_CAL_ID=0&amp;MAX_AA_CAL_ID=9999&amp;FILTRO_AA_CAL=0&amp;VIS_APP=0&amp;DATA_ESA=21/01/2023">eng</a>
+</li>
+</ul>
+<div class="masthead_usermenu">
+<h2 class="accessibility-item">Menu utente</h2>
+<div class="masthead_usermenu_user">
+<div aria-label="Utente collegato" role="navigation" class="masthead_usermenu_user_name">MARIO ALVIANO</div>
+<img alt="Foto Utente" src="img/layout/ico-docente.gif" aria-hidden="true"></div>
+<div class="masthead_usermenu_menu">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_account_Area_Riservata" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="10-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Area Riservata​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="10-100" class="notOpened">
+<li id="log">
+<a id="menu_link-navbox_account_Logout" href="Logout.do?menu_opened_cod=">Logout​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_account_auth/CambioPasswordForm" href="auth/CambioPasswordForm.do?menu_opened_cod=">Cambia Password​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="masthead_menu_body">
+<ul>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Home" href="auth/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Home​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-100" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Messaggi" href="auth/Messaggi.do?menu_opened_cod=menu_link-navbox_docenti_Home">Messaggi​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-open  has-children ">
+<a id="menu_link-navbox_docenti_Didattica" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="true" aria-controls="500-200"><i aria-hidden="true" class="fa fa-chevron-left"></i>Didattica​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-200" class="is-open ">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaAttivitaCalEsa" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Calendario Esami​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/TemplateAppelli" href="auth/docente/CalendarioEsami/TemplateAppelli.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Modelli Appello​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/HomeDocElettronico" href="auth/HomeDocElettronico.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Firma Documenti Elettronici​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_FirmaDigitale/ConfirmaTest" href="FirmaDigitale/ConfirmaTest.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Test Firma Digitale​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/CalendarioEsami/ListaVerbaliAppello" href="auth/docente/CalendarioEsami/ListaVerbaliAppello.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Visualizza Verbali​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/ElencoPartizioniDocente" href="auth/docente/RegistroDocente/ElencoPartizioniDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Partizioni assegnate​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/DefinizioneOfferta/OffertaDidatticaDocente" href="auth/docente/DefinizioneOfferta/OffertaDidatticaDocente.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Offerta Didattica​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/learningplanmgmt/LPMWizRicerca" href="auth/docente/learningplanmgmt/LPMWizRicerca.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Approvazione piani​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/questionari/ElencoQuestionariDoc" href="auth/docente/questionari/ElencoQuestionariDoc.do?menu_opened_cod=menu_link-navbox_docenti_Didattica">Questionari​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Conseguimento_Titolo" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-300"><i aria-hidden="true" class="fa fa-chevron-left"></i>Conseguimento Titolo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-300" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/SeduteLaurea" href="auth/docente/Graduation/SeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Sedute di Laurea​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/Graduation/LaureandiAssegnati" href="auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo">Laureandi assegnati​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Registro" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti" aria-expanded="false" aria-controls="500-400"><i aria-hidden="true" class="fa fa-chevron-left"></i>Registro​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-400" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/Home" href="auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Lezioni​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RegistroDocente/HomeDiario" href="auth/docente/RegistroDocente/HomeDiario.do?menu_opened_cod=menu_link-navbox_docenti_Registro">Diario​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Commissioni" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-500"><i aria-hidden="true" class="fa fa-chevron-left"></i>Commissioni​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-500" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/Admission/ElencoCommissioni" href="auth/Admission/ElencoCommissioni.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Concorsi​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/Graduation/ElencoSeduteLaurea" href="auth/docente/Graduation/ElencoSeduteLaurea.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni">Conseguimento titolo​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-navbox_docenti_Mobilita" href="Home.do?menu_opened_cod=" aria-expanded="false" aria-controls="500-550"><i aria-hidden="true" class="fa fa-chevron-left"></i>Mobilit&agrave;​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="500-550" class="notOpened">
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLA" href="auth/docente/dirittoAlloStudio/RicercaLA.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Learning Agreement​ </a>
+</li>
+<li>
+<a id="menu_link-navbox_docenti_auth/docente/RicercaLAInc" href="auth/docente/dirittoAlloStudio/RicercaLAInc.do?menu_opened_cod=menu_link-navbox_docenti_Mobilita">Gest. Learning Agreement Incoming​ </a>
+</li>
+</ul>
+</li>
+<li class=" is-hidden  has-children ">
+<a id="menu_link-GuideInfoAteneo" href="Redirect.do?parconfurl=GUOL_INFO_ATENEO&amp;menu_opened_cod=menu_link-GuideParent" aria-expanded="false" aria-controls="1900-100"><i aria-hidden="true" class="fa fa-chevron-left"></i>Informazioni Ateneo​ <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+<ul id="1900-100" class="notOpened">
+<li>
+<a id="menu_link-SedeAteneo" href="Redirect.do?parconfurl=GUOL_SEAT&amp;menu_opened_cod=menu_link-GuideInfoAteneo">Portale dell'Ateneo​ </a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<div class="l-content-container">
+<div class="l-container">
+<div class="l-sidebar">
+<aside class="l-sidebar-left">
+<div aria-hidden="true" class="l-sidebar-left-placeholder"></div>
+</aside>
+<main aria-live="polite" id="main" class="l-sidebar-right">
+<h2 class="accessibility-item">Contenuto principale</h2>
+<div class="briciole">
+<h2 id="maincontent" class="accessibility-item">Tu sei qui</h2>
+<ul>
+<li>
+<a title="Homepage" href="auth/docente/AreaDocente.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02"><span class="accessibility-item" aria-hidden="true">Homepage</span><i aria-hidden="true" class="fa fa-home"></i></a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li>
+<a title="Calendario Esami" href="auth/docente/CalendarioEsami/ListaAttivitaCalEsa.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02">Calendario Esami</a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li>
+<a title="Lista appelli" href="auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02?AA_ID=2022&amp;CDS_ID=10711&amp;SES_ID=ALL_SES&amp;AD_ID=14522">Lista appelli</a>
+</li>
+<li aria-hidden="true">
+<span>&raquo;</span>
+</li>
+<li class="active" aria-current="page">Lista Iscritti</li>
+</ul>
+</div>
+<div class="l-header">
+<div class="pagetitle">
+<h2 class="pagetitle_title">Lista Iscritti</h2>
+</div>
+</div>
+<div id="esse3old" class="layout-container-fluid container-fluid">
+<table width="100%" cellspacing="10" cellpadding="0" border="0">
+<tr>
+<td class="tplHeader"></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table width="598" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="450" class="legenda3"><b>Appelli di: SECURE SOFTWARE DESIGN [27006179]</b></td><td align="right" class="legenda3"><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02?CDS_ID=10711&amp;AD_ID=14522&amp;AA_ID=2022&amp;APP_ID=7&amp;APP_LOG_ID=&amp;MIN_AA_CAL_ID=0&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=101">visualizza dettagli &gt;&gt;</a></td>
+</tr>
+<tr>
+<td class="tplMessage">ARTIFICIAL INTELLIGENCE AND COMPUTER SCIENCE [0814] (LM)...</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="598" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Sessioni:</b></th><td valign="top" class="tplMaster">I sessione ordinaria [09/01/2023 - 25/02/2023] &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="180"><b>Descrizione Appello:</b></th><td valign="top" class="tplMaster">Scritto, discussione ed eventuale orale<img src="images/online_flg.gif" alt="Appello On line"> &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="180"><b>Prenotazione (dal-al):</b></th><td valign="top" class="tplMaster">06/01/2023
+          -
+          19/01/2023 &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="180"><b>Date Appello:</b></th><td valign="top" class="tplMaster">21/01/2023   10:00 &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Tipo di Prova:</b></th><td valign="top" class="tplMaster">non specificato &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="128"><b>Verbalizzazione:</b></th><td valign="top" class="tplMaster">Verbalizzazione senza pubblicazione esiti &nbsp;
+													</td>
+</tr>
+<tr>
+<th valign="top" class="tplMaster" width="180"><b>Totale Studenti iscritti:</b></th><td valign="top" class="tplMaster">2 &nbsp;
+													</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td><img border="0" alt="" height="20" width="1" src="assets/images/clearpixel.gif"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">Prova d'esame non ancora effettuata, iscrizioni aperte</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="tplTitolo"><b>Elenco Studenti Iscritti all'Appello</b></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/CalendarioEsami/DispatchFunzioneListaIscritti.do?SORT_ORDER=ascending&amp;SORT_CODE=2" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody>
+<tr>
+<th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><a target="" href="auth/docente/CalendarioEsami/ListaStudentiEsameStampa.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100"><img border="0" alt="Stampa Lista Iscritti" src="images/print_isc_app.gif" title="Stampa Lista Iscritti"></a></td><th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><a target="" href="auth/docente/CalendarioEsami/ListaStudentiEsameExcel.xls?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;TV_GRUPPO_VOTO_APP_ID=&amp;TV_GRUPPO_GIUD_COD=&amp;default_ins_esiti=1&amp;excel=1%0A    "><img border="0" alt="Esporta Dati Lista Iscritti" src="images/excel-exp-iscritti.gif" title="Esporta Dati Lista Iscritti"></a></td><th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><input align="top" src="images/comunicazioni.gif" name="comunica" type="image" title="Comunicazioni agli Iscritti"></td><th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><a target="" href="auth/docente/CalendarioEsami/CalendarioEsamiInserisciIscritto.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;SES_ID="><img border="0" alt="Aggiungi Studente" src="images/student-add.gif" title="Aggiungi Studente"></a></td><th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><a target="" href="auth/docente/CalendarioEsami/ModificaTipoSvolgEsame.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100"><img border="0" alt="Modifica svolgimento esame" src="images/ic_DOL.gif" title="Modifica svolgimento esame"></a></td><th class="tplForm" align="left"></th><td class="tplForm" width="50" align="left"><a target="" href="auth/docente/CalendarioEsami/ListaLogPrenotazioneEsame.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;APP_LOG_ID=&amp;URL_RET=1"><img border="0" alt="Storico operazioni" src="images/icona_log.gif" title="Storico operazioni"></a></td><th class="tplForm"></th><td class="tplForm" width="350" align="left">
+<cell width="350"></cell>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+</td>
+</tr>
+<input value="2022" name="AA_ID" id="" type="hidden"><input value="10711" name="CDS_ID" id="" type="hidden"><input value="14522" name="AD_ID" id="" type="hidden"><input value="7" name="APP_ID" id="" type="hidden"><input value="21/01/2023 00:00:00" name="DATA_INIZIO_APP" id="" type="hidden"><input value="0" name="MIN_AA_CAL_ID" id="" type="hidden"><input value="" name="EXTRA_TESTO" id="" type="hidden"><input value="1" name="PAR_LISTA_ID" id="" type="hidden"><input value="auth/docente/CalendarioEsami/ListaStudentiEsame.do" name="URL_BACK_COMUNICAZIONI" id="" type="hidden"><input value="?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;MIN_AA_CAL_ID=0&amp;MAX_AA_CAL_ID=9999&amp;FILTRO_AA_CAL=0&amp;VIS_APP=0&amp;VIS_DETT=-100&amp;VIEW_DETT_ESACOM=1" name="PARAM_BACK_COMUNICAZIONI" id="" type="hidden"><input value="09/01/2023 00:00:00_1" name="MIN_SESS" id="" type="hidden"><input value="25/02/2023 00:00:00_1" name="MAX_SESS" id="" type="hidden"><input value="" name="TV_GRUPPO_VOTO_APP_ID" id="" type="hidden"><input value="" name="TV_GRUPPO_GIUD_COD" id="" type="hidden"><input value="['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']" name="ARRAY_VOTI_NUM_JS" id="" type="hidden"><input value="1" name="VIEW_DETT_ESACOM" id="" type="hidden"><input value="VOTO_1" name="GRUPPO_VALUTAZIONE" id="" type="hidden">
+</table>
+</form>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0" class="detail_table">
+<tr>
+<th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="20">#</th><th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="90">
+<table>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=1&amp;SORT_ORDER=ascending"><img border="0" src="images/up.gif" alt="ordinamento ascendente"></a></td><td rowspan="2"><th>Data Iscr.</th></td>
+</tr>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=1&amp;SORT_ORDER=descending"><img border="0" src="images/down.gif" alt="ordinamento discendente"></a></td>
+</tr>
+</table>
+</th><th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="70">
+<table>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=3&amp;SORT_ORDER=ascending"><img border="0" src="images/up.gif" alt="ordinamento ascendente"></a></td><td rowspan="2"><th>Matricola</th></td>
+</tr>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=3&amp;SORT_ORDER=descending"><img border="0" src="images/down.gif" alt="ordinamento discendente"></a></td>
+</tr>
+</table>
+</th><th valign="top" class="detail_table" colspan="2" id="" rowspan="" style="" width="200">
+<table>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=2&amp;SORT_ORDER=ascending"><img border="0" src="images/up.gif" alt="ordinamento ascendente"></a></td><td rowspan="2"><th>Cognome e Nome</th></td>
+</tr>
+<tr>
+<td><a href="auth/docente/CalendarioEsami/ListaStudentiEsame.do?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;SORT_CODE=2&amp;SORT_ORDER=descending"><img border="0" src="images/down.gif" alt="ordinamento discendente"></a></td>
+</tr>
+</table>
+</th><th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="60">Anno Freq.</th><th valign="top" class="detail_table" colspan="2" id="" rowspan="" style="" width="">Esito</th><th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="50">Svolg. Esame</th><th valign="top" class="detail_table" colspan="" id="" rowspan="" style="" width="15">Canc</th>
+</tr>
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="detail_table">1</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table">10/01/2023</td><td id="" width="" valign="" colspan="" style="" rowspan="" class="detail_table">123</td><td id="" width="" valign="" colspan="" style="text-align:left; " rowspan="" class="detail_table_middle"><a class="detail_table" title="" href="auth/docente/Libretto/LibrettoDocenteCalEsa.do?STU_ID=239072&amp;ADSCE_ID=8689935&amp;MAT_ID=123&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;VIS_APP=0&amp;FILTRO_AA_CAL=0&amp;AA_ID=2022&amp;URL_RET=1">ROSSI MARIO</a></td><td id="" width="" valign="" colspan="" style="text-align:right; " rowspan="" class="detail_table"></td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table">2022/2023</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table_middle"> - </td><td id="" width="20" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table"></td><td id="" width="" valign="" colspan="" style="text-align:left; " title="Esame in Presenza" rowspan="" class="detail_table">P</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table"><a class="detail_table" href="auth/docente/CalendarioEsami/CalendarioEsamiCancellaIscritto.do?CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;MAT_STU=123&amp;AA_ID=2022"><img border="0" valign="center" src="images/del.gif" alt="Cancella lo Studente dalla Lista" title="Cancella lo Studente dalla Lista"></a></td>
+</tr>
+<tr>
+<td id="" width="" valign="" colspan="" style="" rowspan="" class="detail_table">2</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table">06/01/2023</td><td id="" width="" valign="" colspan="" style="" rowspan="" class="detail_table">124</td><td id="" width="" valign="" colspan="" style="text-align:left; " rowspan="" class="detail_table_middle"><a class="detail_table" title="" href="auth/docente/Libretto/LibrettoDocenteCalEsa.do?STU_ID=233756&amp;ADSCE_ID=8689897&amp;MAT_ID=124&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;VIS_APP=0&amp;FILTRO_AA_CAL=0&amp;AA_ID=2022&amp;URL_RET=1">VERDI GIUSEPPE</a></td><td id="" width="" valign="" colspan="" style="text-align:right; " rowspan="" class="detail_table"></td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table">2022/2023</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table_middle"> - </td><td id="" width="20" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table"></td><td id="" width="" valign="" colspan="" style="text-align:left; " title="Esame in Presenza" rowspan="" class="detail_table">P</td><td id="" width="" valign="" colspan="" style="text-align:center; " rowspan="" class="detail_table"><a class="detail_table" href="auth/docente/CalendarioEsami/CalendarioEsamiCancellaIscritto.do?CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;MAT_STU=124&amp;AA_ID=2022"><img border="0" valign="center" src="images/del.gif" alt="Cancella lo Studente dalla Lista" title="Cancella lo Studente dalla Lista"></a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0" width="598">
+<tr>
+<td colspan="8"><img border="0" alt="" height="10" width="1" src="assets/images/clearpixel.gif"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="100%"><a class="tplMaster" target="" href="auth/docente/CalendarioEsami/ListaStudentiEsameStampa.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100"><img border="0" src="images/print_isc_app.gif">&nbsp;<b>Stampa Lista Iscritti</b></a></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">E' possibile stampare la lista degli iscritti all'appello d'esame selezionato. Attenzione: verificare la data di chiusura delle iscrizioni.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="100%"><a class="tplMaster" target="" href="auth/docente/CalendarioEsami/ListaStudentiEsameExcel.xls?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;TV_GRUPPO_VOTO_APP_ID=&amp;TV_GRUPPO_GIUD_COD=&amp;default_ins_esiti=1&amp;excel=1%0A    "><img border="0" src="images/excel-exp-iscritti.gif">&nbsp;<b>Esporta Dati Lista Iscritti</b></a></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">E' possibile esportare e salvare i dati relativi alle liste iscritti all'appello d'esame selezionato in formato Excel. Attenzione: verificare la data di chiusura delle iscrizioni.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/CalendarioEsami/ComunicazioneListaStudenti.do" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>
+<table width="" cellspacing="0" cellpadding="1" border="0">
+<tbody>
+<tr>
+<td class="tplForm" align="left" colspan="2">
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td width="10"><input value="Comunicazioni agli Iscritti" src="images/comunicazioni.gif" name="comunica" type="image"></td><td><input value="Comunicazioni agli Iscritti" style="font-weight: bold;" class="tplLinkForm tplMaster" name="comunica" type="submit"></td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<input value="2022" name="AA_ID" id="" type="hidden"><input value="10711" name="CDS_ID" id="" type="hidden"><input value="14522" name="AD_ID" id="" type="hidden"><input value="7" name="APP_ID" id="" type="hidden"><input value="21/01/2023 00:00:00" name="DATA_INIZIO_APP" id="" type="hidden"><input value="" name="EXTRA_TESTO" id="" type="hidden"><input value="1" name="PAR_LISTA_ID" id="" type="hidden"><input value="auth/docente/CalendarioEsami/ListaStudentiEsame.do" name="URL_BACK_COMUNICAZIONI" id="" type="hidden"><input value="?AA_ID=2022&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;APP_LOG_ID=&amp;MIN_AA_CAL_ID=0&amp;MAX_AA_CAL_ID=9999&amp;FILTRO_AA_CAL=0&amp;VIS_APP=0&amp;VIS_DETT=-100&amp;VIEW_DETT_ESACOM=1" name="PARAM_BACK_COMUNICAZIONI" id="" type="hidden">
+</table>
+</form>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">La funzione comunicazioni agli iscritti alla prova d'esame vi consente di inviare comunicati a tutti gli studenti iscritti o ad un loro sottoinsieme da voi selezionato. Tale comunicato potr&agrave; avere il vostro recapito come mittente, oppure un recapito di sistema (scelta di default).</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="100%"><a class="tplMaster" target="" href="auth/docente/CalendarioEsami/CalendarioEsamiInserisciIscritto.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;SES_ID="><img border="0" src="images/student-add.gif">&nbsp;<b>Aggiungi Studente</b></a></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">Questa funzione consente di iscrivere studenti all'appello d'esame selezionato.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="100%"><a class="tplMaster" target="" href="auth/docente/CalendarioEsami/ModificaTipoSvolgEsame.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100"><img border="0" src="images/ic_DOL.gif">&nbsp;<b>Modifica svolgimento esame</b></a></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">La funzione di modifica svolgimento esame consente di modificare il tipo svolgimento esame per gli studenti iscritti all'appello.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="100%"><a class="tplMaster" target="" href="auth/docente/CalendarioEsami/ListaLogPrenotazioneEsame.do?AA_ID=2022&amp;MIN_AA_CAL_ID=0&amp;CDS_ID=10711&amp;AD_ID=14522&amp;APP_ID=7&amp;SORT_ORDER=ascending&amp;SORT_CODE=2&amp;gruppo_giud_cod=VOTO_1&amp;AA_CAL_ID=2021&amp;FMT_COGN_NOME=CN&amp;VIEW_DETT_ESACOM=1&amp;VIS_DETT=-100&amp;APP_LOG_ID=&amp;URL_RET=1"><img border="0" src="images/icona_log.gif">&nbsp;<b>Storico operazioni</b></a></td>
+</tr>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td width="598" align="left" class="tplMessage">La funzione storico operazioni vi consente di visualizzare lo storico operazioni effettuato sui singoli studenti.
+  	Viene visualizzata la lista di tutti gli studenti nella funzione principale con le informazioni dell'esito e le relative informazioni
+  	sull'utente e data di ultima modifica. Per un singolo studente &egrave; possibile prendere visizione del log di tutte le operazioni effettuate
+  	per gli eventi di Prenotazione e modifica voti</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<form name="" target="_self" method="post" action="auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do" onsubmit="if (!checkFormSingleSubmit(this)) {return false;} ">
+<table cellspacing="0" cellpadding="0" border="0">
+<input value="2022" name="AA_ID" id="" type="hidden"><input value="10711" name="CDS_ID" id="" type="hidden"><input value="14522" name="AD_ID" id="" type="hidden"><input value="7" name="APP_ID" id="" type="hidden"><input value="0" name="MIN_AA_CAL_ID" id="" type="hidden">
+<tr>
+<td>
+<center>
+<input name="btnSubmit" value="Esci" class="tplFormSubmit" type="submit" onClick="return checkFormSingleSubmit(this);">
+</center>
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+<tr>
+<td class="tplBottomHelp">
+<hr id="separatore short help" size="1" class="tplBottomHelp">
+<img alt="Short help" align="absmiddle" height="17" width="14" src="images/help.gif">&nbsp;
+				La pagina in oggetto visualizza le principali informazioni riguardanti gli studenti iscritti all'appello.<br>
+</td>
+</tr>
+</table>
+</div>
+</main>
+</div>
+</div>
+</div>
+<div id="secondary-menu" class="secondary-menu">
+<div class="l-container">
+<div class="secondary-menu_top">
+<button data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" id="focus-secondario" class="secondary-menu_button" data-scroll="#footer">Link utili<i data-toggle-icon-closed="true" aria-hidden="true" class="fa fa-chevron-right"></i><i data-toggle-icon-open="true" aria-hidden="true" class="fa fa-chevron-down"></i></button>
+</div>
+<nav id="secondary-menu-list" class="secondary-menu-list">
+<h2 id="menusecondario" class="accessibility-item">Link utili</h2>
+<ul>
+<li>
+<a title="Home" href="Home.do">Home</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<footer id="footer" class="footer">
+<div class="l-container">
+<div class="footer_content">
+<p>
+<a href="InformativaCookie.do">Informativa utilizzo cookie</a> | &copy; CINECA</p>
+</div>
+</div>
+</footer>
+<script src="JavaScript/enquire/enquire.min.js"></script><script src="JavaScript/layout/layout.js?v=20.12.00"></script><script>$(onReady);</script>
+</body>
+</html>

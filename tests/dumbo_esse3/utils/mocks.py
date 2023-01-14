@@ -85,6 +85,8 @@ def mock_esse3_app(environ, start_response):
         elif url == "/auth/docente/CalendarioEsami/InserisciAggiornaAppelloCalEsaSubmit.do;jsessionid=F2C9EEA7A724D6C5A148AD08E959A4D1.esse3-unical-prod-02":
             MOCK_ESSE3_STATE["add exam cod completed"] = True
             html = read_html("add_exam_cod.html")
+        elif url == "/auth/docente/CalendarioEsami/ListaStudentiEsame.do;jsessionid=6B451A4C663DDAA5ABC8BE210A61964D.esse3-unical-prod-02?AA_ID=2022&CDS_ID=10711&AD_ID=14522&APP_ID=7&MIN_AA_CAL_ID=0&MAX_AA_CAL_ID=9999&FILTRO_AA_CAL=0&VIS_APP=0&DATA_ESA=21/01/2023":
+            html = read_html("exam_cod_details.html")
         elif url == "/auth/docente/RegistroDocente/AggiornaRigaReg.do;jsessionid=959E8793B1AEF05E5E4DFDB2445A6A9C.esse3-unical-prod-02?R_DOC_ID=6980":
             MOCK_ESSE3_STATE["register ae empty"] = False
             html = read_html("register_ae_nonempty.html")
