@@ -131,7 +131,7 @@ def command_exams(
             if with_students and exam.number_of_students.positive:
                 console.print()
                 students = esse3_wrapper.fetch_students(course, exam.date_and_time)
-                console.print("\n".join(f"{student.id}\t{student.name}" for student in students))
+                console.print("\n".join(f"{student.name},{student.id}" for student in students))
                 console.print()
 
 

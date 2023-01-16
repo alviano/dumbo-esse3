@@ -53,7 +53,7 @@ class StudentId:
     pass
 
 
-@bounded_string(min_length=3, max_length=80, pattern=r"[A-ZÀÈÉÌÒÙ' ]*")
+@bounded_string(min_length=3, max_length=80, pattern=r"[A-ZÀÈÉÌÒÙÍ' ]*")
 class StudentName:
     pass
 
