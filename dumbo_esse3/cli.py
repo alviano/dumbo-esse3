@@ -1,19 +1,18 @@
 import csv
 import dataclasses
-import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Optional, List
 
 import typer
+from dumbo_utils.console import console
+from dumbo_utils.validation import validate
 from rich.progress import track
 from rich.table import Table
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, DateTime, Register, \
     RegisterActivity, ActivityType, NumberOfHours, ActivityTitle, StudentGraduation, Student, FinalScore, GraduationNote
-from dumbo_esse3.utils.console import console
-from dumbo_esse3.utils.validators import validate
 
 
 @dataclasses.dataclass(frozen=True)

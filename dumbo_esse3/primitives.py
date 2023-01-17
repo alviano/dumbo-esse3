@@ -4,8 +4,8 @@ import enum
 
 import typeguard
 
-from dumbo_esse3.utils.primitives import bounded_string, bounded_integer
-from dumbo_esse3.utils.validators import validate
+from dumbo_utils.primitives import bounded_string, bounded_integer
+from dumbo_utils.validation import validate
 
 from dateutil.relativedelta import relativedelta
 
