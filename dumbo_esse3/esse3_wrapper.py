@@ -1,6 +1,8 @@
 import dataclasses
 from dataclasses import InitVar
 from typing import List, Final, Optional
+
+from dumbo_utils.primitives import PrivateKey
 from lxml import html
 
 import typeguard
@@ -37,15 +39,15 @@ def change_esse3_server(url):
 @typeguard.typechecked
 @dataclasses.dataclass(frozen=True)
 class Esse3Wrapper:
-    key: InitVar[object]
+    key: InitVar[PrivateKey]
     username: InitVar[Username]
     password: InitVar[Password]
     debug: bool = dataclasses.field(default=False)
     driver: webdriver.Chrome = dataclasses.field(default_factory=webdriver.Chrome)
-    __key = object()
+    __key = PrivateKey()
 
-    def __post_init__(self, key: object, username: Username, password: Password):
-        validate('key', key, equals=self.__key, help_msg="Can only be instantiated using a factory method")
+    def __post_init__(self, key: PrivateKey, username: Username, password: Password):
+        self.__key.validate(key)
         self.maximize()
         self.__login(username, password)
 
