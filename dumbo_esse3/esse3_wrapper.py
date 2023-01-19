@@ -97,8 +97,13 @@ class Esse3Wrapper:
     def maximize(self) -> None:
         self.driver.maximize_window()
 
+    def __check_expiring_token(self):
+        if self.driver.find_elements(By.XPATH, "//strong[text() = 'Certificati in scadenza']"):
+            self.driver.find_element(By.XPATH, "//a[text() = 'Prosegui']").send_keys(Keys.RETURN)
+
     def fetch_courses(self) -> List[Course]:
         self.driver.get(URLs["course_list"])
+        self.__check_expiring_token()
         rows = self.driver.find_elements(By.XPATH, "//tr[@class='detail_table'][td//input[@src = 'images/sostenuta.gif']]")
         res = []
         for idx, row in enumerate(rows):
@@ -108,6 +113,7 @@ class Esse3Wrapper:
 
     def fetch_exams(self, course: Course) -> List[Exam]:
         self.driver.get(URLs["course_list"])
+        self.__check_expiring_token()
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
         exams = self.driver.find_elements(By.XPATH, '//tr[@class="detail_table"]')
         return list(sorted([Exam.of(
@@ -117,6 +123,7 @@ class Esse3Wrapper:
 
     def fetch_students(self, course: Course, exam: DateTime) -> List[Student]:
         self.driver.get(URLs["course_list"])
+        self.__check_expiring_token()
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
         self.driver.find_element(By.XPATH, f"//tr[normalize-space(td/text()) = '{exam}']//input[@src='images/defAppStudent.gif']").send_keys(Keys.RETURN)
@@ -136,6 +143,7 @@ class Esse3Wrapper:
     def add_exam(self, course: Course, exam: DateTime, exam_type: ExamType, description: ExamDescription,
                  notes: ExamNotes) -> None:
         self.driver.get(URLs["course_list"])
+        self.__check_expiring_token()
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
 
         self.driver.find_element(By.XPATH, '//input[@type = "submit"][@name = "new_pf"]').send_keys(Keys.RETURN)
