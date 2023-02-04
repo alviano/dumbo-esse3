@@ -74,6 +74,14 @@ def mock_esse3_app(environ, start_response):
             html = read_html("graduation_day_lm_student_1.html")
         elif url == "/auth/docente/Graduation/DettaglioLaureando.do?sed_ct_prg=1&app_ct_id=12334&stu_id=12345&pers_id=12345&mat_id=342935&cds_id=10646&pds_id=1&aa_ord_id=2018&dom_ct_id=126474&tesi_id=132&sottoseduta=0":
             html = read_html("graduation_day_lm_student_1.html")
+        elif url == URLs["committee_list"].replace(LOCAL_SERVER, ''):
+            html = read_html("committee_list.html")
+        elif url == "/auth/Admission/ValutazioneTitListaProve.do?comm_prove_conc_id=123":
+            html = read_html("committee_parts.html")
+        elif url == "/auth/Admission/ElencoIscrittiTurni.do?prove_conc_id=4028&comm_prove_conc_id=123":
+            html = read_html("committee_part.html")
+        elif url == "/auth/Admission/ValutazioneClassifica.do?classif_dett_id=321&prove_conc_id=4028&comm_prove_conc_id=123":
+            html = read_html("committee_details.html")
     elif method == "POST":
         if url == "/auth/docente/CalendarioEsami/ElencoAppelliCalEsa.do;jsessionid=86CA8F3D3A6885013058837D593E0551.esse3-unical-prod-04":
             if MOCK_ESSE3_STATE["add exam cod completed"]:

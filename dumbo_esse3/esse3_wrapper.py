@@ -7,13 +7,17 @@ from lxml import html
 
 import typeguard
 from selenium import webdriver
-from selenium.common import WebDriverException, NoSuchElementException
+from selenium.common import WebDriverException, NoSuchElementException, ElementNotSelectableException, \
+    ElementNotVisibleException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from dumbo_esse3.primitives import Course, Username, Password, Exam, Student, StudentThesisState, CdL, \
     ExamDescription, ExamNotes, ExamType, DateTime, Register, NumberOfHours, Semester, RegisterActivity, \
-    ActivityTitle, ActivityType, GraduationDay, StudentGraduation
+    ActivityTitle, ActivityType, GraduationDay, StudentGraduation, Committee, CommitteeValuation, CommitteeName, \
+    CommitteePart, FiscalCode
 from dumbo_utils.validation import validate
 
 ESSE3_SERVER = "https://unical.esse3.cineca.it"
@@ -24,6 +28,7 @@ URLs: Final = {
     "thesis_list": f'{ESSE3_SERVER}/auth/docente/Graduation/LaureandiAssegnati.do?menu_opened_cod=menu_link-navbox_docenti_Conseguimento_Titolo',
     "register_list": f'{ESSE3_SERVER}/auth/docente/RegistroDocente/Home.do?menu_opened_cod=menu_link-navbox_docenti_Registro',
     "graduation_day_list": f'{ESSE3_SERVER}/auth/docente/Graduation/ElencoSeduteLaurea.do',
+    "committee_list": f'{ESSE3_SERVER}/auth/Admission/ElencoCommissioni.do?menu_opened_cod=menu_link-navbox_docenti_Commissioni',
 }
 
 
@@ -321,6 +326,8 @@ class Esse3Wrapper:
             f"//table[@id = 'seduteAperte']/tbody/tr/td[text() = '{graduation_day}']/../td/a"
         ).send_keys(Keys.RETURN)
 
+        # PAGINATION MUST BE HANDLED AS FOR COMMITTEE EVALUATIONS
+
         html_document = html.fromstring(self.driver.page_source)
         rows = html_document.xpath('//table[@id="elencoLaureandi"]/tbody/tr')
         student_to_url = {
@@ -389,6 +396,89 @@ class Esse3Wrapper:
 
             if not dry_run:
                 self.driver.find_element(By.ID, 'grad-dettLau-btnSubmit').send_keys(Keys.RETURN)
+
+    def fetch_committees(self) -> List[Committee]:
+        self.driver.get(URLs["committee_list"])
+        rows = self.driver.find_elements(By.XPATH, "//table[@id = 'tableElencoCommissioni']/tbody/tr")
+        committee = [(
+            element.find_element(By.XPATH, "td[1]").text,
+            element.find_element(By.XPATH, "td[3]/a").get_attribute("href"),
+        ) for element in rows]
+        res: Final = []
+        for name, link in committee:
+            committee_name = CommitteeName(name)
+            self.driver.get(link)
+            rows = self.driver.find_elements(By.XPATH, "//table[@id = 'tableElencoConcTurni']/tbody/tr/td[2]")
+            res.extend(Committee(committee_name, CommitteePart(row.text)) for row in rows)
+        return res
+
+    def upload_committee_valuations(
+            self,
+            committee: Committee,
+            valuations: List[CommitteeValuation],
+            dry_run: bool = False,
+    ) -> None:
+        validate("at least one valuation", valuations, min_len=1, help_msg="No valuation was provided")
+
+        self.driver.get(URLs["committee_list"])
+        self.driver.find_element(
+            By.XPATH,
+            f"//table[@id = 'tableElencoCommissioni']/tbody/tr[td[1] = '{committee.name}']/td[3]/a"
+        ).send_keys(Keys.RETURN)
+        self.driver.find_element(
+            By.XPATH,
+            f"//table[@id = 'tableElencoConcTurni']/tbody/tr[td[2] = '{committee.part}']/td[4]/a"
+        ).send_keys(Keys.RETURN)
+
+        ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
+        wait = WebDriverWait(self.driver, timeout=10, poll_frequency=1, ignored_exceptions=ignore_list)
+        wait.until(expected_conditions.presence_of_element_located(
+            (By.XPATH, "//table[@id='tableElencoIscritti']/tfoot/tr"))
+        )
+
+        self.driver.execute_script("""
+            Object.keys(localStorage).forEach(key => {
+                if (key.endsWith(":paging")) {
+                    localStorage.setItem(key, '{"current": 1,"size": 999999}');
+                }
+            });
+            console.log(Object.keys(localStorage));
+            console.log(Object.values(localStorage));
+        """)
+        self.driver.refresh()
+
+        fiscal_code_to_valuation = {valuation.fiscal_code: valuation for valuation in valuations}
+
+        html_document = html.fromstring(self.driver.page_source)
+        fiscal_code_to_url = {
+            FiscalCode(row.xpath("td[3]")[0].text): ESSE3_SERVER + '/' + row.xpath("td[5]/a/@href")[0]
+            for row in html_document.xpath('//table[@id="tableElencoIscritti"]/tbody/tr')
+        }
+
+        validate("valuations", fiscal_code_to_valuation.keys(), equals=fiscal_code_to_url.keys(),
+                 help_msg="Candidates don't match")
+
+        self.driver.get(fiscal_code_to_url[valuations[0].fiscal_code])
+        for valuation in valuations:
+            url = fiscal_code_to_url[valuation.fiscal_code]
+            self.driver.get(url)
+
+            self.__replace_content(
+                self.driver.find_element(By.ID, 'esito'),
+                str(valuation.score)
+            )
+            self.driver.find_element(By.ID, 'valutazioneCompletata1').send_keys(Keys.SPACE)
+            self.__replace_content(
+                self.driver.find_element(By.XPATH, '//div[@id = "nota-div"]//textarea'),
+                str(valuation.notes)
+            )
+            self.__replace_content(
+                self.driver.find_element(By.ID, 'numBusta'),
+                str(valuation.envelope_number) if valuation.envelope_number is not None else ""
+            )
+
+            if not dry_run:
+                self.driver.find_element(By.ID, 'btnSubmit').send_keys(Keys.RETURN)
 
     @staticmethod
     def __replace_content(element, content):

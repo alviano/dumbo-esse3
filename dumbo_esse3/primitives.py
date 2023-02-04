@@ -1,6 +1,7 @@
 import dataclasses
 import datetime
 import enum
+from typing import Optional
 
 import typeguard
 
@@ -45,6 +46,11 @@ class Course:
 
 @bounded_string(min_length=3, max_length=255, pattern=Course.pattern() + r' - [A-Za-z ]+')
 class CdL:
+    pass
+
+
+@bounded_string(min_length=16, max_length=16, pattern=r'[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]')
+class FiscalCode:
     pass
 
 
@@ -296,4 +302,67 @@ class StudentGraduation:
             laude=self.laude,
             special_mention=self.special_mention,
             notes=value,
+        )
+
+
+@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 /_-]*")
+class CommitteeName:
+    pass
+
+
+@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 /_-]*")
+class CommitteePart:
+    pass
+
+
+@typeguard.typechecked
+@dataclasses.dataclass(frozen=True)
+class Committee:
+    name: CommitteeName
+    part: CommitteePart
+
+
+@bounded_integer(min_value=0, max_value=30)
+class CommitteeScore:
+    pass
+
+
+@bounded_string(min_length=0, max_length=4000, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù '\":;.,()\[\]\n_-]*")
+class CommitteeNote:
+    @staticmethod
+    def empty() -> 'CommitteeNote':
+        return CommitteeNote('')
+
+
+@bounded_integer(min_value=1, max_value=5)
+class EnvelopeNumber:
+    pass
+
+
+@typeguard.typechecked
+@dataclasses.dataclass(frozen=True)
+class CommitteeValuation:
+    fiscal_code: FiscalCode
+    score: CommitteeScore
+    notes: CommitteeNote = dataclasses.field(default=CommitteeNote.empty())
+    envelope_number: Optional[EnvelopeNumber] = dataclasses.field(default=None)
+
+    @staticmethod
+    def of(fiscal_code: str, score: int) -> 'CommitteeValuation':
+        return CommitteeValuation(FiscalCode(fiscal_code), CommitteeScore(score))
+
+    def with_notes(self, value: CommitteeNote) -> 'CommitteeValuation':
+        return CommitteeValuation(
+            fiscal_code=self.fiscal_code,
+            score=self.score,
+            notes=value,
+            envelope_number=self.envelope_number,
+        )
+
+    def with_envelope_number(self, value: EnvelopeNumber) -> 'CommitteeValuation':
+        return CommitteeValuation(
+            fiscal_code=self.fiscal_code,
+            score=self.score,
+            notes=self.notes,
+            envelope_number=value,
         )

@@ -12,7 +12,8 @@ from rich.table import Table
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import StudentThesisState, ExamDescription, ExamNotes, ExamType, DateTime, Register, \
-    RegisterActivity, ActivityType, NumberOfHours, ActivityTitle, StudentGraduation, Student, FinalScore, GraduationNote
+    RegisterActivity, ActivityType, NumberOfHours, ActivityTitle, StudentGraduation, Student, FinalScore, \
+    GraduationNote, CommitteeValuation, FiscalCode, CommitteeScore, CommitteeNote, EnvelopeNumber
 
 
 @dataclasses.dataclass(frozen=True)
@@ -446,7 +447,7 @@ def command_delete_register_activity(
 def command_graduation_days() -> None:
     """
     Print the list of graduation days.
-    The number associated with each graduation day is used an ID.
+    The number associated with each graduation day is used as an ID.
     """
     esse3_wrapper = new_esse3_wrapper()
     with console.status("Fetching graduation days..."):
@@ -485,6 +486,7 @@ def read_graduation_day_list(csv_file: Path) -> List[StudentGraduation]:
             for row in rows[1:]
         ]
 
+
 @app.command(name="upload-graduation-day")
 def command_upload_graduation_day(
         of: int = typer.Option(..., help="Index of the graduation day to upload"),
@@ -515,12 +517,82 @@ def command_upload_graduation_day(
         days = esse3_wrapper.fetch_graduation_days()
     validate("", of, min_value=1, max_value=len(days))
 
-    with console.status("Fetching graduation days..."):
+    with console.status("Uploading graduation days..."):
         esse3_wrapper.upload_graduation_day(
             graduation_day=days[of - 1],
             student_graduation_list=student_graduation_list,
             date=None if date is None else DateTime.parse_date(date),
             exclude_from_committee=exclude_from_committee,
+            dry_run=dry_run,
+        )
+    console.print("All done!")
+
+
+@app.command(name="committees")
+def command_committees() -> None:
+    """
+    Print the list of committees.
+    The number associated with each committee is used as an ID.
+    """
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching committees..."):
+        committees = esse3_wrapper.fetch_committees()
+
+    table = Table(title="Committees")
+    table.add_column("#")
+    table.add_column("Committee")
+    table.add_column("Part")
+    for index, committee in enumerate(committees, start=1):
+        table.add_row(
+            str(index),
+            str(committee.name),
+            str(committee.part),
+        )
+    console.print(table)
+
+
+def read_committee_valuations(csv_file: Path) -> List[CommitteeValuation]:
+    validate("csv-file", csv_file.exists(), help_msg="The provided file doesn't exist")
+    with open(csv_file) as f:
+        reader = csv.reader(f)
+        rows = [row for row in reader]
+        fiscal_code_index = rows[0].index("CODICE FISCALE")
+        score_index = rows[0].index("PUNTEGGIO")
+        notes_index = rows[0].index("NOTE")
+        envelope_index = rows[0].index("BUSTA")
+        return [
+            CommitteeValuation(
+                fiscal_code=FiscalCode(row[fiscal_code_index]),
+                score=CommitteeScore.parse(row[score_index]),
+                notes=CommitteeNote(row[notes_index]),
+                envelope_number=EnvelopeNumber.parse(row[envelope_index]) if row[envelope_index] else None,
+            )
+            for row in rows[1:]
+        ]
+
+
+@app.command(name="upload-committee-valuation")
+def command_upload_committee_valuation(
+        of: int = typer.Option(..., help="Index of the committee valuation to upload"),
+        csv_file: Path = typer.Option(..., help="Path to the CSV file containing the scores to upload"),
+        dry_run: bool = typer.Option(False, "--dry-run", help="Don't save data"),
+) -> None:
+    """
+    Upload scores for a committee. Requires the role CHAIR OF COMMITTEE.
+    The ID of the committee be obtained with the command committees.
+    Scores are provided via a CSV file.
+    """
+    valuations = read_committee_valuations(csv_file)
+
+    esse3_wrapper = new_esse3_wrapper()
+    with console.status("Fetching committees..."):
+        committees = esse3_wrapper.fetch_committees()
+    validate("", of, min_value=1, max_value=len(committees))
+
+    with console.status("Uploading committee evaluations..."):
+        esse3_wrapper.upload_committee_valuations(
+            committee=committees[of - 1],
+            valuations=valuations,
             dry_run=dry_run,
         )
     console.print("All done!")

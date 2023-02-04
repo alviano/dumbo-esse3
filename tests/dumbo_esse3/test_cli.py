@@ -4,8 +4,8 @@ from unittest.mock import patch, mock_open
 import pytest
 from typer.testing import CliRunner
 
-from dumbo_esse3.cli import app, read_graduation_day_list
-from dumbo_esse3.primitives import StudentId
+from dumbo_esse3.cli import app, read_graduation_day_list, read_committee_valuations
+from dumbo_esse3.primitives import StudentId, DateTime, FiscalCode
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 
 
@@ -22,7 +22,8 @@ def test_courses(runner):
     assert "SECURE SOFTWARE DESIGN [27006179]" in result.stdout
 
 
-def test_exams(runner):
+@patch("dumbo_esse3.primitives.DateTime.now", return_value=DateTime.parse("01/01/2023 09:00"))
+def test_exams(datetime_mock, runner):
     result = runner.invoke(app, ["exams"])
     assert result.exit_code == 0
     assert "Exams" in result.stdout
@@ -52,3 +53,20 @@ MATRICOLA,STUDENTE,VOTO FINALE,LODE,MENZIONE,NOTE
         graduations = read_graduation_day_list(Path("scores.csv"))
         assert len(graduations) == 2
         assert graduations[0].student.id == StudentId("12344")
+
+
+def test_committees(runner):
+    result = runner.invoke(app, ["committees"])
+    assert result.exit_code == 0
+    assert "COMMISSIONE SELEZIONE PNRR MEI - 123" in result.stdout
+
+
+def test_read_committee_valuations():
+    with patch("builtins.open", mock_open(read_data="""
+CODICE FISCALE,PUNTEGGIO,NOTE,BUSTA
+FOOBAR00A01F123A,30,,
+FOOBAR00A01F123B,0,,
+    """.strip())):
+        valuations = read_committee_valuations(Path("scores.csv"))
+        assert len(valuations) == 2
+        assert valuations[0].fiscal_code == FiscalCode("FOOBAR00A01F123A")

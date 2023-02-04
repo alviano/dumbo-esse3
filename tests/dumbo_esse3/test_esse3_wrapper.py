@@ -2,7 +2,8 @@ import pytest
 
 from dumbo_esse3.esse3_wrapper import Esse3Wrapper
 from dumbo_esse3.primitives import DateTime, Course, ActivityTitle, ExamType, ExamDescription, ExamNotes, \
-    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState, GraduationDay, StudentGraduation
+    RegisterActivity, NumberOfHours, ActivityType, StudentThesisState, GraduationDay, StudentGraduation, Committee, \
+    CommitteeName, CommitteePart, CommitteeValuation
 from tests.dumbo_esse3.utils.mocks import test_server  # noqa: F401; pylint: disable=unused-variable
 from tests.test_environment import USERNAME, PASSWORD
 
@@ -135,7 +136,6 @@ def test_fetch_graduation_days(esse3_wrapper):
 
 
 def test_upload_graduation_day_with_correct_data(esse3_wrapper):
-    pass
     days = esse3_wrapper.fetch_graduation_days()
     scores = [
         StudentGraduation.of("12344", "AIEIE BRAZORF", 105),
@@ -153,3 +153,19 @@ def test_upload_graduation_day_fail_if_missing_data(esse3_wrapper):
     scores += [StudentGraduation.of("12346", "MARIANO VANO", 114)]
     with pytest.raises(ValueError):
         esse3_wrapper.upload_graduation_day(days[-1], scores)
+
+
+def test_fetch_committees(esse3_wrapper):
+    committees = esse3_wrapper.fetch_committees()
+    assert len(committees) == 3
+    assert committees[0] == Committee(CommitteeName("COMMISSIONE SELEZIONE PNRR MEI - 123"),
+                                      CommitteePart("Valutazione Titoli"))
+
+
+def test_upload_committee_valuation_with_correct_data(esse3_wrapper):
+    committees = esse3_wrapper.fetch_committees()
+    scores = [
+        CommitteeValuation.of("FOOBAR00A01F123A", 30),
+        CommitteeValuation.of("FOOBAR00A01F123B", 0),
+    ]
+    esse3_wrapper.upload_committee_valuations(committees[0], scores)
