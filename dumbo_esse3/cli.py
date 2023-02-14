@@ -465,7 +465,7 @@ def command_graduation_days() -> None:
 
 
 def read_graduation_day_list(csv_file: Path) -> List[StudentGraduation]:
-    validate("csv-file", csv_file.exists(), help_msg="The provided file doesn't exist")
+    validate("csv-file", csv_file.exists(), equals=True, help_msg="The provided file doesn't exist")
     with open(csv_file) as f:
         reader = csv.reader(f)
         rows = [row for row in reader]
@@ -552,7 +552,7 @@ def command_committees() -> None:
 
 
 def read_committee_valuations(csv_file: Path) -> List[CommitteeValuation]:
-    validate("csv-file", csv_file.exists(), help_msg="The provided file doesn't exist")
+    validate("csv-file", csv_file.exists(), equals=True, help_msg="The provided file doesn't exist")
     with open(csv_file) as f:
         reader = csv.reader(f)
         rows = [row for row in reader]
