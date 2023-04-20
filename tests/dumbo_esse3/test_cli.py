@@ -44,6 +44,7 @@ def test_graduation_days(runner):
     assert "Commissione Master del 19 dicembre 2022" in result.stdout
 
 
+@patch.object(Path, "exists", lambda self: True)
 def test_read_graduation_day_list():
     with patch("builtins.open", mock_open(read_data="""
 MATRICOLA,STUDENTE,VOTO FINALE,LODE,MENZIONE,NOTE
@@ -61,6 +62,7 @@ def test_committees(runner):
     assert "COMMISSIONE SELEZIONE PNRR MEI - 123" in result.stdout
 
 
+@patch.object(Path, "exists", lambda self: True)
 def test_read_committee_valuations():
     with patch("builtins.open", mock_open(read_data="""
 CODICE FISCALE,PUNTEGGIO,NOTE,BUSTA

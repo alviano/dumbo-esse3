@@ -8,7 +8,7 @@ from lxml import html
 import typeguard
 from selenium import webdriver
 from selenium.common import WebDriverException, NoSuchElementException, ElementNotSelectableException, \
-    ElementNotVisibleException
+    ElementNotVisibleException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -429,22 +429,25 @@ class Esse3Wrapper:
             f"//table[@id = 'tableElencoConcTurni']/tbody/tr[td[2] = '{committee.part}']/td[4]/a"
         ).send_keys(Keys.RETURN)
 
-        ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
-        wait = WebDriverWait(self.driver, timeout=10, poll_frequency=1, ignored_exceptions=ignore_list)
-        wait.until(expected_conditions.presence_of_element_located(
-            (By.XPATH, "//table[@id='tableElencoIscritti']/tfoot/tr"))
-        )
+        try:
+            ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
+            wait = WebDriverWait(self.driver, timeout=3, poll_frequency=1, ignored_exceptions=ignore_list)
+            wait.until(expected_conditions.presence_of_element_located(
+                (By.XPATH, "//table[@id='tableElencoIscritti']/tfoot/tr"))
+            )
 
-        self.driver.execute_script("""
-            Object.keys(localStorage).forEach(key => {
-                if (key.endsWith(":paging")) {
-                    localStorage.setItem(key, '{"current": 1,"size": 999999}');
-                }
-            });
-            console.log(Object.keys(localStorage));
-            console.log(Object.values(localStorage));
-        """)
-        self.driver.refresh()
+            self.driver.execute_script("""
+                Object.keys(localStorage).forEach(key => {
+                    if (key.endsWith(":paging")) {
+                        localStorage.setItem(key, '{"current": 1,"size": 999999}');
+                    }
+                });
+                console.log(Object.keys(localStorage));
+                console.log(Object.values(localStorage));
+            """)
+            self.driver.refresh()
+        except TimeoutException:
+            pass
 
         fiscal_code_to_valuation = {valuation.fiscal_code: valuation for valuation in valuations}
 
