@@ -326,8 +326,6 @@ class Esse3Wrapper:
             f"//table[@id = 'seduteAperte']/tbody/tr/td[text() = '{graduation_day}']/../td/a"
         ).send_keys(Keys.RETURN)
 
-        # PAGINATION MUST BE HANDLED AS FOR COMMITTEE EVALUATIONS
-
         html_document = html.fromstring(self.driver.page_source)
         rows = html_document.xpath('//table[@id="elencoLaureandi"]/tbody/tr')
         student_to_url = {
@@ -372,6 +370,7 @@ class Esse3Wrapper:
                 self.driver.find_element(By.ID, 'grad-dettLau-annotazioni'),
                 graduation.notes.value
             )
+            self.driver.execute_script("arguments[0].setAttribute('onchange', () => {})", self.driver.find_element(By.ID, 'grad-dettLau-puntiTesi'))
             self.__replace_content(
                 self.driver.find_element(By.ID, 'grad-dettLau-puntiTesi'),
                 str(thesis_score)
@@ -380,9 +379,9 @@ class Esse3Wrapper:
                 self.driver.find_element(By.ID, 'grad-dettLau-dataCt'),
                 graduation_date
             )
-            if graduation.laude:
+            if graduation.laude != self.driver.find_element(By.ID, 'grad-dettLau-lode1').is_selected():
                 self.driver.find_element(By.ID, 'grad-dettLau-lode1').send_keys(Keys.SPACE)
-            if graduation.special_mention:
+            if graduation.special_mention != self.driver.find_element(By.ID, 'grad-dettLau-menzione1').is_selected():
                 self.driver.find_element(By.ID, 'grad-dettLau-menzione1').send_keys(Keys.SPACE)
 
             if committee:
