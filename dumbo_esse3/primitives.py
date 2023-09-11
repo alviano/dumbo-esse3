@@ -200,7 +200,7 @@ class StudentThesisState:
     state: State
 
     @staticmethod
-    def of(student: Student, cdl: CdL, state: State) -> 'StudentThesisState':
+    def of(student: Student, cdl: CdL, state: "StudentThesisState.State") -> 'StudentThesisState':
         return StudentThesisState(student, cdl, state)
 
 
@@ -218,7 +218,7 @@ class Register:
     state: State
 
     @staticmethod
-    def of(course: Course, hours: NumberOfHours, semester: Semester, state: State) -> 'Register':
+    def of(course: Course, hours: NumberOfHours, semester: Semester, state: "Register.State") -> 'Register':
         return Register(course, hours, semester, state)
 
 
