@@ -104,10 +104,10 @@ class DateTime:
     @staticmethod
     def smart_parse(s: str) -> 'DateTime':
         s = s.replace('/', '').replace(':', '')
-        s = s.split(' ', maxsplit=1)
+        parts = s.split(' ', maxsplit=1)
         now = datetime.datetime.now()
         year = now.year
-        res = datetime.datetime.strptime(f"{s[0]}{year} {s[1]}", "%d%m%Y %H%M")
+        res = datetime.datetime.strptime(f"{parts[0]}{year} {parts[1]}", "%d%m%Y %H%M")
         if res <= now:
             res = res + relativedelta(years=1)
         return DateTime(res)
