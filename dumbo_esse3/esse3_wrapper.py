@@ -70,7 +70,8 @@ class Esse3Wrapper:
     def create(cls, username: str, password: str, debug: bool = False, detached: bool = False,
                headless: bool = True) -> 'Esse3Wrapper':
         options = webdriver.ChromeOptions()
-        options.headless = headless
+        if headless:
+            options.add_argument("--headless=new")
         if debug or detached:
             options.add_experimental_option("detach", True)
         driver = webdriver.Chrome(options=options)

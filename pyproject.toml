@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dumbo-esse3"
-version = "0.4.6"
+version = "0.4.7"
 description = "Esse3 command line utility, to save my future time!"
 authors = ["Mario Alviano <mario.alviano@gmail.com>"]
 
@@ -12,7 +12,7 @@ lxml = "^4.9.2"
 selenium = "^4.4.3"
 
 [tool.poetry.dev-dependencies]
-coverage = "^7.0.0"
+coverage = "^7.3.2"
 freezegun = "^1.2.2"
 pytest = "^7.2.0"
 pytest-localserver = "^0.8.0"
