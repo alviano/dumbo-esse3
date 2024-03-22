@@ -207,7 +207,7 @@ def command_add_exams(
 
 @app.command(name="theses")
 def command_theses(
-        list_option: bool = typer.Option(True, "--list", "--no-list", help="Print the list of theses"),
+        list_option: bool = typer.Option(True, "--list/--no-list", help="Print the list of theses"),
         show: List[int] = typer.Option([], help="Index of student thesis to show"),
         sign: List[int] = typer.Option([], help="Index of student thesis to sign"),
         show_all: bool = typer.Option(False, "--show-all", help="Show all theses"),
@@ -270,7 +270,8 @@ def command_theses(
         if sign_all or index in sign:
             if student_thesis_state.state == StudentThesisState.State.UNSIGNED:
                 console.log(f"Sign thesis of {student_thesis_state.student.name} (#{index})")
-                esse3_wrapper.sign_thesis(student_thesis_state.student)
+                student_wrapper = new_esse3_wrapper(detached=True, with_live_status=False)
+                student_wrapper.sign_thesis(student_thesis_state.student)
             else:
                 console.log(f"Skip thesis of {student_thesis_state.student.name} (#{index})")
 

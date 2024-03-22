@@ -170,8 +170,12 @@ class Esse3Wrapper:
 
         all_students = []
 
-        tables = self.driver.find_elements(By.XPATH, f"//div[@id='containerPrincipale']/table")
+        tables = self.driver.find_elements(By.XPATH, "//div[@id='containerPrincipale']/table")
         for table in tables:
+            ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
+            wait = WebDriverWait(table, timeout=3, poll_frequency=1, ignored_exceptions=ignore_list)
+            wait.until(expected_conditions.presence_of_element_located((By.XPATH, "tbody/tr")))
+
             cdl = table.find_element(By.XPATH, f"caption").text
             students = table.find_elements(By.XPATH, f"tbody/tr")
             for student in students:
@@ -199,7 +203,14 @@ class Esse3Wrapper:
 
     def __thesis_action(self, student: Student, action) -> None:
         self.driver.get(URLs["thesis_list"])
-        self.driver.find_element(By.XPATH, f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a[@id = 'btnAllegatiTesi']").send_keys(Keys.RETURN)
+
+        selector = f"//tr[td/text() = '{student.id}'][td/text() = '{student.name}']//a[@id = 'btnAllegatiTesi']"
+
+        ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
+        wait = WebDriverWait(self.driver, timeout=3, poll_frequency=1, ignored_exceptions=ignore_list)
+        wait.until(expected_conditions.presence_of_element_located((By.XPATH, selector)))
+
+        self.driver.find_element(By.XPATH, selector).send_keys(Keys.RETURN)
         self.driver.find_element(By.ID, action).send_keys(Keys.RETURN)
 
     def show_thesis(self, student: Student) -> None:
