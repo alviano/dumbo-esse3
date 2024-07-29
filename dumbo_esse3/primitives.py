@@ -305,12 +305,12 @@ class StudentGraduation:
         )
 
 
-@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 /_-]*")
+@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9., /_-]*")
 class CommitteeName:
     pass
 
 
-@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9 /_-]*")
+@bounded_string(min_length=5, max_length=255, pattern=r"[A-Za-z0-9., /_-]*")
 class CommitteePart:
     pass
 
