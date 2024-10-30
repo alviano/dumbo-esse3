@@ -490,10 +490,11 @@ class Esse3Wrapper:
                 self.driver.find_element(By.XPATH, '//div[@id = "nota-div"]//textarea'),
                 str(valuation.notes)
             )
-            self.__replace_content(
-                self.driver.find_element(By.ID, 'numBusta'),
-                str(valuation.envelope_number) if valuation.envelope_number is not None else ""
-            )
+            if valuation.envelope_number:
+                self.__replace_content(
+                    self.driver.find_element(By.ID, 'numBusta'),
+                    str(valuation.envelope_number) if valuation.envelope_number is not None else ""
+                )
 
             if not dry_run:
                 self.driver.find_element(By.ID, 'btnSubmit').send_keys(Keys.RETURN)
