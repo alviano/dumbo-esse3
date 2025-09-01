@@ -1,4 +1,5 @@
 import dataclasses
+import time
 from dataclasses import InitVar
 from typing import List, Final, Optional
 
@@ -121,6 +122,7 @@ class Esse3Wrapper:
         self.driver.get(URLs["course_list"])
         self.__check_expiring_token()
         self.driver.find_element(By.XPATH, f"//tr[td = '{course}']/td//input[@src = 'images/sostenuta.gif']").send_keys(Keys.RETURN)
+        time.sleep(0.1)  # gives time to load the new page
         exams = self.driver.find_elements(By.XPATH, '//tr[@class="detail_table"]')
         return list(sorted([Exam.of(
             DateTime.parse(exam.find_element(By.XPATH, "td[3]").text),

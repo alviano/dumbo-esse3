@@ -39,7 +39,7 @@ class Password:
     pass
 
 
-@bounded_string(min_length=3, max_length=255, pattern=r'[A-Z ]+ (- )?\[M?\d+\]')
+@bounded_string(min_length=3, max_length=255, pattern=r'[A-Za-z0-9 ]+ (- )?\[M?\d+\]')
 class Course:
     pass
 
@@ -74,7 +74,7 @@ class ExamNotes:
     pass
 
 
-@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9 ]*")
+@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù ]*")
 class Semester:
     pass
 
