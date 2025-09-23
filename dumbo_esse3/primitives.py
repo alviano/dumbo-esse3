@@ -74,7 +74,7 @@ class ExamNotes:
     pass
 
 
-@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9à ]*")
+@bounded_string(min_length=1, max_length=40, pattern=r"[A-Za-z0-9ÀÈÉÌÒÙàèéìòù ]*")
 class Semester:
     pass
 
