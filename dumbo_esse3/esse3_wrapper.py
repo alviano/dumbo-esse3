@@ -56,6 +56,7 @@ class Esse3Wrapper:
         self.__key.validate(key)
         self.maximize()
         self.__login(username, password)
+        self.driver.find_element(By.ID, "c-p-bn").send_keys(Keys.RETURN)
 
     def __del__(self):
         if not self.debug:

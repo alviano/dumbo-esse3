@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "dumbo-esse3"
-version = "0.4.11"
+version = "0.4.13"
 description = "Esse3 command line utility, to save my future time!"
 authors = ["Mario Alviano <mario.alviano@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 dateutils = "^0.6.12"
-dumbo-utils = "^0.1.4"
+dumbo-utils = "^0.3.7"
 lxml = "^6.0.1"
 selenium = "^4.4.3"
 
